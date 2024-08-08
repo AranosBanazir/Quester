@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Screen Time",
+        "description": "Get to watch 10 mins of a show idk",
+        "cost": 100
+    },
+    {
+        "name": "McDonandls Trip",
+        "description": "Get to go to diabetes land",
+        "cost": 1000
+    },
+    {
+        "name": "Waterpark Trip",
+        "description": "Day at the Waterpark",
+        "cost": 500
+    }
+]

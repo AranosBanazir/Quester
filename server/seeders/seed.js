@@ -1,12 +1,17 @@
 const db = require('../config/connection');
-const { User } = require('../models');
-const cleanDB = require('./cleanDB');
-const userSeeds = require('./userSeeds.json');
+const { BaseUser, Child } = require('../models');
+// const cleanDB = require('./cleanDB');
+// const userSeeds = require('./userSeeds.json');
 
 db.once('open', async () => {
   try {
-    await cleanDB('User', 'users')
-    await User.create(userSeeds);
+    await BaseUser.deleteMany()
+    await Child.create({
+        name: 'Child',
+        password: '12345asdfasdf',
+
+
+    });
 
     console.log('all done!');
     process.exit(0);
