@@ -3,21 +3,26 @@ type Task {
   _id: ID!
   name: String!
   description: String!
-  points: Number!
+  points: Int!
   owner: Child!
-  deadline: Date
 }  
 
 type Reward {
   name: String!
   description: String
-  cost: Number!
+  cost: Int!
 }
 
 type Child {
     tasks: [Task]
     inventory: [Reward]
-    wallet: Number
+    wallet: Int
+}
+
+input ChildInput {
+    tasks: [TaskInput]
+    inventory: [RewardInput]
+    wallet: Int
 }
 
 type Parent {
@@ -34,6 +39,18 @@ type User {
     password: String!
   }
 
+  input TaskInput {
+    name: String
+    description: String
+    points: Int
+    owner: ChildInput
+  }
+
+  input RewardInput {
+    name: String
+    description: String
+    cost: Int
+  }
 
   type Auth {
     token: ID!
@@ -48,8 +65,19 @@ type User {
   }
 
   type Mutation {
-    addUser(name: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
+    addParent(username: String!, email: String!, password: String!): Auth
+    addChild(username: String!, password: String!): Auth
+
+    addTask(name: String!, description: String!, points: Int!, owner: ChildInput!): Task
+    updateTask(taskId: ID!, updateInput: TaskInput!): Task
+    delTask(taskId: ID!): Task
+
+    addReward(name: String!, description: String, const: Int!): Reward
+    updateReward(rewardId: ID!, rewardInput: RewardInput!): Reward
+    delReward(rewardId: ID!): Reward
+
+
+    login(username: String!, password: String!): Auth
 
     removeUser: User    
   }

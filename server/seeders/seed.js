@@ -13,19 +13,20 @@ db.once('open', async () => {
     await BaseUser.deleteMany()
     const children = await Child.create(childData)
 
-    // const rndChild = Math.floor()
+    //randomly assign a task to a child
+    const rndChild = Math.floor(Math.random() * children.length)
     const modifiedTasks = taskData.map(task=>{
-      return {...task, owner: children[1]._id}
+      return {...task, owner: children[rndChild]._id}
     })
-    
-    const tasks = await Task.create(modifiedTasks)
 
+    const tasks = await Task.create(modifiedTasks)
     for (const task of tasks){
       await Child.findByIdAndUpdate(task.owner, {
         $addToSet: {tasks: task._id }
       })
     }
 
+    
 
     console.log('all done!');
     process.exit(0);
