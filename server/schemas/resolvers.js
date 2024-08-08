@@ -17,6 +17,19 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    getTasks: async (parent, {userId}, context)=>{
+      if (context.user){
+        let tasks = []
+        const user = await Child.findById({_id: userId}, 'tasks')
+        console.log(user)
+        // const token = signToken(user)
+        return {token, user}
+      }
+      throw AuthenticationError
+    },
+    getRewards: async (parent, {userId}, context)=>{
+
+    }
   },
 
   Mutation: {
