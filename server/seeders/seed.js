@@ -1,17 +1,31 @@
 const db = require('../config/connection');
-const { BaseUser, Child } = require('../models');
-// const cleanDB = require('./cleanDB');
-// const userSeeds = require('./userSeeds.json');
+const { BaseUser, Child, Task, Reward, Parent,} = require('../models');
+const taskData = require('./taskData.json')
+const parentData = require('./parentData.json')
+const rewardData = require('./rewardData.json')
+const childData = require('./childData.json')
+
+
+
 
 db.once('open', async () => {
   try {
     await BaseUser.deleteMany()
-    await Child.create({
-        name: 'Child',
-        password: '12345asdfasdf',
+    const children = await Child.create(childData)
 
+    // const rndChild = Math.floor()
+    const modifiedTasks = taskData.map(task=>{
+      return {...task, owner: children[1]._id}
+    })
+    
+    const tasks = await Task.create(modifiedTasks)
 
-    });
+    for (const task of tasks){
+      await Child.findByIdAndUpdate(task.owner, {
+        $addToSet: {tasks: task._id }
+      })
+    }
+
 
     console.log('all done!');
     process.exit(0);

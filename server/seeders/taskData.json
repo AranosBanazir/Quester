@@ -1,5 +1,17 @@
 [
     {
-        
+        "name": "Dishes",
+        "description": "Do the dishes",
+        "points": 200
+    },
+    {
+        "name": "Walk the dog",
+        "description": "take scruffles for a walk",
+        "points": 500
+    },
+    {
+        "name": "go for a walk",
+        "description": "I mean come on...",
+        "points": 300
     }
 ]
