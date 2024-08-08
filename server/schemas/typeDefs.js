@@ -1,11 +1,39 @@
 const typeDefs = `
-  type User {
+type Task {
+  _id: ID!
+  name: String!
+  description: String!
+  points: Number!
+  owner: Child!
+  deadline: Date
+}  
+
+type Reward {
+  name: String!
+  description: String
+  cost: Number!
+}
+
+type Child {
+    tasks: [Task]
+    inventory: [Reward]
+    wallet: Number
+}
+
+type Parent {
+    username: String!
+    email: String!
+    password: String!
+    rewards: [Reward]
+    kids: [Child]
+}
+
+type User {
     _id: ID
-    name: String
-    email: String
-    password: String
-    skills: [String]!
+    username: String!
+    password: String!
   }
+
 
   type Auth {
     token: ID!

@@ -11,7 +11,7 @@ const parentSchema = new Schema({
         match: [/.+@.+\..+/, 'Must match an email address!'],
       },
     rewards: [{type: Schema.Types.ObjectId, ref: 'Reward'}],
-    kids: [{type: Schema.Types.ObjectId, ref: 'Kid'}]
+    kids: [{type: Schema.Types.ObjectId, ref: 'Child'}]
 })
 
 
