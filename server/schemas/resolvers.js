@@ -17,7 +17,7 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    getTasks: async (parent, {userId}, context)=>{
+    getTasks: async (parent, args, context)=>{
       if (context.user){
         let tasks = []
         const user = await Child.findById({_id: userId}, 'tasks')
@@ -26,8 +26,19 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    getRewards: async (parent, {userId}, context)=>{
-      
+    getRewards: async (parent, args, context)=>{
+      if (context.user){
+        const user = await BaseUser.findById({_id: context.user._id})
+        if (user.__t === 'Child'){
+          const parent = await Parent.find({kids: {$elemMatch: {$eq: context.user._id}}}, 'rewards')
+          for (const p of parent){
+            return p.rewards 
+          }
+        }else if (user.__t === 'Parent'){
+          return user.rewards
+        }
+        return user
+      }
     }
   },
 
@@ -46,7 +57,6 @@ const resolvers = {
         })        
 
         const token = signToken(user);
-  
         return { token, user };
       }
       throw AuthenticationError
@@ -94,6 +104,24 @@ const resolvers = {
       }
       throw AuthenticationError
     },
+    confirmTaskComplete: async (parent, {taskId}, context)=>{
+      //confirming both tasks by parent and child to ensure the task is done
+      if (context.user){
+        const user = await BaseUser.findById({_id: context.user._id})
+        if (user.__t === 'Child'){
+          const task = await Task.findByIdAndUpdate({_id: taskId},{
+            childConfirmed: true
+          })
+          return task
+        }else if (user.__t == 'Parent'){
+          const task = await Task.findByIdAndUpdate({_id: taskId},{
+            parentConfirmed: true
+          })
+          return task
+        }
+      }
+      throw AuthenticationError
+    },
     delTask: async (parent, {taskId}, context)=>{
       if (context.user){
         return await Task.findByIdAndDelete({_id: taskId})
@@ -113,8 +141,9 @@ const resolvers = {
     },
     updateReward: async (parent, {rewardId, updatedReward}, context)=>{
       if (context.user){
-        
-      } 
+        const task = await Task.findByIdAndUpdate({_id: taskId}, updatedTask)
+        return task
+      }
       throw AuthenticationError
     },
     delReward: async (parent, {rewardId}, context)=>{

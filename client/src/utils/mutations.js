@@ -39,11 +39,33 @@ export const ADD_TASK = gql`
 `
 
 export const UPDATE_TASK = gql`
-  
+  mutation UpdateTask($taskId: ID!, $updatedTask: TaskInput!) {
+    updateTask(taskId: $taskId, updatedTask: $updatedTask) {
+      name
+      points
+      description
+      _id
+    }
+  }
+`
+
+export const CONFIRM_TASK = gql`
+  mutation ConfirmTaskComplete($taskId: ID!) {
+    confirmTaskComplete(taskId: $taskId) {
+      name
+      childConfirmed
+      parentConfirmed
+    }
+  }
 `
 
 export const DELETE_TASK = gql`
-  
+ mutation DelTask($taskId: ID!) {
+    delTask(taskId: $taskId) {
+    _id
+    name  
+    }
+  } 
 `
 
 export const ADD_REWARD = gql`
