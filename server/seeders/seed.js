@@ -17,6 +17,7 @@ db.once('open', async () => {
     const parents = await Parent.create(parentData)
     const rewards = await Reward.create(rewardData)
 
+ 
     //randomly assign a task to a child
     let rndChild = Math.floor(Math.random() * children.length)
     const modifiedTasks = taskData.map(task=>{
@@ -29,6 +30,8 @@ db.once('open', async () => {
         $addToSet: {tasks: task._id }
       })
     }
+
+    
 
     // console.log(children)
     for (const parent of parents){

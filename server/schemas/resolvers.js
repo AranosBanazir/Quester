@@ -24,7 +24,7 @@ const resolvers = {
         console.log(user)
         return user
       }
-      // throw AuthenticationError
+      throw AuthenticationError
     },
     getRewards: async (parent, {userId}, context)=>{
       
@@ -87,6 +87,20 @@ const resolvers = {
       }
       throw AuthenticationError
     },
+    updateTask: async (parent, {taskId, updatedTask}, context)=>{
+      if (context.user){
+        const task = await Task.findByIdAndUpdate({_id: taskId}, updatedTask)
+        return task
+      }
+      throw AuthenticationError
+    },
+    delTask: async (parent, {taskId}, context)=>{
+      if (context.user){
+        return await Task.findByIdAndDelete({_id: taskId})
+      }
+      throw AuthenticationError
+    },
+
     addReward: async (parent, {reward}, context)=>{
       if (context.user){
         const newReward = await Reward.create(reward)
@@ -96,6 +110,17 @@ const resolvers = {
         return newReward
       }
       throw AuthenticationError
+    },
+    updateReward: async (parent, {rewardId, updatedReward}, context)=>{
+      if (context.user){
+        
+      } 
+      throw AuthenticationError
+    },
+    delReward: async (parent, {rewardId}, context)=>{
+      if (context.user){
+        return await Reward.findByIdAndDelete({_id: rewardId}) 
+      }
     }
   },
 };
