@@ -10,7 +10,7 @@ import Login from './pages/Login';
 import Error from './pages/Error';
 import CreateTask from './pages/CreateTask.jsx'
 import MyTasks from './pages/MyTasks.jsx'
-import RewardsStrore from './pages/RewardsStore.jsx'
+import RewardsStore from './pages/RewardsStore.jsx'
 
 
 const router = createBrowserRouter([
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         element: <MyTasks />
       }, {
         path: '/rewards',
-        element: <RewardsStrore />
+        element: <RewardsStore />
       }
     ]
   }
