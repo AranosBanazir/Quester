@@ -20,9 +20,9 @@ const taskSchema = new Schema({
         ref: 'Child',
         required: true
     },
-    deadline:{
-        type: Date
-    }  
+    // deadline:{
+    //     type: Date
+    // }  
 })
 
 
