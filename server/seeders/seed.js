@@ -11,8 +11,11 @@ const childData = require('./childData.json')
 db.once('open', async () => {
   try {
     await BaseUser.deleteMany()
+    await Task.deleteMany()
+    await Reward.deleteMany()
     const children = await Child.create(childData)
     const parents = await Parent.create(parentData)
+    const rewards = await Reward.create(rewardData)
 
     //randomly assign a task to a child
     let rndChild = Math.floor(Math.random() * children.length)

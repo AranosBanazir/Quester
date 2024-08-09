@@ -43,7 +43,7 @@ type User {
     name: String
     description: String
     points: Int
-    owner: ChildInput
+    owner: ID!
   }
 
   input RewardInput {
@@ -70,11 +70,11 @@ type User {
     addParent(username: String!, email: String!, password: String!): Auth
     addChild(username: String!, password: String!): Auth
 
-    addTask(name: String!, description: String!, points: Int!, owner: ChildInput!): Task
+    addTask(task: TaskInput!): Task
     updateTask(taskId: ID!, updateInput: TaskInput!): Task
     delTask(taskId: ID!): Task
 
-    addReward(name: String!, description: String, const: Int!): Reward
+    addReward(reward: RewardInput!): Reward
     updateReward(rewardId: ID!, rewardInput: RewardInput!): Reward
     delReward(rewardId: ID!): Reward
 
