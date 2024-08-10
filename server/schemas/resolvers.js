@@ -19,23 +19,42 @@ const resolvers = {
     },
     getTasks: async (parent, args, context)=>{
       if (context.user){
-        let tasks = []
-        const user = await Child.findById({_id: userId}, 'tasks')
-        console.log(user)
-        return user
+        const user = await BaseUser.findById({_id: context.user._id}, '__t')
+        if (user.__t === 'Child'){
+          const child = await Child.findById({_id: context.user._id}, 'tasks').populate('tasks')
+          return child.tasks
+        }else if (user.__t === 'Parent'){
+          let tasks = []
+          //getting all the kids under the Parent account
+          const parent = await Parent.findById({_id: context.user._id}, 'kids').populate('kids')
+          //Looping through the kids to get all the task id's
+          for (const kid of parent.kids){
+            tasks = [...tasks, ...kid.tasks]
+          }
+
+          let parsedTasks = []
+          //loop through the task id's to get the full task objects
+          for(const task of tasks){
+            const parsedTask = await Task.findById({_id: task})
+            parsedTasks.push(parsedTask)
+          }
+          
+          return parsedTasks
+        }
       }
       throw AuthenticationError
     },
     getRewards: async (parent, args, context)=>{
       if (context.user){
-        const user = await BaseUser.findById({_id: context.user._id})
+        const user = await BaseUser.findById({_id: context.user._id}, '__t')
         if (user.__t === 'Child'){
-          const parent = await Parent.find({kids: {$elemMatch: {$eq: context.user._id}}}, 'rewards')
-          for (const p of parent){
-            return p.rewards 
-          }
+          const parent = await Parent.find({kids: {$elemMatch: {$eq: context.user._id}}}, 'rewards').populate('rewards')
+          
+          return parent.rewards || []
         }else if (user.__t === 'Parent'){
-          return user.rewards
+          const rewards = await Parent.findById({_id: context.user._id}, 'rewards').populate('rewards')
+          
+          return rewards.rewards
         }
         return user
       }
