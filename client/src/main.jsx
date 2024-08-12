@@ -13,6 +13,7 @@ import MyTasks from './pages/MyTasks';
 import RewardsStore from './pages/RewardsStore';
 
 
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/rewards-store',
+
         element: <RewardsStore />
       }
     ]

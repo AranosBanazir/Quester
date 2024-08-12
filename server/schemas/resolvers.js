@@ -22,13 +22,12 @@ const resolvers = {
         let tasks = []
         const user = await Child.findById({_id: userId}, 'tasks')
         console.log(user)
-        // const token = signToken(user)
-        return {token, user}
+        return user
       }
-      throw AuthenticationError
+      // throw AuthenticationError
     },
     getRewards: async (parent, {userId}, context)=>{
-
+      
     }
   },
 
@@ -76,6 +75,28 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+  
+    addTask: async (parent, {task}, context) =>{
+      if (context.user){
+        const newTask = await Task.create(task)
+        console.log(newTask)
+        const child = await Child.findByIdAndUpdate({_id: task.owner}, {
+          $addToSet: {tasks: newTask._id}
+        })
+        return newTask
+      }
+      throw AuthenticationError
+    },
+    addReward: async (parent, {reward}, context)=>{
+      if (context.user){
+        const newReward = await Reward.create(reward)
+        const parent = await Parent.findByIdAndUpdate({_id: context.user._id},{
+          $addToSet: {rewards: newReward._id}
+        })
+        return newReward
+      }
+      throw AuthenticationError
+    }
   },
 };
 
