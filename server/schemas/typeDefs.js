@@ -4,7 +4,9 @@ type Task {
   name: String!
   description: String!
   points: Int!
-  owner: Child!
+  owner: ID!
+  childConfirmed: Boolean
+  parentConfirmed: Boolean
 }  
 
 type Reward {
@@ -60,8 +62,9 @@ type User {
   type Query {
     users: [User]!
     user(userId: ID!): User
-    getTasks(userId: ID!): [Task]
-    getRewards(userId: ID!): [Reward]
+    getTasks: [Task]
+    getRewards: [Reward]
+    getInventory(userId: ID!): [Reward]
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
     me: User
   }
@@ -71,13 +74,13 @@ type User {
     addChild(username: String!, password: String!): Auth
 
     addTask(task: TaskInput!): Task
-    updateTask(taskId: ID!, updateInput: TaskInput!): Task
+    updateTask(taskId: ID!, updatedTask: TaskInput!): Task
+    confirmTaskComplete(taskId: ID!): Task
     delTask(taskId: ID!): Task
 
     addReward(reward: RewardInput!): Reward
-    updateReward(rewardId: ID!, rewardInput: RewardInput!): Reward
+    updateReward(rewardId: ID!, updatedReward: RewardInput!): Reward
     delReward(rewardId: ID!): Reward
-
 
     login(username: String!, password: String!): Auth
 

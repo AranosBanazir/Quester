@@ -20,6 +20,14 @@ const taskSchema = new Schema({
         ref: 'Child',
         required: true
     },
+    childConfirmed:{
+        type: Boolean,
+        default: false
+    },
+    parentConfirmed:{
+        type: Boolean,
+        default: false
+    }
     // deadline:{
     //     type: Date
     // }  
