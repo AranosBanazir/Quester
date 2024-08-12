@@ -32,6 +32,30 @@ export const QUERY_ME = gql`
 
 /*Taken from in class example. Might need adjustments ~Nick*/
 
+
+export const GET_TASKS = gql`
+  query GetTasks{
+    getTasks{
+    _id
+    name
+    points
+    description  
+    }
+  }
+`
+
+export const GET_REWARDS = gql`
+  query GetRewards {
+    getRewards {
+      _id
+      cost
+      description
+      name
+    }
+  }
+`
+
+
 export const QUERY_REWARDS = gql`
   query getRewards($rewards: ID) {
     rewards(reward: $reward) {
