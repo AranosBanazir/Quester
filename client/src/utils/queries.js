@@ -29,3 +29,43 @@ export const QUERY_ME = gql`
     }
   }
 `;
+
+/*Taken from in class example. Might need adjustments ~Nick*/
+
+export const QUERY_REWARDS = gql`
+  query getRewards($rewards: ID) {
+    rewards(reward: $reward) {
+      _id
+      name
+      description
+      points
+      image
+      category {
+        _id
+      }
+    }
+  }
+`;
+
+export const QUERY_REWARDS_CHECKOUT = gql`
+  query getRewardsCheckout($rewards: [RewardInput]) {
+    checkout(rewards: $rewards) {
+      session
+    }
+  }
+`;
+
+export const QUERY_ALL_REWARDS = gql`
+  {
+    rewards {
+      _id
+      name
+      image
+      description
+      points
+      category {
+        name
+      }
+    }
+  }
+`;

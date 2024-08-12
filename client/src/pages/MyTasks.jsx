@@ -1,4 +1,6 @@
-const MyTask = () => {
+
+const MyTasks = () => {
+
     return (
       <main>
         <div className="flex-row justify-center">
@@ -9,6 +11,5 @@ const MyTask = () => {
       </main>
     );
   };
-  
-  export default MyTask;
-  
+
+export default MyTasks;

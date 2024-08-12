@@ -8,9 +8,10 @@ import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Error from './pages/Error';
-import CreateTask from './pages/CreateTask.jsx'
-import MyTasks from './pages/MyTasks.jsx'
-import RewardsStore from './pages/RewardsStore.jsx'
+import CreateTask from './pages/CreateTask';
+import MyTasks from './pages/MyTasks';
+import RewardsStore from './pages/RewardsStore';
+
 
 
 const router = createBrowserRouter([
@@ -34,14 +35,18 @@ const router = createBrowserRouter([
       }, {
         path: '/profiles/:userId',
         element: <Profile />
-      }, {
-        path: '/create',
+      },
+      {
+        path: '/create-task',
         element: <CreateTask />
-      }, {
-        path: '/tasks',
+      },
+      {
+        path: '/my-tasks',
         element: <MyTasks />
-      }, {
-        path: '/rewards',
+      },
+      {
+        path: '/rewards-store',
+
         element: <RewardsStore />
       }
     ]
