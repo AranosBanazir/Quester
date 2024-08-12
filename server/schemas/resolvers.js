@@ -48,9 +48,9 @@ const resolvers = {
       if (context.user){
         const user = await BaseUser.findById({_id: context.user._id}, '__t')
         if (user.__t === 'Child'){
-          const parent = await Parent.find({kids: {$elemMatch: {$eq: context.user._id}}}, 'rewards').populate('rewards')
-          
-          return parent.rewards || []
+          const parent = await Parent.find({kids: {$all: context.user._id}}, 'rewards').populate('rewards')
+      
+          return parent[0].rewards || []
         }else if (user.__t === 'Parent'){
           const rewards = await Parent.findById({_id: context.user._id}, 'rewards').populate('rewards')
           

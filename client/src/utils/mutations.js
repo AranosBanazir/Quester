@@ -69,7 +69,13 @@ export const DELETE_TASK = gql`
 `
 
 export const ADD_REWARD = gql`
-
+  mutation AddReward($reward: RewardInput!) {
+    addReward(reward: $reward) {
+      cost
+      description
+      name
+    }
+  }
 `
 
 export const UPDATE_REWARD = gql`
