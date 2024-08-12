@@ -10,6 +10,7 @@ type Task {
 }  
 
 type Reward {
+  _id: ID!
   name: String!
   description: String
   cost: Int!
