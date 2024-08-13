@@ -10,8 +10,8 @@ import Error from './pages/Error';
 import CreateTask from './pages/CreateTask';
 import MyTasks from './pages/MyTasks';
 import RewardsStore from './pages/RewardsStore';
-
-
+import Parent from '../src/pages/ParentPage.jsx'
+import Child from '../src/pages/ChildPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -41,7 +41,15 @@ const router = createBrowserRouter([
         path: '/rewards-store',
 
         element: <RewardsStore />
+      },
+      {
+        path: '/parent',
+        element: <Parent />
+      }, {
+        path: '/child',
+        element: <Child />
       }
+      
     ]
   }
 ])
