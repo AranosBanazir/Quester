@@ -15,8 +15,8 @@ const Home = () => {
          userId: data?.me._id
      }
  })
-
-  const userData = userInfo.data.user
+ 
+  const userData = userInfo?.data?.user
   let relaventPage;
 
   if (data){
