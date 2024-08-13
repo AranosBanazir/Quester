@@ -1,15 +1,19 @@
+import React from 'react';
+import { useQuery } from '@apollo/client';
+import { GET_TASKS } from '../utils/queries';
 
 const MyTasks = () => {
+  const { data, error, loading } = useQuery(GET_TASKS);
 
-    return (
-      <main>
-        <div className="flex-row justify-center">
-          <div className="col-12 col-md-10 my-3">
-            <h1>Home</h1>
-          </div>
-        </div>
-      </main>
-    );
-  };
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred: {error.message}</div>;
 
-export default MyTasks;
+  return (
+    <div>
+      <h1>Tasks:</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
+};
+
+export default MyTasks
