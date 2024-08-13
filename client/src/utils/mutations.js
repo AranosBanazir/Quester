@@ -78,13 +78,13 @@ export const ADD_REWARD = gql`
   }
 `
 
-export const UPDATE_REWARD = gql`
+// export const UPDATE_REWARD = gql`
   
-`
+// `
 
-export const DELETE_REWARD = gql`
+// export const DELETE_REWARD = gql`
   
-`
+// `
 
 export const LOGIN_USER = gql`
   mutation Login($username: String!, $password: String!) {
@@ -94,6 +94,6 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const DELTE_USER = gql`
+// export const DELTE_USER = gql`
 
-`
+// `
