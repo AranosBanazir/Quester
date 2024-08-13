@@ -29,6 +29,27 @@ query User($userId: ID!) {
         description
       }
     }
+    ...on Child{
+      _id
+      username
+      tasks {
+        _id
+        name
+        description
+        points
+        owner
+        childConfirmed
+        parentConfirmed
+      }
+      inventory {
+        _id
+        cost
+        name
+        description
+      }
+      wallet
+      
+    }
 
   }
 }
