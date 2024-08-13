@@ -14,6 +14,7 @@ const Rewards = () => {
   })
 
   const userData = userInfo?.data?.user || {}
+
   
     let relaventPage;
     if (data){

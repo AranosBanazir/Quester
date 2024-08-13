@@ -1,5 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { ME } from "../../utils/queries";
+import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
+
+import ChildTasks from "../child-pages/ChildTasks";
 
 
 const Tasks = () => {
@@ -12,7 +14,11 @@ const Tasks = () => {
   })
   
     let relaventPage;
+
+   
+
     const userData = userInfo?.data?.user || {}   
+
     if (data){
       if (userType === 'Parent'){
         relaventPage = <ParentTasks  data={userData}/>
