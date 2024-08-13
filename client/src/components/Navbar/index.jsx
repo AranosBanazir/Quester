@@ -1,31 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ME } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
 
 function Navbar() {
+  const {loading, error, data} = useQuery(ME)
+  const isThereData = data && true
+ 
+  const userType = data?.me.__typename || 'user'
+  //checking if the person is logged in
+
+  let navItems = []
+  //checking what nav items to display
+  if (userType === 'Parent'){
+    navItems = [
+      "Rewards",
+      "Tasks",
+      "Kids",
+      "Logout",
+    ]
+  }else if (userType === 'Child'){
+    navItems = [
+      "Rewards",
+      "Tasks",
+      "Kids",
+      "Logout",
+    ]
+  }else{
+    navItems = [
+      "Login",
+      "Signup",
+    ]
+  }
   return (
     <nav style={styles.navbar}>
       <ul style={styles.navList}>
-        <li style={styles.navItem}>
-          <Link to="/" style={styles.link}>Home</Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/create-task" style={styles.link}>Create Task</Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/my-tasks" style={styles.link}>My Tasks</Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/rewards-store" style={styles.link}>Rewards Store</Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/me" style={styles.link}>Profile</Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/login" style={styles.link}>Login</Link>
-        </li>
-        <li style={styles.navItem}>
-          <Link to="/signup" style={styles.link}>Signup</Link>
-        </li>
+        {navItems.map(item=>{
+          return (
+            <li style={styles.navItem} key={item}>
+              <Link to={`/${item}`} style={styles.link}>{item}</Link>
+          </li>
+          )
+        })}
       </ul>
     </nav>
   );

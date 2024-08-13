@@ -21,6 +21,7 @@ export const QUERY_SINGLE_USER = gql`
 export const ME = gql`
   query me {
     me {
+      __typename
       _id
       username
     }

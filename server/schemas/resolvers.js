@@ -2,6 +2,18 @@ const { BaseUser, Reward, Task, Child, Parent } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
+  UserTypes:{
+    __resolveType(obj, contextValue, info){
+      if (obj.rewards){
+        return 'Parent'
+      }
+
+      if (obj.tasks){
+        return 'Child'
+      }
+      return null
+    }
+  },
   Query: {
     users: async () => {
       return BaseUser.find();
