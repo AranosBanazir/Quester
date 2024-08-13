@@ -3,16 +3,16 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
 import './index.css'
 
 import App from './App.jsx'
-import Home from './pages/Home';
+import Home from './pages/base-pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Error from './pages/Error';
-import CreateTask from './pages/CreateTask';
-import MyTasks from './pages/MyTasks';
-import RewardsStore from './pages/RewardsStore';
-import Parent from '../src/pages/ParentPage.jsx'
-import Child from '../src/pages/ChildPage.jsx'
+import Error from './pages/base-pages/Error';
+import CreateTask from './pages/base-pages/CreateTask';
+import MyTasks from './pages/base-pages/MyTasks';
+import RewardsStore from './pages/base-pages/RewardsStore';
+import Rewards from './pages/base-pages/Rewards.jsx';
 
+//TODO: need to expand the router to work with new pages
 const router = createBrowserRouter([
   {
     path: '/',
@@ -38,17 +38,10 @@ const router = createBrowserRouter([
         element: <MyTasks />
       },
       {
-        path: '/rewards-store',
+        path: '/rewards',
 
-        element: <RewardsStore />
+        element: <Rewards/>
       },
-      {
-        path: '/parent',
-        element: <Parent />
-      }, {
-        path: '/child',
-        element: <Child />
-      }
       
     ]
   }

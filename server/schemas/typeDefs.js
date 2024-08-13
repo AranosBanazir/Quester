@@ -1,4 +1,5 @@
 const typeDefs = `
+
 type Task {
   _id: ID!
   name: String!
@@ -17,6 +18,8 @@ type Reward {
 }
 
 type Child {
+    _id: ID!
+    username: String!
     tasks: [Task]
     inventory: [Reward]
     wallet: Int
@@ -29,6 +32,7 @@ input ChildInput {
 }
 
 type Parent {
+    _id: ID!
     username: String!
     email: String!
     password: String!
@@ -59,15 +63,17 @@ type User {
     token: ID!
     user: User
   }
+      union UserTypes = User | Parent | Child
+
 
   type Query {
-    users: [User]!
-    user(userId: ID!): User
+    users: [UserTypes]!
+    user(userId: ID!): UserTypes
     getTasks: [Task]
     getRewards: [Reward]
     getInventory(userId: ID!): [Reward]
     # Because we have the context functionality in place to check a JWT and decode its data, we can use a query that will always find and return the logged in user's data
-    me: User
+    me: UserTypes
   }
 
   type Mutation {
@@ -85,7 +91,7 @@ type User {
 
     login(username: String!, password: String!): Auth
 
-    removeUser: User    
+    removeUser: UserTypes    
   }
 `;
 

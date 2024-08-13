@@ -1,8 +1,8 @@
 // pages/CreateTask.jsx
 
 import React, { useState, useEffect } from 'react';
-import TaskCard from '../components/TaskCard';
-import { getTasks, getKids } from '../utils/api'; // Adjust the path as needed
+import TaskCard from '../../components/TaskCard';
+import { getTasks, getKids } from '../../utils/api'; // Adjust the path as needed
 
 const CreateTask = () => {
   const [tasks, setTasks] = useState([]);

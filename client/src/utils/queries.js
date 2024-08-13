@@ -10,21 +10,45 @@ export const QUERY_USERS = gql`
 `;
 
 export const QUERY_SINGLE_USER = gql`
-  query singleUser($userId: ID!) {
-    user(userId: $userId) {
+query User($userId: ID!) {
+  user(userId: $userId) {
+    __typename
+
+    ...on Parent{
       _id
       username
+      kids {
+        username
+        _id
+      }
+
+      rewards {
+        _id
+        cost
+        name
+        description
+      }
     }
+
   }
+}
 `;
 
 export const ME = gql`
-  query me {
+  query Me {
     me {
-      _id
+    __typename
+      ...on Parent{
+        username
+        _id
+      }
+
+    ...on Child{
       username
+      _id
     }
   }
+}
 `;
 
 /*Taken from in class example. Might need adjustments ~Nick*/

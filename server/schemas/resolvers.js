@@ -2,19 +2,34 @@ const { BaseUser, Reward, Task, Child, Parent } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
+  UserTypes:{
+    __resolveType(obj, contextValue, info){
+      if (obj.rewards){
+        return 'Parent'
+      }
+
+      if (obj.tasks){
+        return 'Child'
+      }
+      return null
+    }
+  },
   Query: {
     users: async () => {
       return BaseUser.find();
     },
 
     user: async (parent, { userId }) => {
-      return BaseUser.findOne({ _id: userId });
+      return BaseUser.findOne({ _id: userId })
+              .populate('kids')
+              .populate('tasks')
+              .populate('rewards')
+              .populate('inventory');
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
       if (context.user) {
         const user = await BaseUser.findOne({ _id: context.user._id }).populate('kids');
-        console.log(user)
         return user
       }
       throw AuthenticationError;
