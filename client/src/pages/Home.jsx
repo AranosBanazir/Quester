@@ -8,8 +8,12 @@ import Parent from './ParentPage'
 
 
 const Home = () => {
+  const {loading, error, data} = useQuery(ME)
+
+  console.log(data)
   return (
     <main>
+
       <Child/>
       <Parent/>
     </main>
