@@ -14,8 +14,11 @@ const Tasks = () => {
   })
   
     let relaventPage;
-    const userData = userInfo?.data?.user
+
    
+
+    const userData = userInfo?.data?.user || {}   
+
     if (data){
       if (userType === 'Parent'){
         relaventPage = <ParentTasks  data={userData}/>
