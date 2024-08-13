@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ME } from '../../utils/queries';
+import { ME} from '../../utils/queries';
 import { useQuery } from '@apollo/client';
 
 function Navbar() {
   const {loading, error, data} = useQuery(ME)
-  const isThereData = data && true
- 
   const userType = data?.me.__typename || 'user'
+ 
+  
+  const isThereData = data && true
   //checking if the person is logged in
 
   let navItems = []

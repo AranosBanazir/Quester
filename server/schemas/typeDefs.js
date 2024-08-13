@@ -18,6 +18,8 @@ type Reward {
 }
 
 type Child {
+    _id: ID!
+    username: String!
     tasks: [Task]
     inventory: [Reward]
     wallet: Int
@@ -30,6 +32,7 @@ input ChildInput {
 }
 
 type Parent {
+    _id: ID!
     username: String!
     email: String!
     password: String!
@@ -64,8 +67,8 @@ type User {
 
 
   type Query {
-    users: [User]!
-    user(userId: ID!): User
+    users: [UserTypes]!
+    user(userId: ID!): UserTypes
     getTasks: [Task]
     getRewards: [Reward]
     getInventory(userId: ID!): [Reward]
@@ -88,7 +91,7 @@ type User {
 
     login(username: String!, password: String!): Auth
 
-    removeUser: User    
+    removeUser: UserTypes    
   }
 `;
 

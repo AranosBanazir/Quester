@@ -1,10 +1,10 @@
 import { useLazyQuery } from '@apollo/client'
-import { useRewardCartContext } from '../utils/RewardCartContext'
-import { QUERY_REWARDS_CHECKOUT } from '../utils/queries'
+import { useRewardCartContext } from '../../utils/RewardCartContext'
+import { QUERY_REWARDS_CHECKOUT } from '../../utils/queries'
 
 
-import RewardList from '../components/RewardList'
-import RewardCard from '../components/RewardCard'
+import RewardList from '../../components/RewardList'
+import RewardCard from '../../components/RewardCard'
 
 const RewardsStore = () => {
   const { state } = useRewardCartContext()

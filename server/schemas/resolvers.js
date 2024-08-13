@@ -20,13 +20,16 @@ const resolvers = {
     },
 
     user: async (parent, { userId }) => {
-      return BaseUser.findOne({ _id: userId });
+      return BaseUser.findOne({ _id: userId })
+              .populate('kids')
+              .populate('tasks')
+              .populate('rewards')
+              .populate('inventory');
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
       if (context.user) {
         const user = await BaseUser.findOne({ _id: context.user._id }).populate('kids');
-        console.log(user)
         return user
       }
       throw AuthenticationError;
