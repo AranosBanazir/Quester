@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom/dist'
 import './index.css'
 
+
 import App from './App.jsx'
 import Home from './pages/base-pages/Home';
 import Signup from './pages/Signup';
@@ -11,7 +12,6 @@ import CreateTask from './pages/base-pages/CreateTask';
 import MyTasks from './pages/base-pages/MyTasks';
 import RewardsStore from './pages/base-pages/RewardsStore';
 import Rewards from './pages/base-pages/Rewards.jsx';
-
 //TODO: need to expand the router to work with new pages
 const router = createBrowserRouter([
   {
@@ -31,18 +31,16 @@ const router = createBrowserRouter([
       }, 
       {
         path: '/create-task',
-        element: <CreateTask />
+        element: <CreateTask/>
       },
       {
-        path: '/my-tasks',
-        element: <MyTasks />
+        path: '/tasks',
+        element: <MyTasks/>
       },
       {
         path: '/rewards',
-
         element: <Rewards/>
-      },
-      
+      }
     ]
   }
 ])

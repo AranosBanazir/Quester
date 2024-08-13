@@ -14,9 +14,6 @@ const Tasks = () => {
   })
   
     let relaventPage;
-
-   
-
     const userData = userInfo?.data?.user || {}   
 
     if (data){

@@ -31,6 +31,17 @@ input ChildInput {
     wallet: Int
 }
 
+input UserInput{
+    username: String!
+    password: String!
+}
+  
+input UserUpdateInput{
+  username: String
+  password: String
+  email: String
+}
+
 type Parent {
     _id: ID!
     username: String!
@@ -39,6 +50,8 @@ type Parent {
     rewards: [Reward]
     kids: [Child]
 }
+
+
 
 type User {
     _id: ID
@@ -63,7 +76,8 @@ type User {
     token: ID!
     user: User
   }
-      union UserTypes = User | Parent | Child
+  
+  union UserTypes = User | Parent | Child
 
 
   type Query {
@@ -80,6 +94,10 @@ type User {
     addParent(username: String!, email: String!, password: String!): Auth
     addChild(username: String!, password: String!): Auth
 
+    updateUser(creds:UserInput!, updatedUserInfo: UserUpdateInput):UserTypes
+    removeUser(creds:UserInput!):UserTypes  
+
+
     addTask(task: TaskInput!): Task
     updateTask(taskId: ID!, updatedTask: TaskInput!): Task
     confirmTaskComplete(taskId: ID!): Task
@@ -91,7 +109,7 @@ type User {
 
     login(username: String!, password: String!): Auth
 
-    removeUser: UserTypes    
+      
   }
 `;
 

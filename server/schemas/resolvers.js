@@ -85,7 +85,7 @@ const resolvers = {
 
       return { token, user };
     },
-    addChild: async (parent, { name, password }, context) => {
+    addChild: async (parent, { username, password }, context) => {
       if (context.user){
         const child = await Child.create({username, password})
         const parent = await Parent.findByIdAndUpdate({_id: context.user._id}, {
@@ -99,13 +99,11 @@ const resolvers = {
     },
     login: async (parent, { username, password }) => {
       const user = await BaseUser.findOne({ username });
-
       if (!user) {
         throw AuthenticationError;
       }
-
+      
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw AuthenticationError;
       }
@@ -114,18 +112,94 @@ const resolvers = {
       return { token, user };
     },
     // Set up mutation so a logged in user can only remove their user and no one else's
-    //TODO Consider changing this to allow parent to delete their kids as well...
-    removeUser: async (parent, args, context) => {
-      if (context.user) {
-        return User.findOneAndDelete({ _id: context.user._id });
+    removeUser: async (parent, {creds}, context) => {
+      if (context.user){
+      
+        const user = await BaseUser.findOne({ username: creds.username });
+      
+        if (!user) {
+          throw AuthenticationError;
+        }
+  
+        const correctPw = await user.isCorrectPassword(creds.password);
+  
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+
+        //if we have gotten this far then ther user is:
+        //1.) logged in
+        //2.) has the correct username and password
+        //3.) either is the account or owns the account
+        if (user.__t === 'Parent'){
+          const parent = await BaseUser.findById({_id: context.user._id}).populate('kids')
+          if (parent.username == user.username){
+            await BaseUser.findByIdAndDelete({_id: parent._id})
+            return user
+          }
+
+          //Loops through the kids to see if the requested user to delete is in the array
+          for (const kid of parent.kids){
+            if (kid.username === user.username){
+              await BaseUser.deleteOne({_id: user._id})
+            } 
+          }
+          return null
+        }else if (user.__t === 'Child'){
+          throw AuthenticationError
+        }
       }
-      throw AuthenticationError;
+
+    },
+    updateUser: async (parent, {creds, updatedUserInfo}, context) =>{
+      if (context.user){
+        
+        const user = await BaseUser.findOne({ username: creds.username });
+     
+        if (!user) {
+          throw AuthenticationError;
+        }
+  
+        const correctPw = await user.isCorrectPassword(creds.password);
+        
+        if (!correctPw) {
+          throw AuthenticationError;
+        }
+
+        //if we have gotten this far then ther user is:
+        //1.) logged in
+        //2.) has the correct username and password
+        //3.) either is the account or owns the account
+        if (user.__t === 'Parent'){
+          const parent = await BaseUser.findById({_id: context.user._id}).populate('kids')
+
+          if (parent.username == user.username){
+            await BaseUser.findByIdAndUpdate({_id: parent._id}, updatedUserInfo)
+            return user
+          }
+
+
+        
+          
+        }else if (user.__t === 'Child'){ 
+          const parent = await BaseUser.findById({_id: context.user._id}, 'kids').populate('kids')
+          //Loops through the kids to see if the requested user to delete is in the array
+          for (const kid of parent.kids){
+            if (kid.username === user.username){
+              const targetKid = await BaseUser.findByIdAndUpdate({_id: user._id}, updatedUserInfo, {
+                new: true
+              })
+              return targetKid
+            } 
+          }
+        }
+      }
+
     },
   
     addTask: async (parent, {task}, context) =>{
       if (context.user){
         const newTask = await Task.create(task)
-        console.log(newTask)
         const child = await Child.findByIdAndUpdate({_id: task.owner}, {
           $addToSet: {tasks: newTask._id}
         })
@@ -160,6 +234,7 @@ const resolvers = {
     },
     delTask: async (parent, {taskId}, context)=>{
       if (context.user){
+        const user = BaseUser.find({})
         return await Task.findByIdAndDelete({_id: taskId})
       }
       throw AuthenticationError
