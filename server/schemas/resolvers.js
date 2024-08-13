@@ -85,15 +85,15 @@ const resolvers = {
 
       return { token, user };
     },
-    addChild: async (parent, { name, password }, context) => {
+    addChild: async (parent, { username, password }, context) => {
       if (context.user){
         const child = await Child.create({username, password})
         const parent = await Parent.findByIdAndUpdate({_id: context.user._id}, {
           $addToSet: {kids: child}
         })        
 
-        const token = signToken(user);
-        return { token, user };
+        
+        return child;
       }
       throw AuthenticationError
     },

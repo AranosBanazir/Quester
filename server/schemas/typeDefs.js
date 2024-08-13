@@ -78,7 +78,7 @@ type User {
 
   type Mutation {
     addParent(username: String!, email: String!, password: String!): Auth
-    addChild(username: String!, password: String!): Auth
+    addChild(username: String!, password: String!): UserTypes
 
     addTask(task: TaskInput!): Task
     updateTask(taskId: ID!, updatedTask: TaskInput!): Task
