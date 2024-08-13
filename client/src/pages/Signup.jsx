@@ -8,11 +8,11 @@ import Auth from '../utils/auth';
 
 const Signup = () => {
   const [formState, setFormState] = useState({
-    name: '',
+    username: '',
     email: '',
     password: '',
   });
-  const [addUser, { error, data }] = useMutation(ADD_PARENT);
+  const [addParent, { error, data }] = useMutation(ADD_PARENT);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -30,13 +30,14 @@ const Signup = () => {
     console.log(formState);
 
     try {
-      const { data } = await addUser({
+      const { data } = await addParent({
         variables: { ...formState },
       });
-
-      Auth.login(data.addUser.token);
+      console.log(data)
+      Auth.login(data.addParent.token);
     } catch (e) {
       console.error(e);
+      console.log('help')
     }
   };
 
@@ -56,7 +57,7 @@ const Signup = () => {
                 <input
                   className="form-input"
                   placeholder="Your username"
-                  name="name"
+                  name="username"
                   type="text"
                   value={formState.name}
                   onChange={handleChange}
