@@ -3,7 +3,7 @@ const ParentHomePage = () =>{
 
     return (
         <>
-        <h1>PARENT PAGE</h1>
+        <h1 className="text-red-500">PARENT PAGE</h1>
         </>
     )
 }
