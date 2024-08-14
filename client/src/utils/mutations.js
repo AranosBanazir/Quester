@@ -33,6 +33,7 @@ export const ADD_TASK = gql`
       name
       description
       points  
+      owner
     }
   }
 `

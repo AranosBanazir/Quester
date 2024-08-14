@@ -58,18 +58,32 @@ query User($userId: ID!) {
 export const ME = gql`
   query Me {
     me {
-    __typename
-      ...on Parent{
+      __typename
+      ...on Parent {
+        username
+        _id
+        kids {
+          _id
+          username
+        }
+      }
+      ...on Child {
         username
         _id
       }
-
-    ...on Child{
-      username
-      _id
     }
   }
-}
+`;
+
+export const GET_CHILDREN = gql`
+  query GetChildren {
+    me {
+      kids {
+        _id
+        username
+      }
+    }
+  }
 `;
 
 /*Taken from in class example. Might need adjustments ~Nick*/

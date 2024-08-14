@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 
+import ParentTasks from "../parent-pages/ParentTasks";
 import ChildTasks from "../child-pages/ChildTasks";
 
 
@@ -13,8 +14,8 @@ const Tasks = () => {
       }
   })
   
-    let relaventPage;
-    const userData = userInfo?.data?.user || {}   
+  const userData = userInfo?.data?.user || {}   
+  let relaventPage;
 
     if (data){
       if (userType === 'Parent'){

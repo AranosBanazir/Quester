@@ -43,9 +43,9 @@ const AddChildForm = ({ userId }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Add Child</h2>
+            <h2  className="text-red-500">Add Child</h2>
             <div>
-                <label htmlFor="username">Username:</label>
+                <label  className="text-red-500" htmlFor="username">Username:</label>
                 <input
                     id="username"
                     type="text"
@@ -55,7 +55,7 @@ const AddChildForm = ({ userId }) => {
                 />
             </div>
             <div>
-                <label htmlFor="password">Password:</label>
+                <label   className="text-red-500" htmlFor="password">Password:</label>
                 <input
                     id="password"
                     type="password"
@@ -64,7 +64,7 @@ const AddChildForm = ({ userId }) => {
                     required
                 />
             </div>
-            <button type="submit" disabled={loading}>
+            <button  className="text-red-500" type="submit" disabled={loading}>
                 {loading ? 'Adding...' : 'Add Child'}
             </button>
             {error && <p>Error: {error.message || 'An unknown error occurred'}</p>}
