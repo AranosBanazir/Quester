@@ -34,7 +34,7 @@ const ChildTasks = ({data}) =>{
     return (
         <>
 
-        <h1>CHILD PAGE</h1>
+        <h1 className="text-red-500">CHILD PAGE TASKS</h1>
         {data?.tasks?.map((task) => {
             return <TaskCard  task={task} key={`taskCard-${task._id}`}/>
         })}

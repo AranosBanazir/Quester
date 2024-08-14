@@ -5,6 +5,7 @@ const ChildRewards = ({data}) =>{
 
     return (
         <>
+        <h1 className="text-red-500">CHILD REWARDS PAGE</h1>
         </>
     )
 }
