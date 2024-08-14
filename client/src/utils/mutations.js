@@ -74,7 +74,7 @@ export const ADD_REWARD = gql`
       cost
       description
       name
-      owner
+      _id
     }
   }
 `

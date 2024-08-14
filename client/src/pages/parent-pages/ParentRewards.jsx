@@ -9,7 +9,6 @@ const ParentRewards = () => {
   const [rewardName, setRewardName] = useState('');
   const [rewardDescription, setRewardDescription] = useState('');
   const [rewardCost, setRewardCost] = useState('');
-  const [selectedChild, setSelectedChild] = useState('');
   const [rewards, setRewards] = useState([]);
 
   // Query to get user data
@@ -25,7 +24,6 @@ const ParentRewards = () => {
       setRewardName('');
       setRewardDescription('');
       setRewardCost('');
-      setSelectedChild('');
       // Update rewards state with the new reward
       setRewards(prevRewards => [...prevRewards, data.addReward]);
     },
@@ -37,7 +35,9 @@ const ParentRewards = () => {
   const handleRewardSubmit = (e) => {
     e.preventDefault();
 
-    if (!rewardName || !rewardDescription || !rewardCost || !selectedChild) {
+    console.log(rewardDescription, rewardCost, rewardName)
+
+    if (!rewardName || !rewardDescription || !rewardCost) {
       console.error('Reward details are missing');
       return;
     }
@@ -47,8 +47,7 @@ const ParentRewards = () => {
         reward: {
           name: rewardName,
           description: rewardDescription,
-          cost: parseInt(rewardCost, 10),
-          owner: selectedChild,
+          cost: parseInt(rewardCost),
         },
       },
     }).catch(err => {
@@ -106,22 +105,6 @@ const ParentRewards = () => {
               onChange={(e) => setRewardCost(e.target.value)}
               required
             />
-          </div>
-          <div>
-            <label className="text-red-500" htmlFor="childSelect">Assign to Child:</label>
-            <select
-              id="childSelect"
-              value={selectedChild}
-              onChange={(e) => setSelectedChild(e.target.value)}
-              required
-            >
-              <option value="">Select a child</option>
-              {children.map(child => (
-                <option key={child._id} value={child._id}>
-                  {child.username}
-                </option>
-              ))}
-            </select>
           </div>
           <button type="submit" disabled={rewardLoading}>
             {rewardLoading ? 'Adding Reward...' : 'Add Reward'}
