@@ -16,11 +16,10 @@ export const ADD_PARENT = gql`
 export const ADD_CHILD = gql`
 mutation addChild($username: String!, $password: String!) {
   addChild(username: $username, password: $password) {
-    token
-    user {
-      _id
+    ...on Child {
       username
-    }  
+      _id
+    }
   }
 }
 `

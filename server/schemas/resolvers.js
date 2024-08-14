@@ -92,8 +92,8 @@ const resolvers = {
           $addToSet: {kids: child}
         })        
 
-        const token = signToken(user);
-        return { token, user };
+        
+        return child;
       }
       throw AuthenticationError
     },
