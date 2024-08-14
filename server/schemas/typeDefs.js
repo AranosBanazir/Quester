@@ -103,10 +103,11 @@ type User {
     confirmTaskComplete(taskId: ID!): Task
     delTask(taskId: ID!): Task
 
+    buyReward(rewardId: ID!, userId: ID!): Reward
     addReward(reward: RewardInput!): Reward
     updateReward(rewardId: ID!, updatedReward: RewardInput!): Reward
     delReward(rewardId: ID!): Reward
-
+    
     login(username: String!, password: String!): Auth
 
       

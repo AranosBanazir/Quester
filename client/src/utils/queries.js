@@ -13,13 +13,13 @@ export const QUERY_SINGLE_USER = gql`
 query User($userId: ID!) {
   user(userId: $userId) {
     __typename
-
     ...on Parent{
       _id
       username
       kids {
         username
         _id
+        wallet
       }
 
       rewards {
@@ -48,9 +48,7 @@ query User($userId: ID!) {
         description
       }
       wallet
-      
     }
-
   }
 }
 `;
