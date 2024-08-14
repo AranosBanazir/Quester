@@ -24,7 +24,6 @@ function Navbar() {
     navItems = [
       "Rewards",
       "Tasks",
-      "Kids",
       "Logout",
     ]
   }else{
