@@ -79,9 +79,15 @@ export const ADD_REWARD = gql`
   }
 `
 
-// export const UPDATE_REWARD = gql`
-  
-// `
+export const BUY_REWARD = gql`
+  mutation BuyReward($rewardId: ID!, $userId: ID!) {
+    buyReward(rewardId: $rewardId, userId: $userId) {
+      _id
+      name
+    }
+  }
+`
+
 
 export const CONFIRM_REWARD = gql`
   mutation ConfirmRewardComplete($rewardId: ID!) {
@@ -99,8 +105,19 @@ export const DELETE_REWARD = gql`
     _id
     name  
     }
-  } 
+  }` 
+export const UPDATE_REWARD = gql`
+  mutation UpdateReward($rewardId: ID!, $updatedReward: RewardInput!) {
+  updateReward(rewardId: $rewardId, updatedReward: $updatedReward) {
+    _id
+    cost
+    name
+    description
+  }
+}
 `
+
+
 
 export const LOGIN_USER = gql`
   mutation Login($username: String!, $password: String!) {
@@ -110,6 +127,16 @@ export const LOGIN_USER = gql`
   }
 `;
 
-// export const DELTE_USER = gql`
+export const DELTE_USER = gql`
+mutation RemoveUser($creds: UserInput!) {
+  removeUser(creds: $creds) {
+    ...on Parent{
+      username
+    }
 
-// `
+    ...on Child {
+      username
+    }
+  }
+}
+`
