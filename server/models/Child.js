@@ -15,9 +15,17 @@ const childSchema = new Schema({
 
 
 
+childSchema.methods.buyReward = async function (cost) {
+    //returning false if there are not enough funds
+    if (cost > this.wallet){
+        return false
+    }
+    this.wallet = this.wallet - cost
 
-
-
+    await this.save()
+    return true
+    
+  };
 
 const Child = BaseUser.discriminator('Child', childSchema )
 
