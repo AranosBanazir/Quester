@@ -74,6 +74,7 @@ export const ADD_REWARD = gql`
       cost
       description
       name
+      owner
     }
   }
 `
@@ -82,9 +83,24 @@ export const ADD_REWARD = gql`
   
 // `
 
-// export const DELETE_REWARD = gql`
-  
-// `
+export const CONFIRM_REWARD = gql`
+  mutation ConfirmRewardComplete($rewardId: ID!) {
+    confirmRewardComplete(rewardId: $rewardId) {
+      name
+      childConfirmed
+      parentConfirmed
+    }
+  }
+`
+
+export const DELETE_REWARD = gql`
+ mutation DelReward($rewardId: ID!) {
+    delReward(rewardId: $rewardId) {
+    _id
+    name  
+    }
+  } 
+`
 
 export const LOGIN_USER = gql`
   mutation Login($username: String!, $password: String!) {

@@ -14,6 +14,7 @@ const rewardSchema = new Schema({
         type: Number,
         required: true
     },
+    
 
 })
 
