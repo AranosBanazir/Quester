@@ -29,17 +29,21 @@ function Navbar() {
             <li key={item}>
               {item === "Logout" ? (
                 <button
-                  className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign "
                   onClick={logout}
                 >
+                  <p className="mb-7">
                   {item}
+                  </p>
                 </button>
               ) : (
                 <Link
                   to={`/${item.toLowerCase()}`}
-                  className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 >
+                  <p className="mb-7">
                   {item}
+                  </p>
                 </Link>
               )}
             </li>
@@ -47,31 +51,47 @@ function Navbar() {
         </ul>
         
         <div className="flex items-center space-x-4">
-          {Auth.loggedIn() ? (
+          {Auth.loggedIn() && userType === 'Parent' ? (
             <>
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 to="/me"
               >
+                <p className="mb-7">
                 View My Profile
+               </p>
               </Link>
               <button
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 onClick={logout}
               >
+              <p className="mb-7">
                 Logout
+              </p>
               </button>
             </>
-          ) : (
+          ) : Auth.loggedIn() && userType === 'Child' ? (
+            <>
+            <button
+              className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+              onClick={logout}
+            >
+              <p>
+                Logout
+              </p>
+            </button>
+          </>
+          ):          
+          (
             <>
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 to="/login"
               >
                 Login
               </Link>
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 to="/signup"
               >
                 Signup

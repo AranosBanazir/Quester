@@ -29,7 +29,7 @@ const TaskCard = ({ task, onRedeem, onDelete }) => {
   };
 
   return (
-    <div className="card my-2">
+    <div className="card my-2" key={task._id}>
       <div className="sticky-note h-[400px] items-center">
         <h5 className="card-title text-black permanent-marker-regular text-2xl task-text">{task.name}</h5>
         <p className="text-wrap text-black max-w-[200px] text-center font-bold text-xl task-text">{task.description}</p>

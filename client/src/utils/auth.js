@@ -25,6 +25,7 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
+    document.querySelector('body').setAttribute('background-image', '/assets/backgrounds/treehouse.jpg')
     window.location.assign('/');
   }
 

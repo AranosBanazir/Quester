@@ -246,9 +246,12 @@ const resolvers = {
           })
           return task
         }else if (user.__t == 'Parent'){
-          const task = await Task.findByIdAndUpdate({_id: taskId},{
-            parentConfirmed: true
-          })
+          const task = await Task.findById({_id: taskId})
+
+          if (task.childConfirmed === true){
+            Child.payForTask(task.points)
+          }
+
           return task
         }
       }

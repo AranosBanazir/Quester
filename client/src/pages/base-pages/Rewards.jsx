@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import ParentRewards from "../parent-pages/ParentRewards";
 import ChildRewards from "../child-pages/ChildRewards";
-
+import Spinner from "../../components/Spinner";
 
 const Rewards = () => {
   const {loading, error, data} = useQuery(ME)
@@ -27,7 +27,7 @@ const Rewards = () => {
   
     return (
       <main>
-        {relaventPage}
+        {loading ? <Spinner classNames="mx-auto"/> : relaventPage}
       </main>
     );
   };

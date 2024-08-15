@@ -10,7 +10,6 @@ const Home = () => {
   //this will let us know if they are a Parent or a child
   //and we can then render the page to fit the user
   const { loading, error, data } = useQuery(ME);
-
   const userType = data?.me.__typename || "user";
   const userInfo = useQuery(QUERY_SINGLE_USER, {
     variables: {

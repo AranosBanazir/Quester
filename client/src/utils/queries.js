@@ -24,6 +24,8 @@ query User($userId: ID!) {
           name
           description
           points
+          childConfirmed
+          parentConfirmed
         }
       inventory{
         _id

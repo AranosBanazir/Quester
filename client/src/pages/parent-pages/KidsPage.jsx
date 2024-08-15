@@ -3,6 +3,8 @@ import TaskCard from "../../components/TaskCard";
 import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
+import AddChildForm from "./AddChildForm";
+import { redirect } from "react-router-dom";
 
 const KidsPage = () =>{
     const [activeChildState, setActiveChildState] = useState('')
@@ -14,12 +16,11 @@ const KidsPage = () =>{
       },
     });
     
-    
-
-
+ 
 
     const user = userData?.user || {loading: true}
     
+
     if (user.kids && activeChildState === ''){
       setActiveChildState(user.kids[0])
     }
@@ -28,7 +29,9 @@ const KidsPage = () =>{
       const tasks = activeChildState?.tasks || []
       return (
         <>
-        {tasks.map(task=>{
+        {tasks.filter(task=> task.childConfirmed === true
+        )
+        .map(task=>{
           return <TaskCard task={{name: task.name, description: task.description, points: task.points}}/>
         })}
         </>
@@ -40,9 +43,7 @@ const KidsPage = () =>{
       const tasks = activeChildState?.tasks || []
       return (
         <>
-        {tasks.map(task=>{
-          return <TaskCard task={{name: task.name, description: task.description, points: task.points}}/>
-        })}
+
         </>
       )
     }
@@ -88,30 +89,30 @@ const KidsPage = () =>{
             </>
           )}
         </nav>
-
-        <div id="section-container">
-          <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
-              <p>
-                Tasks
-              </p>
-            </div>
-          <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
-            <section id="task-section" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
-                {getActiveChildTasks()}
-            </section>
-          </div>
-          <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
-              <p>
-                Inventory
-              </p>
-            </div>
-            <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
-            <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
-              {getActiveChildInventory()}
-            </section>
-          </div>
-        </div>
-        </>
+        {userLoading || loading || user.loading ? <></>: (
+            <div id="section-container" className="mt-10">
+              <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
+                  <p>
+                    Completed Tasks
+                  </p>
+                </div>
+              <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+                <section id="task-section" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
+                    {getActiveChildTasks()}
+                </section>
+              </div>
+              <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
+                  <p>
+                    Inventory
+                  </p>
+                </div>
+                <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+                <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
+                  {getActiveChildInventory()}
+                </section>
+              </div>
+            </div>)}
+      </>
     )
 }
 
