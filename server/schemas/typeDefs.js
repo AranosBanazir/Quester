@@ -94,7 +94,7 @@ type User {
     addParent(username: String!, email: String!, password: String!): Auth
     addChild(username: String!, password: String!): UserTypes
 
-    updateUser(creds:UserInput!, updatedUserInfo: UserUpdateInput):UserTypes
+    updateUser(updatedUserInfo: UserUpdateInput):UserTypes
     removeUser(creds:UserInput!):UserTypes  
 
 

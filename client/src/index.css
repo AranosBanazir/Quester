@@ -46,6 +46,8 @@ html, body{
   100% { border-color: red; }
 }
 
+
+
 .animated-border {
   animation: rainbow-border 3s linear infinite;
 }
@@ -54,15 +56,10 @@ html, body{
   text-align: center;
 }
 
- 
-  /* padding: 0;
-  /* overflow: hidden; */
 
 
-#section-container{
-  /* max-height: 75vh; */
-  /* overflow-y: auto; */
-}
+
+
 
 .task-text{
   text-shadow: -2px 2px black;
