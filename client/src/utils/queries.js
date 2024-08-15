@@ -19,6 +19,18 @@ query User($userId: ID!) {
       kids {
         username
         _id
+        tasks{
+          _id
+          name
+          description
+          points
+        }
+      inventory{
+        _id
+        name
+        cost
+        description
+      }
         wallet
       }
 

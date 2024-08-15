@@ -18,7 +18,6 @@ const Home = () => {
     },
   });
   const userData = userInfo?.data?.user;
-  console.log(userData)
 
   let relaventPage;
 
