@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import AddChildForm from "./AddChildForm"; // Update the path as necessary
-import { ADD_REWARD } from "../../utils/mutations"; // Import your reward mutations
+import { ADD_REWARD, DELETE_REWARD } from "../../utils/mutations"; // Import your reward mutations
 import { GET_REWARDS, ME } from "../../utils/queries"; // Import your reward queries
 import RewardCard from "../../components/RewardCard"; // Make sure to import RewardCard
 
@@ -41,6 +41,23 @@ const ParentRewards = () => {
       },
     });
 
+  // // Mutation to delete a reward
+  const [deleteReward] = useMutation(DELETE_REWARD, {
+    update(cache, { data: { delReward } }) {
+      // Update the cache to remove the deleted reward
+      const { getRewards } = cache.readQuery({ query: GET_REWARDS });
+      cache.writeQuery({
+        query: GET_REWARDS,
+        data: {
+          getRewards: getRewards.filter((reward) => reward._id !== delReward._id),
+        },
+      });
+    },
+    onError: (err) => {
+      console.error("Error deleting reward:", err.message);
+    }
+  });
+
   const handleRewardSubmit = (e) => {
     e.preventDefault();
 
@@ -63,6 +80,18 @@ const ParentRewards = () => {
       console.error("Mutation error:", err);
     });
   };
+
+  // const handleDeleteReward = async (rewardToDelete) => {
+  //   if (window.confirm(`Are you sure you want to delete the reward "${rewardToDelete.name}"? This action cannot be undone.`)) {
+  //     try {
+  //       await deleteReward({ variables: { rewardId: rewardToDelete._id } });
+  //       // Remove the deleted reward from the state
+  //       setRewards(prevRewards => prevRewards.filter(reward => reward._id !== rewardToDelete._id));
+  //     } catch (err) {
+  //       console.error('Error deleting reward:', err);
+  //     }
+  //   }
+  // };
 
   // Load rewards from the GET_REWARDS query
   useEffect(() => {
@@ -90,8 +119,6 @@ const ParentRewards = () => {
 
   return (
     <div className="container mx-auto p-6">
-     
-
       <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6">
         <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2>
         <form onSubmit={handleRewardSubmit}>

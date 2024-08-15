@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
 
-    const RewardCard = ({ reward, onRedeem, onDelete, showDeleteButton = true }) => {
+    const SecretRewardCard = ({ reward, onRedeem, onDelete }) => {
         const [confirmRewardComplete] = useMutation(CONFIRM_REWARD);
         const [deleteReward] = useMutation(DELETE_REWARD);
       
@@ -12,7 +12,7 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
               await confirmRewardComplete({ variables: { rewardId: reward._id } });
               onRedeem(reward);
             } catch (err) {
-              console.error('Error redeeming reward:', err);
+              console.error('Error redeeming task:', err);
             }
           }
         };
@@ -22,36 +22,40 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
             try {
               await deleteReward({ variables: { rewardId: reward._id } });
               onDelete(reward);
-              window.location.reload();
             } catch (err) {
               console.error('Error deleting reward:', err);
             }
           }
         };
 
-        return (
-          <div className="card card-compact bg-base-100 w-96 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title">{reward.name}</h2>
-              <p>{reward.description}</p>
-              <div className="card-actions justify-end">
-                <button className="btn btn-success self-end mt-5" onClick={handleRedeemClick}>
-                  <p className='mr-2'>
-                    Cost: {reward.cost}
-                  </p>
-                </button>
-                {showDeleteButton && (
-                  <button className="btn btn-error self-end mt-5" onClick={handleDeleteClick}>
-                    Delete!
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        );
-      };
+    return (
+<div className="card card-compact bg-base-100 w-96 shadow-xl">
+
+  <figure>
+    <img
+      src="/rewardstar.png"
+      alt="reward star" />
+  </figure>
+
+  <div className="card-body">
+    <h2 className="card-title">{reward.name}</h2>
+    <p>{reward.description}</p>
+    <div className="card-actions justify-end">
+      <button className="btn btn-success self-end mt-5" onClick={handleRedeemClick}>
+          <p className='mr-2'>
+          Cost: {reward.cost}
+          </p>
+        </button>
+      <button className="btn btn-error self-end mt-5" onClick={handleDeleteClick}>
+        Delete!
+      </button>
+    </div>
+  </div>
+</div>
+    );
+};
 
 
 
 
-export default RewardCard;
+export default SecretRewardCard;
