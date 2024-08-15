@@ -1,3 +1,4 @@
+import Spinner from "../../components/Spinner";
 import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
@@ -17,6 +18,7 @@ const KidsPage = () =>{
     // tabs-lifted
     return (
         <>
+        <Spinner classNames="mx-auto"/>
         <h1 className="text-red-500">My Kids and their shit</h1>
         <nav>
           {userLoading || loading ? (<div>

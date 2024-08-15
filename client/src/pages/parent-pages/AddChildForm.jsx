@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_CHILD } from '../../utils/mutations';
-
+import { ADD_CHILD} from '../../utils/mutations';
+import { QUERY_SINGLE_USER } from '../../utils/queries';
 const AddChildForm = ({ userId }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,6 +32,7 @@ const AddChildForm = ({ userId }) => {
                 username,
                 password,
             },
+            refetchQueries: [QUERY_SINGLE_USER, "user"]
         }).catch(err => {
             console.error('Mutation error:', err);
         });

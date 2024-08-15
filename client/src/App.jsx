@@ -44,9 +44,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <RewardCartProvider>
-      <div className={`flex-column justify-flex-start min-100-vh`} >
+      <div className={`flex flex-col min-100-vh`} >
         <Header />
-        <div className="container">
+        <div className="container mx-auto">
           <Outlet />
         </div>
         <Footer />
