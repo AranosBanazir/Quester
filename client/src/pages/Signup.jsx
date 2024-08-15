@@ -38,7 +38,7 @@ const Signup = () => {
   return (
     <main className="flex items-center justify-center min-h-screen  py-6 px-4">
       <div className="w-full max-w-sm p-6 bg-gray-800 rounded-lg shadow-lg">
-        <h4 className="text-2xl font-bold text-red-500 mb-4">Sign Up</h4>
+        <h4 className="text-3xl font-bold permanent-marker-regular text-white mb-4">Sign Up</h4>
         <div>
           {data ? (
             <p className="text-green-500">
@@ -88,9 +88,11 @@ const Signup = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                className="w-full py-2 nav-sign btn-sign"
               >
-                Sign Up
+                <p className='mb-7'>
+                  Sign Up
+                </p>
               </button>
             </form>
           )}

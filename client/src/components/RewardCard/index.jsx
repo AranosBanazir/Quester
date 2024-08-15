@@ -29,13 +29,7 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
         };
 
     return (
-
 <div className="card card-compact bg-base-100 w-96 shadow-xl">
-  <figure>
-    <img
-      src="./assets/rewardstar.png"
-      alt="reward star" />
-  </figure>
   <div className="card-body">
     <h2 className="card-title">{reward.name}</h2>
     <p>{reward.description}</p>
