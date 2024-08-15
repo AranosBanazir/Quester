@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
+import { ME, QUERY_SINGLE_USER, GET_REWARDS } from "../../utils/queries";
 import ParentRewards from "../parent-pages/ParentRewards";
 import ChildRewards from "../child-pages/ChildRewards";
 
 
 const Rewards = () => {
+  const {loading:rewardLoading, error:rewardError, data:rewardData}= useQuery(GET_REWARDS)
   const {loading, error, data} = useQuery(ME)
   const userType = data?.me.__typename || 'user'
   const userInfo = useQuery(QUERY_SINGLE_USER, {
@@ -21,7 +22,7 @@ const Rewards = () => {
       if (userType === 'Parent'){
         relaventPage = <ParentRewards data={userData}/>
       }else if (userType === 'Child'){
-        relaventPage = <ChildRewards data={userData}/>
+        relaventPage = <ChildRewards data={{...userData, ...rewardData}}/>
       }
     }
   

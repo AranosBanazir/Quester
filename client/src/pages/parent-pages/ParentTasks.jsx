@@ -143,10 +143,6 @@ const ParentTasks = () => {
           </form>
         </section>
   
-        <section className="mb-8">
-          <AddChildForm />
-        </section>
-  
         <section>
           <h2 className="text-2xl font-semibold text-blue-500 mb-4">Tasks</h2>
           {tasks.filter(task => task !== null).length > 0 ? (

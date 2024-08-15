@@ -33,7 +33,7 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
 <div className="card card-compact bg-base-100 w-96 shadow-xl">
   <figure>
     <img
-      src="./assets/rewardstar.png"
+      src="/rewardstar.png"
       alt="reward star" />
   </figure>
   <div className="card-body">
