@@ -71,15 +71,17 @@ const KidsPage = () =>{
     
     return (
         <>  
-        <nav className="flex flex-row justify-evenly flex-wrap mt-10 items-center">
+        <nav className="flex flex-row justify-evenly flex-wrap mt-10 items-center h-auto">
           {userLoading || loading || user.loading ? (<Spinner classNames="mx-auto"/>) : (
             <>
             {user?.kids.map(kid=>{
               return (
                   <button onClick={()=>{
                     handleActiveChild(kid.username)
-                  }} className="btn border-t-gray-900 text-center text-green-600 font-bold text-xl" key={kid._id}>
+                  }} className="bg-transparent text-center text-black font-bold text-xl sign btn-sign permanent-marker-regular" key={kid._id}>
+                    <p className="mt-5 mr-7">
                     {kid.username}
+                    </p>
                   </button>
                   )
             })}
@@ -87,17 +89,28 @@ const KidsPage = () =>{
           )}
         </nav>
 
-        <div className="flex flex-wrap flex-col">
-          
-          <section id="task-section" className="cork w-auto flex flex-wrap flex-col">
-              {getActiveChildTasks()}
-          </section>
-
-          <section id="inventory-div" className="cork w-auto flex flex-wrap flex-col">
-            {getActiveChildInventory()}
-          </section>
+        <div id="section-container">
+          <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
+              <p>
+                Tasks
+              </p>
+            </div>
+          <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+            <section id="task-section" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
+                {getActiveChildTasks()}
+            </section>
+          </div>
+          <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
+              <p>
+                Inventory
+              </p>
+            </div>
+            <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+            <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
+              {getActiveChildInventory()}
+            </section>
+          </div>
         </div>
-
         </>
     )
 }

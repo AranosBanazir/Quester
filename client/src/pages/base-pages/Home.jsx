@@ -24,8 +24,7 @@ const Home = () => {
   if (data) {
     if (userType === 'Parent' && userData?.kids?.length === 0) {
       relaventPage = <ParentAccount data={userData} />
-    }
-    else if (userType === "Parent") {
+    }else if (userType === "Parent") {
       relaventPage = <KidsPage data={userData} />;
     } else if (userType === "Child") {
       relaventPage = <ChildHomePage data={userData} />;

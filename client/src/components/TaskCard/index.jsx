@@ -30,10 +30,12 @@ const TaskCard = ({ task, onRedeem, onDelete }) => {
 
   return (
     <div className="card my-2">
-      <div className="card-body">
-        <h5 className="card-title">{task.name}</h5>
-        <p className="card-text">{task.description}</p>
-        <p className="card-text">Points: {task.points}</p>
+      <div className="sticky-note h-[400px] items-center">
+        <h5 className="card-title text-black permanent-marker-regular text-2xl task-text">{task.name}</h5>
+        <p className="text-wrap text-black max-w-[200px] text-center font-bold text-xl task-text">{task.description}</p>
+        <p className="text-wrap text-black font-bold task-text">Points: {task.points}</p>
+        <image src='/assets/coin.gif' className='w-[50px]'/>
+        <div>
         <button className="btn btn-success mx-2" onClick={handleRedeemClick}>
           Redeem
         </button>
@@ -41,6 +43,7 @@ const TaskCard = ({ task, onRedeem, onDelete }) => {
           Delete
         </button>
       </div>
+        </div>
     </div>
   );
 };
