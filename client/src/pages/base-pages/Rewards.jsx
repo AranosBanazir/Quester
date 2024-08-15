@@ -2,15 +2,15 @@ import { useQuery } from "@apollo/client";
 import { ME, QUERY_SINGLE_USER, GET_REWARDS } from "../../utils/queries";
 import ParentRewards from "../parent-pages/ParentRewards";
 import ChildRewards from "../child-pages/ChildRewards";
-
+import Spinner from "../../components/Spinner";
 
 const Rewards = () => {
   const {loading:rewardLoading, error:rewardError, data:rewardData}= useQuery(GET_REWARDS)
   const {loading, error, data} = useQuery(ME)
-  const userType = data?.me.__typename || 'user'
+  const userType = data?.me?.__typename || 'user'
   const userInfo = useQuery(QUERY_SINGLE_USER, {
       variables: {
-          userId: data?.me._id
+          userId: data?.me?._id
       }
   })
 
@@ -28,7 +28,7 @@ const Rewards = () => {
   
     return (
       <main>
-        {relaventPage}
+        {loading ? <Spinner classNames="mx-auto"/> : relaventPage}
       </main>
     );
   };

@@ -28,12 +28,16 @@ const taskSchema = new Schema({
         type: Boolean,
         default: false
     }
-    // deadline:{
-    //     type: Date
-    // }  
 })
 
-
+//resets the confirm for both Parent/Child
+taskSchema.methods.resetTask = async function () {
+    //returning false if there are not enough funds
+    this.childConfirmed = false
+    this.parentConfirmed = false
+    await this.save()
+    return true
+  };
 
 const Task =  model('Task', taskSchema)
 

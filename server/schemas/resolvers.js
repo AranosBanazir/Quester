@@ -19,12 +19,44 @@ const resolvers = {
       return BaseUser.find();
     },
 
-    user: async (parent, { userId }) => {
-      return BaseUser.findOne({ _id: userId })
-              .populate('kids')
-              .populate('tasks')
-              .populate('rewards')
-              .populate('inventory');
+    user: async (parent, { userId }, context) => {
+      if (context.user){
+
+        const user = await BaseUser.findById({_id: userId}, '__t')
+        if (user.__t === 'Parent'){
+
+        
+        const parent = await Parent.findById({ _id: userId })
+                                   .populate('kids')
+                                   .populate('rewards')
+            
+        
+            for(const kid of parent.kids){
+              let tasks = []
+              let inventory = []
+              const child = await Child.findById({_id: kid._id}).populate('tasks').populate('inventory')
+
+              for (const item of child.inventory){
+                inventory.push(item)
+              }
+
+              for (const task of child.tasks){
+                tasks.push(task)
+              }
+              kid.inventory = inventory
+              kid.tasks = tasks
+            }
+          return parent
+        }else if (user.__t === 'Child'){
+          const child = await Child.findById({ _id: userId })
+          .populate('inventory')
+          .populate('tasks')
+          
+          
+              return child
+        }
+        return AuthenticationError
+      }
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
@@ -218,19 +250,25 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    confirmTaskComplete: async (parent, {taskId}, context)=>{
+    confirmTaskComplete: async (parent, {taskId, childId}, context)=>{
       //confirming both tasks by parent and child to ensure the task is done
       if (context.user){
         const user = await BaseUser.findById({_id: context.user._id})
         if (user.__t === 'Child'){
           const task = await Task.findByIdAndUpdate({_id: taskId},{
             childConfirmed: true
+          },{
+            new: true
           })
           return task
         }else if (user.__t == 'Parent'){
-          const task = await Task.findByIdAndUpdate({_id: taskId},{
-            parentConfirmed: true
-          })
+          const task = await Task.findById({_id: taskId})
+          const child = await Child.findById({_id: childId})
+          if (task.childConfirmed === true){
+            child.payForTask(task.points)       
+          }
+
+          task.resetTask()
           return task
         }
       }

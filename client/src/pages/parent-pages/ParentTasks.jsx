@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import AddChildForm from './AddChildForm'; // Update the path as necessary
 import { ADD_TASK } from '../../utils/mutations'; // Import your mutations
 import { GET_TASKS, ME } from '../../utils/queries'; // Import your queries
-import TaskCard from '../../components/TaskCard'; // Make sure to import TaskCard
+
+//TODO Need a new task card for parents that isn't cartoony
 
 const ParentTasks = () => {
     const [taskName, setTaskName] = useState('');
@@ -41,7 +41,7 @@ const ParentTasks = () => {
           task: {
             name: taskName,
             description: taskDescription,
-            points: parseInt(taskPoints, 10),
+            points: parseInt(taskPoints),
             owner: selectedChild,
           },
         },
@@ -60,13 +60,11 @@ const ParentTasks = () => {
     if (userError) return <p className="text-center text-red-500">Error loading user data: {userError.message}</p>;
     if (tasksError) return <p className="text-center text-red-500">Error loading tasks: {tasksError.message}</p>;
   
-    const isParent = userData?.me.__typename === 'Parent';
+    const isParent = userData?.me?.__typename === 'Parent';
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
     return (
-      <div className="container mx-auto p-4 max-w-2xl mx-auto">
-        
-  
+      <div className="container p-4 max-w-2xl mx-auto">
         <section className="mb-4">
           <form onSubmit={handleTaskSubmit} className="bg-gray-800 p-4 rounded-md shadow-md">
           <h2 className="text-lg font-semibold text-blue-500 mb-2">Add Task</h2>
@@ -134,22 +132,12 @@ const ParentTasks = () => {
           </form>
         </section>
   
+
+  
         <section>
-          {tasks.length > 0 ? (
-            tasks.filter(task => task !== null).map(task => (
-              <TaskCard
-                key={task._id}
-                task={task}
-                onRedeem={() => {}}
-                onDelete={() => {}}
-              />
-            ))
-          ) : (
             <div className="bg-gray-800 p-4 rounded-md shadow-md text-center">
-              
               <p className="text-gray-400 text-sm">No tasks available.</p>
             </div>
-          )}
         </section>
       </div>
     );

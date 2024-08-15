@@ -6,19 +6,31 @@ const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white py-4 mt-auto">
-      <div className="container mx-auto text-center">
-        {location.pathname !== '/' && (
-          <button
-            className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 mb-4 transition-colors duration-200"
-            onClick={() => navigate(-1)}
-          >
-            &larr; Go Back
-          </button>
-        )}
+      <div className=" mx-auto text-center flex flex-col justify-center items-center">
         <h4 className="text-sm">
-          &copy; {new Date().getFullYear()} - Proj 3 Starter
+          &copy; {new Date().getFullYear()} Made with contributions from: 
         </h4>
+    
+          <div className='flex flex-row flex-wrap'>
+
+          <a href='https://github.com/LerieLogin' className="btn-github">
+          
+          </a>
+          <p className='mr-5'>Larry Logan</p>
+
+      
+          <a href='https://github.com/Soko77788' className="btn-github"></a>
+          <p className='mr-5'>Nick Sokolowski</p>
+     
+   
+          <a href='https://github.com/AranosBanazir' className="btn-github"></a>
+          <p className='mr-5'>Caleb Saiia</p>
+
+
+          </div>
+     
       </div>
+
     </footer>
   );
 };

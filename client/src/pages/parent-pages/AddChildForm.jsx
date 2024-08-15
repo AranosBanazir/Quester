@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_CHILD } from '../../utils/mutations';
-
+import { ADD_CHILD} from '../../utils/mutations';
+import { QUERY_SINGLE_USER } from '../../utils/queries';
 const AddChildForm = ({ userId }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,14 +32,15 @@ const AddChildForm = ({ userId }) => {
                 username,
                 password,
             },
+            refetchQueries: [QUERY_SINGLE_USER, "user"]
         }).catch(err => {
             console.error('Mutation error:', err);
         });
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-6 rounded-md shadow-lg mx-auto">
-            <h2 className="text-2xl font-bold mb-4 text-red-500">Add Child</h2>
+        <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-6 rounded-md shadow-lg mx-auto max-w-[75%] mt-10">
+            <h2 className="text-3xl font-bold mb-4 text-white permanent-marker-regular">Add Child</h2>
             <div className="mb-4">
                 <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">Username:</label>
                 <input

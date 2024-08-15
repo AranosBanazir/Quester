@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <main className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-sm p-6 bg-gray-800  rounded-lg shadow-lg">
-        <h4 className="text-2xl font-bold text-red-500 mb-4">Login</h4>
+        <h4 className="text-3xl font-bold mb-4 permanent-marker-regular text-white">Login</h4>
         <div>
           {data ? (
             <p className="text-green-500">
@@ -77,9 +77,11 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                className="w-full py-2 btn-sign wood-sign"
               >
-                Log In
+                <p className="mb-7">
+                  Login
+                </p>
               </button>
             </form>
           )}

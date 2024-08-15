@@ -2,7 +2,7 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
 
-    const RewardCard = ({ reward, onRedeem, onDelete }) => {
+    const SecretRewardCard = ({ reward, onRedeem, onDelete }) => {
         const [confirmRewardComplete] = useMutation(CONFIRM_REWARD);
         const [deleteReward] = useMutation(DELETE_REWARD);
       
@@ -30,6 +30,13 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
 
     return (
 <div className="card card-compact bg-base-100 w-96 shadow-xl">
+
+  <figure>
+    <img
+      src="/rewardstar.png"
+      alt="reward star" />
+  </figure>
+
   <div className="card-body">
     <h2 className="card-title">{reward.name}</h2>
     <p>{reward.description}</p>
@@ -51,4 +58,4 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
 
 
 
-export default RewardCard;
+export default SecretRewardCard;
