@@ -48,17 +48,17 @@ const KidsPage = () =>{
       )
     }
 
-    useEffect(()=>{
-      if (!user.kids) return
+    // useEffect(()=>{
+    //   if (!user.kids) return
 
-      const taskDiv = document.getElementById('task-section')
-      const rewardsDiv = document.getElementById('rewards-section')
-      const inventory  = document.getElementById('inventory-section')
+    //   const taskDiv = document.getElementById('task-section')
+    //   const rewardsDiv = document.getElementById('rewards-section')
+    //   const inventory  = document.getElementById('inventory-section')
 
   
       
-    console.log(activeChildState?.tasks)
-    }, [activeChildState])
+    // console.log(activeChildState?.tasks)
+    // }, [activeChildState])
 
 
     const handleActiveChild = (child) =>{
@@ -80,7 +80,7 @@ const KidsPage = () =>{
                   <button onClick={()=>{
                     handleActiveChild(kid.username)
                   }} className="bg-transparent text-center text-black font-bold text-xl sign btn-sign permanent-marker-regular wobble" key={kid._id}>
-                    <p className="mt-5 mr-7">
+                    <p className="mt-8 mr-16">
                     {kid.username}
                     </p>
                   </button>
@@ -92,9 +92,9 @@ const KidsPage = () =>{
         {userLoading || loading || user.loading ? <></>: (
             <div id="section-container" className="mt-10">
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
-                  <p>
-                    Completed Tasks
-                  </p>
+
+                  <img src="/assets/task-banner.png" alt=""  />
+                  
                 </div>
               <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
                 <section id="task-section" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
@@ -102,9 +102,7 @@ const KidsPage = () =>{
                 </section>
               </div>
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
-                  <p>
-                    Inventory
-                  </p>
+                  <img src="/assets/inv-banner.png" alt="" />
                 </div>
                 <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
                 <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
