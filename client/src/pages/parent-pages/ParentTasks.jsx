@@ -64,7 +64,7 @@ const ParentTasks = () => {
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
     return (
-      <div className="container mx-auto p-4 max-w-2xl">
+      <div className="container mx-auto p-4 max-w-2xl mx-auto">
         
   
         <section className="mb-4">

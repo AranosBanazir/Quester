@@ -40,18 +40,17 @@ const client = new ApolloClient({
 
 
 function App() {
- 
   return (
     <ApolloProvider client={client}>
       <RewardCartProvider>
-      <div className={`flex flex-col min-100-vh`} >
-        <Header />
-        <div className="container mx-auto">
-          <Outlet />
+        <div id="root">
+          <Header />
+          <main>
+            <Outlet />
+          </main>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-      </ RewardCartProvider>
+      </RewardCartProvider>
     </ApolloProvider>
   );
 }
