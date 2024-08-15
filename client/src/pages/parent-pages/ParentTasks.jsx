@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_TASK } from '../../utils/mutations'; // Import your mutations
 import { GET_TASKS, ME } from '../../utils/queries'; // Import your queries
+import SecretTaskCard from '../../components/SecretTaskCard'
+
 
 //TODO Need a new task card for parents that isn't cartoony
 
-const ParentTasks = () => {
+const ParentTasks = ({}) => {
     const [taskName, setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
     const [taskPoints, setTaskPoints] = useState('');
@@ -64,6 +66,7 @@ const ParentTasks = () => {
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
     return (
+      <>
       <div className="container p-4 max-w-2xl mx-auto">
         <section className="mb-4">
           <form onSubmit={handleTaskSubmit} className="bg-gray-800 p-4 rounded-md shadow-md">
@@ -135,12 +138,24 @@ const ParentTasks = () => {
 
   
         <section>
-            <div className="bg-gray-800 p-4 rounded-md shadow-md text-center">
-              <p className="text-gray-400 text-sm">No tasks available.</p>
-            </div>
-        </section>
-      </div>
+  <h2 className="text-blue-500">Tasks</h2>
+  {tasks.filter(task => task !== null).length > 0 ? (
+    tasks.filter(task => task !== null).map(task => (
+      <SecretTaskCard
+        key={task._id}
+        task={task}
+        onRedeem={() => {}}
+        onDelete={() => {}}
+      />
+    ))
+  ) : (
+    <p className="text-gray-400 text-sm">No tasks available.</p>
+  )}
+</section>
+</div>
+</>
     );
 };
 
 export default ParentTasks;
+

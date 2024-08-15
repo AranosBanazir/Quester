@@ -4,7 +4,7 @@ import { CONFIRM_TASK, DELETE_TASK } from '../../utils/mutations';
 import { FaStar, FaCoins } from 'react-icons/fa';
 
 
-const TaskCard = ({ task, onRedeem, onDelete }) => {
+const SecretTaskCard = ({ task, onRedeem, onDelete }) => {
   const [confirmTaskComplete] = useMutation(CONFIRM_TASK);
   const [deleteTask] = useMutation(DELETE_TASK);
 
@@ -31,25 +31,29 @@ const TaskCard = ({ task, onRedeem, onDelete }) => {
   };
 
 
-  return (
-    <div className="card my-2" key={task._id}>
-      <div className="sticky-note h-[400px] items-center">
-        <h5 className="card-title text-black permanent-marker-regular text-2xl task-text">{task.name}</h5>
-        <p className="text-wrap text-black max-w-[200px] text-center font-bold text-xl task-text">{task.description}</p>
-        <p className="text-wrap text-black font-bold task-text">Points: {task.points}</p>
-        <image src='/assets/coin.gif' className='w-[50px]'/>
-        <div>
-        <button className="btn btn-success mx-2" onClick={handleRedeemClick}>
-          Redeem
-        </button>
-        <button className="btn btn-danger" onClick={handleDeleteClick}>
-          Delete
-        </button>
-      </div>
+return (
+    <div className="card bg-base-100 w-80 shadow-xl mx-4 my-4 border-4 border-transparent animated-border">
+      <div className="card-body flex flex-col items-center text-center">
+        <h5 className="card-title font-bold flex items-center">
+          <FaStar className="inline mx-1" /> Task: {task.name} <FaStar className="inline mx-1" />
+        </h5>
+        <p className="card-text border p-2 mb-2">
+          {task.description}
+        </p>
+        <p className="card-text flex items-center">
+          <FaCoins className="inline mx-1" /> Points: {task.points} <FaCoins className="inline mx-1" />
+        </p>
+        <div className="card-actions flex justify-center">
+          <button className="btn btn-success mx-2" onClick={handleRedeemClick}>
+            Redeem
+          </button>
+          <button className="btn btn-error" onClick={handleDeleteClick}>
+            Delete
+          </button>
         </div>
+      </div>
     </div>
   );
 };
 
-
-export default TaskCard;
+export default SecretTaskCard
