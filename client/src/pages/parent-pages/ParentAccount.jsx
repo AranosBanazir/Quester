@@ -13,7 +13,7 @@ const ParentAccount = () => {
 
     return (
         <div className="container mx-auto p-4">
-            <h1 className="text-3xl font-bold text-red-500 mb-6">Parent Account</h1>
+            
             {userId ? (
                 <AddChildForm userId={userId} />
             ) : (

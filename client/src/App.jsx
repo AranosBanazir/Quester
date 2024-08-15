@@ -49,9 +49,9 @@ function App() {
         <div className="container">
           <Outlet />
         </div>
-        <Footer />
       </div>
       </ RewardCartProvider>
+        <Footer />
     </ApolloProvider>
   );
 }
