@@ -3,7 +3,7 @@ import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import ParentRewards from "../parent-pages/ParentRewards";
 import ChildRewards from "../child-pages/ChildRewards";
 import Spinner from "../../components/Spinner";
-
+import AuthCheck from "../../components/AuthCheck";
 const Rewards = () => {
   const {loading, error, data} = useQuery(ME)
   const userType = data?.me?.__typename || 'user'
@@ -26,9 +26,9 @@ const Rewards = () => {
     }
   
     return (
-      <main>
+      <AuthCheck>
         {loading ? <Spinner classNames="mx-auto"/> : relaventPage}
-      </main>
+      </AuthCheck>
     );
   };
   export default Rewards;

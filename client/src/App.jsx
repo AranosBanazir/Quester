@@ -13,8 +13,7 @@ import { RewardCartProvider } from './utils/RewardCartContext';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
-
+import { useEffect } from 'react';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -40,15 +39,26 @@ const client = new ApolloClient({
 
 
 function App() {
-  
+  useEffect(()=>{
+    const backgrounds = [
+      "tropical",
+      "treehouse"
+    ]
+    const rndBackgroundIndex = Math.floor(Math.random() * backgrounds.length)
+    const background = backgrounds[rndBackgroundIndex]
+
+    document.querySelector('body')
+            .setAttribute('style', `background-image: url("/assets/backgrounds/${background}.jpg");`)
+
+  }, [])
+
+
   return (
     <ApolloProvider client={client}>
       <RewardCartProvider>
         <div className='flex flex-col min-h-screen'>
           <Header />
-          <main>
             <Outlet />
-          </main>
           <Footer />
         </div>
       </RewardCartProvider>

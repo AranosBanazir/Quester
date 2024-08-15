@@ -3,7 +3,8 @@ import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 
 import ParentTasks from "../parent-pages/ParentTasks";
 import ChildTasks from "../child-pages/ChildTasks";
-
+import AuthCheck from "../../components/AuthCheck";
+import Spinner from "../../components/Spinner";
 
 const Tasks = () => {
   const {loading, error, data} = useQuery(ME)
@@ -27,9 +28,9 @@ const Tasks = () => {
     }
   
     return (
-      <main>
-        {relaventPage}
-      </main>
+      <AuthCheck>
+        {userInfo.loading ? <Spinner/>: relaventPage}
+      </AuthCheck>
     );
   };
   export default Tasks;
