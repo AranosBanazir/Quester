@@ -189,8 +189,8 @@ main {
 
 .wobble:focus{
   animation-name: wobble-hor-top;
-  animation-duration: 5s;
-  animation-timing-function: ease-out;
+  animation-duration: 7s;
+  animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: 1;
   animation-direction: alternate;
