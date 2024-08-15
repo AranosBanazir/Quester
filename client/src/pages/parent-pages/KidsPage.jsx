@@ -2,9 +2,9 @@ import Spinner from "../../components/Spinner";
 import TaskCard from "../../components/TaskCard";
 import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
-import { useState, useEffect } from "react";
-import AddChildForm from "./AddChildForm";
-import { redirect } from "react-router-dom";
+import { useState} from "react";
+import AuthCheck from "../../components/AuthCheck";
+
 
 const KidsPage = () =>{
     const [activeChildState, setActiveChildState] = useState('')
@@ -27,15 +27,12 @@ const KidsPage = () =>{
 
     const getActiveChildTasks = () =>{
       const tasks = activeChildState?.tasks || []
-      return (
-        <>
-        {tasks.filter(task=> task.childConfirmed === true
-        )
+      return tasks
+        // .filter(task=> task.childConfirmed === true)
         .map(task=>{
           return <TaskCard task={{name: task.name, description: task.description, points: task.points}}/>
-        })}
-        </>
-      )
+        })
+      
     }
 
 
@@ -48,18 +45,6 @@ const KidsPage = () =>{
       )
     }
 
-    // useEffect(()=>{
-    //   if (!user.kids) return
-
-    //   const taskDiv = document.getElementById('task-section')
-    //   const rewardsDiv = document.getElementById('rewards-section')
-    //   const inventory  = document.getElementById('inventory-section')
-
-  
-      
-    // console.log(activeChildState?.tasks)
-    // }, [activeChildState])
-
 
     const handleActiveChild = (child) =>{
       for (const kid of user.kids){
@@ -71,7 +56,8 @@ const KidsPage = () =>{
     }
     
     return (
-        <>  
+          <> 
+          <AuthCheck>
         <nav className="flex flex-row justify-evenly flex-wrap mt-10 items-center h-auto">
           {userLoading || loading ? (<Spinner classNames="mx-auto"/>) : (
             <>
@@ -93,7 +79,7 @@ const KidsPage = () =>{
             <div id="section-container" className="mt-10">
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
 
-                  <img src="/assets/task-banner.png" alt=""  />
+                  <img src="/assets/task-banner-brown.png" alt="Task banner"  />
                   
                 </div>
               <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
@@ -102,7 +88,7 @@ const KidsPage = () =>{
                 </section>
               </div>
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
-                  <img src="/assets/inv-banner.png" alt="" />
+                  <img src="/assets/inv-banner-brown.png" alt="Inventory banner" />
                 </div>
                 <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
                 <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
@@ -110,6 +96,7 @@ const KidsPage = () =>{
                 </section>
               </div>
             </div>)}
+      </AuthCheck>
       </>
     )
 }

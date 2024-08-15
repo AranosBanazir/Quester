@@ -19,19 +19,25 @@ main {
 }
 
 
+body {
+  /* background-image: url('/assets/backgrounds/treehouse.jpg');  */
+  background-size: cover; 
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
 
 html, body{
   width: 100vw; 
-  height: 100vh; 
+  min-height: 100vh; 
   margin: 0; 
   padding: 0;
   /* overflow: hidden; */
 }
 
 #section-container{
-  max-width: 100vw;
-  max-height: 100vh;
-  overflow: auto;
+  /* max-height: 75vh; */
+  /* overflow-y: auto; */
 }
 
 .task-text{
@@ -41,14 +47,6 @@ html, body{
 
 
 
-.cork{
-  background-image: url('/assets/corkboard.png'); 
-  background-size: contain; 
-  background-position:left center;
-  background-repeat: no-repeat;
-  max-width: 1569px;
-  margin: 0px 20px 0px 20px;
-}
 
 .permanent-marker-regular {
   font-family: "Permanent Marker", cursive;
@@ -150,12 +148,6 @@ html, body{
   color: #514f02
 }
 
-body {
-  background-image: url('/assets/backgrounds/treehouse.jpg'); 
-  background-size: cover; 
-  background-position: center center; 
-  background-repeat: no-repeat; 
-}
 
 main {
   background: transparent;
