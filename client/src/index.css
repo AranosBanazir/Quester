@@ -128,6 +128,11 @@ html, body{
   text-shadow: -2px 2px black;
 }
 
+.task-header-text{
+  text-shadow: -1px 3px #87c062;
+  color: #514f02
+}
+
 body {
   background-image: url('/assets/backgrounds/treehouse.jpg'); 
   background-size: cover; 

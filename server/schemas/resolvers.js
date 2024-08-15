@@ -19,30 +19,44 @@ const resolvers = {
       return BaseUser.find();
     },
 
-    user: async (parent, { userId }) => {
-      const user = await BaseUser.findOne({ _id: userId })
-              .populate('kids')
-              .populate('rewards')
-              .populate('inventory')
-              .populate('tasks')
-      
-          for(const kid of user.kids){
-            let tasks = []
-            let inventory = []
-            const child = await Child.findById({_id: kid._id}).populate('tasks').populate('inventory')
+    user: async (parent, { userId }, context) => {
+      if (context.user){
 
-            for (const item of child.inventory){
-              inventory.push(item)
-            }
+        const user = await BaseUser.findById({_id: userId}, '__t')
+        if (user.__t === 'Parent'){
 
-            for (const task of child.tasks){
-              tasks.push(task)
+        
+        const parent = await Parent.findById({ _id: userId })
+                                   .populate('kids')
+                                   .populate('rewards')
+            
+        
+            for(const kid of parent.kids){
+              let tasks = []
+              let inventory = []
+              const child = await Child.findById({_id: kid._id}).populate('tasks').populate('inventory')
+
+              for (const item of child.inventory){
+                inventory.push(item)
+              }
+
+              for (const task of child.tasks){
+                tasks.push(task)
+              }
+              kid.inventory = inventory
+              kid.tasks = tasks
             }
-            kid.inventory = inventory
-            kid.tasks = tasks
-          }
-              
-        return user
+          return parent
+        }else if (user.__t === 'Child'){
+          const child = await Child.findById({ _id: userId })
+          .populate('inventory')
+          .populate('tasks')
+          
+          
+              return child
+        }
+        return AuthenticationError
+      }
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {

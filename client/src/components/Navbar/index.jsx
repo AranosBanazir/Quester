@@ -76,7 +76,7 @@ function Navbar() {
               className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
               onClick={logout}
             >
-              <p>
+              <p className="mb-7">
                 Logout
               </p>
             </button>
@@ -88,13 +88,17 @@ function Navbar() {
                 className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 to="/login"
               >
-                Login
+                <p className="mb-7">
+                  Login
+                </p>
               </Link>
               <Link
                 className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
                 to="/signup"
               >
-                Signup
+              <p className="mb-7">
+                  Signup
+                </p>
               </Link>
             </>
           )}

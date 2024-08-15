@@ -3,7 +3,7 @@ import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import ChildHomePage from "../child-pages/ChildHomePage";
 import ParentAccount from "../parent-pages/ParentAccount";
 import KidsPage from "../parent-pages/KidsPage";
-
+import Login from "../Login";
 const Home = () => {
   //use this in every component that uses the ME query
   //use this in every component that uses the ME query
@@ -28,8 +28,10 @@ const Home = () => {
     } else if (userType === "Child") {
       relaventPage = <ChildHomePage data={userData} />;
     }
+  }else{
+    relaventPage = <Login/>
   }
 
-  return <main>{relaventPage}</main>;
+  return relaventPage
 };
 export default Home;

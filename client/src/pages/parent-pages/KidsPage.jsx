@@ -73,7 +73,7 @@ const KidsPage = () =>{
     return (
         <>  
         <nav className="flex flex-row justify-evenly flex-wrap mt-10 items-center h-auto">
-          {userLoading || loading || user.loading ? (<Spinner classNames="mx-auto"/>) : (
+          {userLoading || loading ? (<Spinner classNames="mx-auto"/>) : (
             <>
             {user?.kids.map(kid=>{
               return (
