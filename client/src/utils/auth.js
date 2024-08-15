@@ -1,5 +1,5 @@
 import decode from 'jwt-decode';
-
+import { redirect } from 'react-router-dom';
 class AuthService {
   getProfile() {
     return decode(this.getToken());
@@ -25,12 +25,14 @@ class AuthService {
 
   login(idToken) {
     localStorage.setItem('id_token', idToken);
+    document.querySelector('body').setAttribute('background-image', '/assets/backgrounds/treehouse.jpg')
     window.location.assign('/');
   }
 
   logout() {
     localStorage.removeItem('id_token');
     window.location.reload();
+    redirect('/login')
   }
 }
 

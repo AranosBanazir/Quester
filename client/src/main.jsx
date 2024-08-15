@@ -13,6 +13,7 @@ import MyTasks from './pages/base-pages/MyTasks';
 import RewardsStore from './pages/base-pages/RewardsStore';
 import Rewards from './pages/base-pages/Rewards.jsx';
 import ParentAccount from './pages/parent-pages/ParentAccount.jsx';
+import KidsPage from './pages/parent-pages/KidsPage.jsx';
 //TODO: need to expand the router to work with new pages
 const router = createBrowserRouter([
   {
@@ -43,10 +44,13 @@ const router = createBrowserRouter([
         element: <Rewards/>
       },
       {
-        path: '/parent-account',
+        path: '/account',
 
         element: <ParentAccount/>
-      },
+      },{
+        path: '/kids',
+        element: <KidsPage/>
+      }
       
     ]
   }

@@ -6,7 +6,7 @@ import Auth from "../../utils/auth"; // Import Auth for authentication
 
 function Navbar() {
   const { loading, error, data } = useQuery(ME);
-  const userType = data?.me.__typename || "user";
+  const userType = data?.me?.__typename || "user";
 
   // Determine navItems based on user type
   let navItems = [];
@@ -22,24 +22,28 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-900 text-white shadow-md rounded-md">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+    <nav className="bg-gray-900 text-white shadow-md rounded-b-xl">
+      <div className="container mx-auto flex flex-wrap justify-between items-center py-4 px-6">
       <ul className="flex space-x-4">
           {navItems.map((item) => (
             <li key={item}>
               {item === "Logout" ? (
                 <button
-                  className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble "
                   onClick={logout}
                 >
+                  <p className="mb-7">
                   {item}
+                  </p>
                 </button>
               ) : (
                 <Link
                   to={`/${item.toLowerCase()}`}
-                  className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 >
+                  <p className="mb-7">
                   {item}
+                  </p>
                 </Link>
               )}
             </li>
@@ -47,34 +51,54 @@ function Navbar() {
         </ul>
         
         <div className="flex items-center space-x-4">
-          {Auth.loggedIn() ? (
+          {Auth.loggedIn() && userType === 'Parent' ? (
             <>
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
-                to="/me"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
+                to="/account"
               >
+                <p className="mb-7">
                 View My Profile
+               </p>
               </Link>
               <button
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 onClick={logout}
               >
+              <p className="mb-7">
                 Logout
+              </p>
               </button>
             </>
-          ) : (
+          ) : Auth.loggedIn() && userType === 'Child' ? (
+            <>
+            <button
+              className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
+              onClick={logout}
+            >
+              <p className="mb-7">
+                Logout
+              </p>
+            </button>
+          </>
+          ):          
+          (
             <>
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 to="/login"
               >
-                Login
+                <p className="mb-7">
+                  Login
+                </p>
               </Link>
               <Link
-                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 to="/signup"
               >
-                Signup
+              <p className="mb-7">
+                  Signup
+                </p>
               </Link>
             </>
           )}

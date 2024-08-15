@@ -3,36 +3,33 @@ import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import ChildHomePage from "../child-pages/ChildHomePage";
 import ParentAccount from "../parent-pages/ParentAccount";
 import KidsPage from "../parent-pages/KidsPage";
-
+import Login from "../Login";
 const Home = () => {
   //use this in every component that uses the ME query
   //use this in every component that uses the ME query
   //this will let us know if they are a Parent or a child
   //and we can then render the page to fit the user
   const { loading, error, data } = useQuery(ME);
-
-  const userType = data?.me.__typename || "user";
+  const userType = data?.me?.__typename || "user";
   const userInfo = useQuery(QUERY_SINGLE_USER, {
     variables: {
-      userId: data?.me._id,
+      userId: data?.me?._id,
     },
   });
   const userData = userInfo?.data?.user;
-  console.log(userData)
 
-  let relaventPage;
+  let relaventPage = <Login/>;
 
   if (data) {
     if (userType === 'Parent' && userData?.kids?.length === 0) {
       relaventPage = <ParentAccount data={userData} />
-    }
-    else if (userType === "Parent") {
+    }else if (userType === "Parent") {
       relaventPage = <KidsPage data={userData} />;
     } else if (userType === "Child") {
       relaventPage = <ChildHomePage data={userData} />;
     }
   }
 
-  return <main>{relaventPage}</main>;
+  return relaventPage
 };
 export default Home;
