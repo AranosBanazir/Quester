@@ -1,72 +1,89 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ME} from '../../utils/queries';
-import { useQuery } from '@apollo/client';
+import React from "react";
+import { Link } from "react-router-dom";
+import { ME } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
+import Auth from "../../utils/auth"; // Import Auth for authentication
 
 function Navbar() {
-  const {loading, error, data} = useQuery(ME)
-  const userType = data?.me.__typename || 'user'
- 
-  
-  const isThereData = data && true
-  //checking if the person is logged in
+  const { loading, error, data } = useQuery(ME);
+  const userType = data?.me.__typename || "user";
 
-  let navItems = []
-  //checking what nav items to display
-  if (userType === 'Parent'){
-    navItems = [
-      "Rewards",
-      "Tasks",
-      "Kids",
-      "Logout",
-    ]
-  }else if (userType === 'Child'){
-    navItems = [
-      "Rewards",
-      "Tasks",
-      "Logout",
-    ]
-  }else{
-    navItems = [
-      "Login",
-      "Signup",
-    ]
+  // Determine navItems based on user type
+  let navItems = [];
+  if (userType === "Parent") {
+    navItems = ["Rewards", "Tasks", "Kids"];
+  } else if (userType === "Child") {
+    navItems = ["Rewards", "Tasks"];
+  } else {
+    navItems = ["Login", "Signup"];
   }
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   return (
-    <nav style={styles.navbar}>
-      <ul style={styles.navList}>
-        {navItems.map(item=>{
-          return (
-            <li style={styles.navItem} key={item}>
-              <Link to={`/${item}`} style={styles.link}>{item}</Link>
-          </li>
-          )
-        })}
-      </ul>
+    <nav className="bg-gray-900 text-white shadow-md rounded-md">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+      <ul className="flex space-x-4">
+          {navItems.map((item) => (
+            <li key={item}>
+              {item === "Logout" ? (
+                <button
+                  className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                  onClick={logout}
+                >
+                  {item}
+                </button>
+              ) : (
+                <Link
+                  to={`/${item.toLowerCase()}`}
+                  className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                >
+                  {item}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+        
+        <div className="flex items-center space-x-4">
+          {Auth.loggedIn() ? (
+            <>
+              <Link
+                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                to="/me"
+              >
+                View My Profile
+              </Link>
+              <button
+                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                to="/login"
+              >
+                Login
+              </Link>
+              <Link
+                className="bg-blue-600 text-white hover:bg-blue-700 rounded-md px-4 py-2 transition-colors duration-200"
+                to="/signup"
+              >
+                Signup
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
     </nav>
   );
 }
-
-const styles = {
-  navbar: {
-    backgroundColor: '#333',
-    padding: '10px',
-  },
-  navList: {
-    listStyle: 'none',
-    display: 'flex',
-    justifyContent: 'space-around',
-    margin: 0,
-    padding: 0,
-  },
-  navItem: {
-    margin: '0 10px',
-  },
-  link: {
-    color: 'white',
-    textDecoration: 'none',
-    fontSize: '16px',
-  },
-};
 
 export default Navbar;

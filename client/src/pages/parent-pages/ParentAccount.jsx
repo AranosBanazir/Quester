@@ -6,21 +6,19 @@ import AddChildForm from './AddChildForm';
 const ParentAccount = () => {
     const { data, loading, error } = useQuery(ME);
 
-    console.log('Loading ME query:', loading);
-    console.log('Error in ME query:', error);
-    console.log('Data from ME query:', data);
-
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error.message}</p>;
+    if (loading) return <p className="text-center text-gray-500">Loading...</p>;
+    if (error) return <p className="text-center text-red-500">Error: {error.message}</p>;
 
     const userId = data?.me?._id;
 
-    console.log('User ID:', userId);
-
     return (
-        <div>
-            <h1>Parent Account</h1>
-            {userId && <AddChildForm userId={userId} />}
+        <div className="container mx-auto p-4">
+            <h1 className="text-3xl font-bold text-red-500 mb-6">Parent Account</h1>
+            {userId ? (
+                <AddChildForm userId={userId} />
+            ) : (
+                <p className="text-center text-gray-500">No user ID found.</p>
+            )}
         </div>
     );
 };

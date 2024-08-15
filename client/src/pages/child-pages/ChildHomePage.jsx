@@ -1,14 +1,11 @@
 
 
 
-const ChildHomePage = () =>{
+const ChildHomePage = () => {
+  return (
+    <div className="fullscreen-background">
+    </div>
+  );
+};
 
-
-    return (
-        <>
-        <h1>CHILD PAGE</h1>
-        </>
-    )
-}
-
-export default ChildHomePage
+export default ChildHomePage;

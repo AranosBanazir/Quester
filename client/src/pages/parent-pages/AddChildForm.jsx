@@ -3,11 +3,9 @@ import { useMutation } from '@apollo/client';
 import { ADD_CHILD } from '../../utils/mutations';
 
 const AddChildForm = ({ userId }) => {
-  
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-  
     const [addChild, { data, loading, error }] = useMutation(ADD_CHILD, {
         onCompleted: (data) => {
             console.log('Mutation successful:', data);
@@ -19,7 +17,6 @@ const AddChildForm = ({ userId }) => {
         },
     });
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -29,7 +26,6 @@ const AddChildForm = ({ userId }) => {
         }
 
         console.log('Submitting form with values:', { username, password });
-
 
         addChild({
             variables: {
@@ -42,33 +38,41 @@ const AddChildForm = ({ userId }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2  className="text-red-500">Add Child</h2>
-            <div>
-                <label  className="text-red-500" htmlFor="username">Username:</label>
+        <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-6 rounded-md shadow-lg">
+            <h2 className="text-2xl font-bold mb-4 text-red-500">Add Child</h2>
+            <div className="mb-4">
+                <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">Username:</label>
                 <input
                     id="username"
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
+                    className="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter username"
                 />
             </div>
-            <div>
-                <label   className="text-red-500" htmlFor="password">Password:</label>
+            <div className="mb-4">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">Password:</label>
                 <input
                     id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    className="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter password"
                 />
             </div>
-            <button  className="text-red-500" type="submit" disabled={loading}>
+            <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+            >
                 {loading ? 'Adding...' : 'Add Child'}
             </button>
-            {error && <p>Error: {error.message || 'An unknown error occurred'}</p>}
-            {data && <p>Child added: {data.addChild.username}</p>}
+            {error && <p className="mt-4 text-red-500">Error: {error.message || 'An unknown error occurred'}</p>}
+            {data && <p className="mt-4 text-green-500">Child added: {data.addChild.username}</p>}
         </form>
     );
 };

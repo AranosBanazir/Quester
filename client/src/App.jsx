@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -40,7 +41,6 @@ function App() {
       <RewardCartProvider>
       <div className="flex-column justify-flex-start min-100-vh">
         <Header />
-        <Navbar />
         <div className="container">
           <Outlet />
         </div>
