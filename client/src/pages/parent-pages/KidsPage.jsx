@@ -3,7 +3,7 @@ const KidsPage = ({data}) =>{
 
     return (
         <>
-        <h1 className="text-red-500">CHILD REWARDS PAGE</h1>
+        <h1 className="text-red-500">kids page</h1>
         </>
     )
 }
