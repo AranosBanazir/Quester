@@ -38,6 +38,24 @@ export const ADD_TASK = gql`
   }
 `
 
+export const UPDATE_USER = gql`
+  mutation UpdateUser($creds: UserInput!, $updatedUserInfo: UserUpdateInput) {
+    updateUser(creds: $creds, updatedUserInfo: $updatedUserInfo) {
+      ... on Parent {
+        _id
+        username
+        email
+        kids {
+          username
+        }
+      }
+      ... on Child {
+        username
+      }
+    }
+  }
+`;
+
 export const UPDATE_TASK = gql`
   mutation UpdateTask($taskId: ID!, $updatedTask: TaskInput!) {
     updateTask(taskId: $taskId, updatedTask: $updatedTask) {

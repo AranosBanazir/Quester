@@ -193,13 +193,13 @@ const resolvers = {
         const user = await BaseUser.findOne({ username: creds.username });
      
         if (!user) {
-          throw AuthenticationError;
+          throw new AuthenticationError;
         }
   
         const correctPw = await user.isCorrectPassword(creds.password);
         
         if (!correctPw) {
-          throw AuthenticationError;
+          throw new AuthenticationError;
         }
 
         //if we have gotten this far then ther user is:
@@ -209,9 +209,10 @@ const resolvers = {
         if (user.__t === 'Parent'){
           const parent = await BaseUser.findById({_id: context.user._id}).populate('kids')
 
-          if (parent.username == user.username){
-            await BaseUser.findByIdAndUpdate({_id: parent._id}, updatedUserInfo)
-            return user
+          if (parent.username == user.username) {
+            Object.assign(parent, updatedUserInfo);
+            await parent.save();
+            return parent; 
           }
 
 
@@ -221,12 +222,12 @@ const resolvers = {
           const parent = await BaseUser.findById({_id: context.user._id}, 'kids').populate('kids')
           //Loops through the kids to see if the requested user to delete is in the array
           for (const kid of parent.kids){
-            if (kid.username === user.username){
-              const targetKid = await BaseUser.findByIdAndUpdate({_id: user._id}, updatedUserInfo, {
-                new: true
-              })
-              return targetKid
-            } 
+            if (kid.username === user.username) {
+              const targetKid = await BaseUser.findById(kid._id);
+              Object.assign(targetKid, updatedUserInfo);
+              await targetKid.save();
+              return targetKid;  
+            }
           }
         }
       }
