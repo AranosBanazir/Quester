@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
-import ParentHomePage from "../parent-pages/ParentHomePage";
 import ChildHomePage from "../child-pages/ChildHomePage";
+import ParentAccount from "../parent-pages/ParentAccount";
+import KidsPage from "../parent-pages/KidsPage";
 
 const Home = () => {
   //use this in every component that uses the ME query
@@ -16,14 +17,17 @@ const Home = () => {
       userId: data?.me._id,
     },
   });
-  console.log(data)
   const userData = userInfo?.data?.user;
+  console.log(userData)
 
   let relaventPage;
 
   if (data) {
-    if (userType === "Parent") {
-      relaventPage = <ParentHomePage data={userData} />;
+    if (userType === 'Parent' && userData?.kids?.length === 0) {
+      relaventPage = <ParentAccount data={userData} />
+    }
+    else if (userType === "Parent") {
+      relaventPage = <KidsPage data={userData} />;
     } else if (userType === "Child") {
       relaventPage = <ChildHomePage data={userData} />;
     }
