@@ -11,7 +11,7 @@ input {
 }
 
 body {
-  background-image: url('../../assets/vecteezy_cartoon-tropical-forest-landscape-ancient-trees_19804669.jpg'); 
+  background-image: url('/assets/vecteezy_cartoon-tropical-forest-landscape-ancient-trees_19804669.jpg'); 
   background-size: cover; 
   background-position: center center; 
   background-repeat: no-repeat; 

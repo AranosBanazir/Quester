@@ -134,6 +134,10 @@ const resolvers = {
         if (user.__t === 'Parent'){
           const parent = await BaseUser.findById({_id: context.user._id}).populate('kids')
           if (parent.username == user.username){
+            for (const kid of parent.kids){
+              await Child.deleteOne({_id: kid._id})
+            }
+            console.log(parent)
             await BaseUser.findByIdAndDelete({_id: parent._id})
             return user
           }
@@ -252,10 +256,24 @@ const resolvers = {
     },
     updateReward: async (parent, {rewardId, updatedReward}, context)=>{
       if (context.user){
-        const task = await Task.findByIdAndUpdate({_id: taskId}, updatedTask)
-        return task
+        const reward = await Reward.findByIdAndUpdate({_id: rewardId}, updatedReward)
+        return reward
       }
       throw AuthenticationError
+    },
+    buyReward: async (parent, {rewardId, userId}, context) =>{
+
+      if (context.user){
+        const reward = await Reward.findById({_id: rewardId})
+        const user = await Child.findByIdAndUpdate({_id: userId}, {
+          $push: {inventory: reward._id},
+        })
+        
+        await user.buyReward(reward.cost)
+        
+        return reward
+      }
+      return AuthenticationError
     },
     delReward: async (parent, {rewardId}, context)=>{
       if (context.user){
