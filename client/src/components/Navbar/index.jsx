@@ -22,8 +22,8 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-900 text-white shadow-md rounded-md">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
+    <nav className="bg-gray-900 text-white shadow-md rounded-b-xl">
+      <div className="container mx-auto flex flex-wrap justify-between items-center py-4 px-6">
       <ul className="flex space-x-4">
           {navItems.map((item) => (
             <li key={item}>

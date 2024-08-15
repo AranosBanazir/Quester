@@ -20,11 +20,29 @@ const resolvers = {
     },
 
     user: async (parent, { userId }) => {
-      return BaseUser.findOne({ _id: userId })
+      const user = await BaseUser.findOne({ _id: userId })
               .populate('kids')
-              .populate('tasks')
               .populate('rewards')
-              .populate('inventory');
+              .populate('inventory')
+              .populate('tasks')
+      
+          for(const kid of user.kids){
+            let tasks = []
+            let inventory = []
+            const child = await Child.findById({_id: kid._id}).populate('tasks').populate('inventory')
+
+            for (const item of child.inventory){
+              inventory.push(item)
+            }
+
+            for (const task of child.tasks){
+              tasks.push(task)
+            }
+            kid.inventory = inventory
+            kid.tasks = tasks
+          }
+              
+        return user
     },
     // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {

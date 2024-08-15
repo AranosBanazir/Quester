@@ -43,7 +43,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <RewardCartProvider>
-        <div id="root">
+        <div className='flex flex-col min-h-screen'>
           <Header />
           <main>
             <Outlet />
