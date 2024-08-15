@@ -12,21 +12,15 @@ const ParentTasks = () => {
     const [selectedChild, setSelectedChild] = useState('');
     const [tasks, setTasks] = useState([]);
   
-    // Query to get user data
     const { data: userData, loading: userLoading, error: userError } = useQuery(ME);
-  
-    // Query to get tasks
     const { data: tasksData, loading: tasksLoading, error: tasksError } = useQuery(GET_TASKS);
 
-    // Mutation to add a task
     const [addTask, { data: taskData, loading: taskLoading, error: taskError }] = useMutation(ADD_TASK, {
       onCompleted: (data) => {
-        console.log('Task added:', data);
         setTaskName('');
         setTaskDescription('');
         setTaskPoints('');
         setSelectedChild('');
-        // Update tasks state with the new task
         setTasks(prevTasks => [...prevTasks, data.addTask]);
       },
       onError: (err) => {
@@ -56,7 +50,6 @@ const ParentTasks = () => {
       });
     };
   
-    // Load tasks from the GET_TASKS query
     useEffect(() => {
       if (tasksData && tasksData.getTasks) {
         setTasks(tasksData.getTasks);
@@ -70,59 +63,57 @@ const ParentTasks = () => {
     const isParent = userData?.me.__typename === 'Parent';
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
-    console.log('Tasks:', tasks); // Debugging log
-
     return (
-      <div className="container mx-auto p-4">
-        <h1 className="text-3xl font-bold text-red-500 mb-6">Parent Page</h1>
+      <div className="container mx-auto p-4 max-w-2xl mx-auto">
+        
   
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-blue-500 mb-4">Add a Task</h2>
-          <form onSubmit={handleTaskSubmit} className="bg-gray-800 p-6 rounded-md shadow-lg">
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="taskName">Task Name:</label>
+        <section className="mb-4">
+          <form onSubmit={handleTaskSubmit} className="bg-gray-800 p-4 rounded-md shadow-md">
+          <h2 className="text-lg font-semibold text-blue-500 mb-2">Add Task</h2>
+            <div className="mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="taskName">Name:</label>
               <input
                 id="taskName"
                 type="text"
                 value={taskName}
                 onChange={(e) => setTaskName(e.target.value)}
                 required
-                className="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter task name"
+                className="w-full p-1 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Task name"
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="taskDescription">Description:</label>
+            <div className="mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="taskDescription">Description:</label>
               <input
                 id="taskDescription"
                 type="text"
                 value={taskDescription}
                 onChange={(e) => setTaskDescription(e.target.value)}
                 required
-                className="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter task description"
+                className="w-full p-1 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Description"
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="taskPoints">Points:</label>
+            <div className="mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="taskPoints">Points:</label>
               <input
                 id="taskPoints"
                 type="number"
                 value={taskPoints}
                 onChange={(e) => setTaskPoints(e.target.value)}
                 required
-                className="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Enter points"
+                className="w-full p-1 border border-gray-600 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Points"
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="childSelect">Assign to Child:</label>
+            <div className="mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="childSelect">Assign to:</label>
               <select
                 id="childSelect"
                 value={selectedChild}
                 onChange={(e) => setSelectedChild(e.target.value)}
                 required
-                className="w-full p-2 border border-gray-600 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-1 border border-gray-600 rounded-md bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select a child</option>
                 {children.map(child => (
@@ -137,15 +128,14 @@ const ParentTasks = () => {
               disabled={taskLoading}
               className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
             >
-              {taskLoading ? 'Adding Task...' : 'Add Task'}
+              {taskLoading ? 'Adding...' : 'Add Task'}
             </button>
-            {taskError && <p className="mt-4 text-red-500">Error: {taskError.message || 'An unknown error occurred'}</p>}
+            {taskError && <p className="mt-2 text-red-500 text-sm">Error: {taskError.message || 'An unknown error occurred'}</p>}
           </form>
         </section>
   
         <section>
-          <h2 className="text-2xl font-semibold text-blue-500 mb-4">Tasks</h2>
-          {tasks.filter(task => task !== null).length > 0 ? (
+          {tasks.length > 0 ? (
             tasks.filter(task => task !== null).map(task => (
               <TaskCard
                 key={task._id}
@@ -155,7 +145,10 @@ const ParentTasks = () => {
               />
             ))
           ) : (
-            <p className="text-center text-gray-500">No tasks available.</p>
+            <div className="bg-gray-800 p-4 rounded-md shadow-md text-center">
+              
+              <p className="text-gray-400 text-sm">No tasks available.</p>
+            </div>
           )}
         </section>
       </div>

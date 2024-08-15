@@ -14,8 +14,6 @@ function Navbar() {
     navItems = ["Rewards", "Tasks", "Kids"];
   } else if (userType === "Child") {
     navItems = ["Rewards", "Tasks"];
-  } else {
-    navItems = ["Login", "Signup"];
   }
 
   const logout = (event) => {
