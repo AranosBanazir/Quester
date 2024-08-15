@@ -187,20 +187,8 @@ const resolvers = {
       }
 
     },
-    updateUser: async (parent, {creds, updatedUserInfo}, context) =>{
+    updateUser: async (parent, {updatedUserInfo}, context) =>{
       if (context.user){
-        
-        const user = await BaseUser.findOne({ username: creds.username });
-     
-        if (!user) {
-          throw AuthenticationError;
-        }
-  
-        const correctPw = await user.isCorrectPassword(creds.password);
-        
-        if (!correctPw) {
-          throw AuthenticationError;
-        }
 
         //if we have gotten this far then ther user is:
         //1.) logged in
