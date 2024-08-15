@@ -6,10 +6,10 @@ import Spinner from "../../components/Spinner";
 
 const Rewards = () => {
   const {loading, error, data} = useQuery(ME)
-  const userType = data?.me.__typename || 'user'
+  const userType = data?.me?.__typename || 'user'
   const userInfo = useQuery(QUERY_SINGLE_USER, {
       variables: {
-          userId: data?.me._id
+          userId: data?.me?._id
       }
   })
 

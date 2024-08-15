@@ -10,15 +10,15 @@ const Home = () => {
   //this will let us know if they are a Parent or a child
   //and we can then render the page to fit the user
   const { loading, error, data } = useQuery(ME);
-  const userType = data?.me.__typename || "user";
+  const userType = data?.me?.__typename || "user";
   const userInfo = useQuery(QUERY_SINGLE_USER, {
     variables: {
-      userId: data?.me._id,
+      userId: data?.me?._id,
     },
   });
   const userData = userInfo?.data?.user;
 
-  let relaventPage;
+  let relaventPage = <Login/>;
 
   if (data) {
     if (userType === 'Parent' && userData?.kids?.length === 0) {
@@ -28,8 +28,6 @@ const Home = () => {
     } else if (userType === "Child") {
       relaventPage = <ChildHomePage data={userData} />;
     }
-  }else{
-    relaventPage = <Login/>
   }
 
   return relaventPage

@@ -60,7 +60,7 @@ const ParentTasks = () => {
     if (userError) return <p className="text-center text-red-500">Error loading user data: {userError.message}</p>;
     if (tasksError) return <p className="text-center text-red-500">Error loading tasks: {tasksError.message}</p>;
   
-    const isParent = userData?.me.__typename === 'Parent';
+    const isParent = userData?.me?.__typename === 'Parent';
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
     return (

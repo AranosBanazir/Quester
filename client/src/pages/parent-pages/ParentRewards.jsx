@@ -85,7 +85,7 @@ const ParentRewards = () => {
       </p>
     );
 
-  const isParent = userData?.me.__typename === "Parent";
+  const isParent = userData?.me?.__typename === "Parent";
   const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
   return (

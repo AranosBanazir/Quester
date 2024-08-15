@@ -6,7 +6,7 @@ import Auth from "../../utils/auth"; // Import Auth for authentication
 
 function Navbar() {
   const { loading, error, data } = useQuery(ME);
-  const userType = data?.me.__typename || "user";
+  const userType = data?.me?.__typename || "user";
 
   // Determine navItems based on user type
   let navItems = [];
@@ -55,7 +55,7 @@ function Navbar() {
             <>
               <Link
                 className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
-                to="/me"
+                to="/account"
               >
                 <p className="mb-7">
                 View My Profile

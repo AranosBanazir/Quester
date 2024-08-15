@@ -9,10 +9,10 @@ import { redirect } from "react-router-dom";
 const KidsPage = () =>{
     const [activeChildState, setActiveChildState] = useState('')
     const { loading, error, data: myData } = useQuery(ME);
-    const userType = myData?.me.__typename || "user";
+    const userType = myData?.me?.__typename || "user";
     const {loading: userLoading, error: userError, data: userData} = useQuery(QUERY_SINGLE_USER, {
       variables: {
-        userId: myData?.me._id,
+        userId: myData?.me?._id,
       },
     });
     

@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <Rewards/>
       },
       {
-        path: '/parent-account',
+        path: '/account',
 
         element: <ParentAccount/>
       },{

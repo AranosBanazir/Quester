@@ -24,6 +24,15 @@ db.once('open', async () => {
       return {...task, owner: children[rndChild]._id}
     })
 
+    
+    for (const reward of rewards){
+      for (const parent of parents){
+        await Parent.findByIdAndUpdate({_id: parent._id}, {
+          $addToSet: {rewards: reward}
+        })
+      }
+    }
+
     const tasks = await Task.create(modifiedTasks)
     for (const task of tasks){
       await Child.findByIdAndUpdate(task.owner, {
