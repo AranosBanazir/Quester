@@ -38,7 +38,7 @@ const AddChildForm = ({ userId }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-6 rounded-md shadow-lg">
+        <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-6 rounded-md shadow-lg mx-auto">
             <h2 className="text-2xl font-bold mb-4 text-red-500">Add Child</h2>
             <div className="mb-4">
                 <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">Username:</label>

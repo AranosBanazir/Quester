@@ -2,28 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-main {
-  background: white;
-}
-
-input {
-  color: white;
-}
+/* Ensure html and body take full height */
 html, body {
   height: 100%;
   margin: 0;
 }
 
+/* The root container takes the full height of the viewport */
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
+/* Ensure main content area expands to take available space */
 main {
   flex: 1;
+  background: transparent; /* Overwrites previous main background settings */
 }
 
+/* Set background for the body */
 body {
   background-image: url('/assets/vecteezy_cartoon-tropical-forest-landscape-ancient-trees_19804669.jpg'); 
   background-size: cover; 
@@ -33,8 +31,4 @@ body {
   height: 100vh; 
   margin: 0; 
   padding: 0; 
-
-}
-main {
-  background: transparent;
 }
