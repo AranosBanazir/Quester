@@ -31,7 +31,6 @@ childSchema.methods.buyReward = async function (cost) {
   childSchema.methods.payForTask = async function (points) {
     //returning false if there are not enough funds
     this.wallet = this.wallet + points
-
     await this.save()
     return true
     

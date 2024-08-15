@@ -102,6 +102,11 @@ html, body{
 
 }
 
+.btn-github{
+  background-image: url('/assets/github.png');
+  height: 25px;
+  width: 25px;
+}
 
 
 .btn-sign{

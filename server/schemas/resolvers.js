@@ -263,9 +263,10 @@ const resolvers = {
           const task = await Task.findById({_id: taskId})
 
           if (task.childConfirmed === true){
-            Child.payForTask(task.points)
+            Child.payForTask(task.points)       
           }
-
+          
+          task.resetTask()
           return task
         }
       }
