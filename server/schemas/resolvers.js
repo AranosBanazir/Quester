@@ -250,22 +250,24 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    confirmTaskComplete: async (parent, {taskId}, context)=>{
+    confirmTaskComplete: async (parent, {taskId, childId}, context)=>{
       //confirming both tasks by parent and child to ensure the task is done
       if (context.user){
         const user = await BaseUser.findById({_id: context.user._id})
         if (user.__t === 'Child'){
           const task = await Task.findByIdAndUpdate({_id: taskId},{
             childConfirmed: true
+          },{
+            new: true
           })
           return task
         }else if (user.__t == 'Parent'){
           const task = await Task.findById({_id: taskId})
-
+          const child = await Child.findById({_id: childId})
           if (task.childConfirmed === true){
-            Child.payForTask(task.points)       
+            child.payForTask(task.points)       
           }
-          
+
           task.resetTask()
           return task
         }

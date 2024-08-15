@@ -41,7 +41,7 @@ const ParentTasks = () => {
           task: {
             name: taskName,
             description: taskDescription,
-            points: parseInt(taskPoints, 10),
+            points: parseInt(taskPoints),
             owner: selectedChild,
           },
         },

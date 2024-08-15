@@ -28,9 +28,6 @@ const taskSchema = new Schema({
         type: Boolean,
         default: false
     }
-    // deadline:{
-    //     type: Date
-    // }  
 })
 
 //resets the confirm for both Parent/Child
