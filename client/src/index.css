@@ -9,6 +9,20 @@ main {
 input {
   color: white;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
 
 body {
   background-image: url('/assets/vecteezy_cartoon-tropical-forest-landscape-ancient-trees_19804669.jpg'); 
@@ -21,4 +35,6 @@ body {
   padding: 0; 
 
 }
- 
+main {
+  background: transparent;
+}
