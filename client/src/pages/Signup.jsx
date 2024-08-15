@@ -88,7 +88,7 @@ const Signup = () => {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 nav-sign btn-sign"
+                className="w-full py-2 wood-sign btn-sign"
               >
                 <p className='mb-7'>
                   Sign Up

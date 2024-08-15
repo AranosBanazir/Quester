@@ -29,7 +29,7 @@ function Navbar() {
             <li key={item}>
               {item === "Logout" ? (
                 <button
-                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign "
+                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble "
                   onClick={logout}
                 >
                   <p className="mb-7">
@@ -39,7 +39,7 @@ function Navbar() {
               ) : (
                 <Link
                   to={`/${item.toLowerCase()}`}
-                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+                  className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 >
                   <p className="mb-7">
                   {item}
@@ -54,7 +54,7 @@ function Navbar() {
           {Auth.loggedIn() && userType === 'Parent' ? (
             <>
               <Link
-                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 to="/account"
               >
                 <p className="mb-7">
@@ -62,7 +62,7 @@ function Navbar() {
                </p>
               </Link>
               <button
-                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 onClick={logout}
               >
               <p className="mb-7">
@@ -73,7 +73,7 @@ function Navbar() {
           ) : Auth.loggedIn() && userType === 'Child' ? (
             <>
             <button
-              className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+              className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
               onClick={logout}
             >
               <p className="mb-7">
@@ -85,7 +85,7 @@ function Navbar() {
           (
             <>
               <Link
-                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 to="/login"
               >
                 <p className="mb-7">
@@ -93,7 +93,7 @@ function Navbar() {
                 </p>
               </Link>
               <Link
-                className="btn-sign text-white rounded-md px-4 py-2 nav-sign"
+                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 to="/signup"
               >
               <p className="mb-7">

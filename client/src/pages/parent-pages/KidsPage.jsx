@@ -79,7 +79,7 @@ const KidsPage = () =>{
               return (
                   <button onClick={()=>{
                     handleActiveChild(kid.username)
-                  }} className="bg-transparent text-center text-black font-bold text-xl sign btn-sign permanent-marker-regular" key={kid._id}>
+                  }} className="bg-transparent text-center text-black font-bold text-xl sign btn-sign permanent-marker-regular wobble" key={kid._id}>
                     <p className="mt-5 mr-7">
                     {kid.username}
                     </p>

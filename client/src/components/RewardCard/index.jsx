@@ -34,8 +34,14 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
     <h2 className="card-title">{reward.name}</h2>
     <p>{reward.description}</p>
     <div className="card-actions justify-end">
-      <button className="btn btn-success" onClick={handleRedeemClick}>Cost: {reward.cost}</button>
-      <button className="btn btn-danger" onClick={handleDeleteClick}>Delete!</button>
+      <button className="btn btn-success self-end mt-5" onClick={handleRedeemClick}>
+          <p className='mr-2'>
+          Cost: {reward.cost}
+          </p>
+        </button>
+      <button className="btn btn-error self-end mt-5" onClick={handleDeleteClick}>
+        Delete!
+      </button>
     </div>
   </div>
 </div>
