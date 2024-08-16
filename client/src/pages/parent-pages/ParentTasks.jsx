@@ -66,10 +66,9 @@ const ParentTasks = ({}) => {
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
 
     return (
-      <>
-      <div className="container p-4 max-w-2xl mx-auto">
-        <section className="mb-4">
-          <form onSubmit={handleTaskSubmit} className="bg-gray-800 p-4 rounded-md shadow-md">
+      <div className="container mx-auto p-6">
+      <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6">
+          <form onSubmit={handleTaskSubmit}>
           <h2 className="text-lg font-semibold text-blue-500 mb-2">Add Task</h2>
             <div className="mb-2">
               <label className="block text-sm font-medium text-gray-300 mb-1" htmlFor="taskName">Name:</label>
@@ -137,23 +136,27 @@ const ParentTasks = ({}) => {
   
 
   
-        <section>
-  <h2 className="text-blue-500">Tasks</h2>
-  {tasks.filter(task => task !== null).length > 0 ? (
-    tasks.filter(task => task !== null).map(task => (
+        <section className="mt-6 p-4 bg-gray-800 rounded-lg shadow-md">
+        <h2 className="text-2xl font-bold mb-4 text-blue-500">Tasks</h2>
+  {tasks.filter((task) => task !== null).length > 0 ? (
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      {tasks
+      .filter(task => task !== null)
+      .map(task => (
       <SecretTaskCard
         key={task._id}
         task={task}
         onRedeem={() => {}}
         onDelete={() => {}}
       />
-    ))
+       ))}
+       </div>
   ) : (
-    <p className="text-gray-400 text-sm">No tasks available.</p>
+    <p className="text-gray-500 text-center">No tasks available.</p>
   )}
 </section>
 </div>
-</>
+
     );
 };
 

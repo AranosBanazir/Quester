@@ -50,13 +50,12 @@ export const UPDATE_TASK = gql`
 `
 
 export const CONFIRM_TASK = gql`
-  mutation ConfirmTaskComplete($taskId: ID!) {
-    confirmTaskComplete(taskId: $taskId) {
-      name
-      childConfirmed
-      parentConfirmed
-    }
+mutation ConfirmTaskComplete($taskId: ID!, $childId: ID!) {
+  confirmTaskComplete(taskId: $taskId, childId: $childId) {
+    childConfirmed
+    parentConfirmed
   }
+}
 `
 
 export const DELETE_TASK = gql`
