@@ -41,14 +41,26 @@ const client = new ApolloClient({
 function App() {
   useEffect(()=>{
     const backgrounds = [
-      // "tropical.jpg",
-      // "treehouse.jpg",
-      // "path.jpg",
-      // "nighttime.jpg",
-      // "mountains.jpg",
-      // "forest.jpg",
-      // "brook.gif",
-      // "waterfall.gif"
+      "tropical.jpg",
+      "treehouse.jpg",
+      "path.jpg",
+      "nighttime.jpg",
+      "mountains.jpg",
+      "forest.jpg",
+      "tropical.jpg",
+      "treehouse.jpg",
+      "path.jpg",
+      "nighttime.jpg",
+      "mountains.jpg",
+      "forest.jpg",
+      "tropical.jpg",
+      "treehouse.jpg",
+      "path.jpg",
+      "nighttime.jpg",
+      "mountains.jpg",
+      "forest.jpg",
+      "brook.gif",
+      "waterfall.gif",
       "campfire.gif"
       
     ]

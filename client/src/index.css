@@ -230,7 +230,7 @@ main {
   width: 100px; 
   height: 100px; 
   animation-name: task-complete;
-  animation-duration: 4s;
+  animation-duration: 8s;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: 1;

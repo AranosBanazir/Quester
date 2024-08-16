@@ -25,7 +25,7 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
               taskCard.classList.add('task-complete')
               setTimeout(() => {
                   taskCard.setAttribute('style', 'display: none;')
-              }, 2500);
+              }, 4000);
 
             }
          })
