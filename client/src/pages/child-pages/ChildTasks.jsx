@@ -14,14 +14,16 @@ const ChildTasks = ({ data }) => {
             className="w-auto flex flex-wrap flex-row justify-evenly"
             style={{ margin: "20px" }}
           >
-            {data?.tasks.map((task) => {
-              return (
-                <TaskCard
-                  task={task}
-                  showDeleteButton={false}
-                  userType={data.__typename}
-                />
-              );
+            {data?.tasks
+              .filter(task=> !task.childConfirmed)
+              .map((task) => {
+                return (
+                  <TaskCard
+                    task={task}
+                    showDeleteButton={false}
+                    userType={data.__typename}
+                  />
+                );
             })}
           </section>
         </div>

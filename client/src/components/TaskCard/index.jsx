@@ -4,6 +4,7 @@ import { CONFIRM_TASK, DELETE_TASK } from '../../utils/mutations';
 import { FaStar, FaCoins } from 'react-icons/fa';
 import { QUERY_SINGLE_USER } from '../../utils/queries';
 
+
 const TaskCard = ({ task, userType, showDeleteButton }) => {
   const [confirmTaskComplete] = useMutation(CONFIRM_TASK);
   const [deleteTask] = useMutation(DELETE_TASK);
@@ -39,7 +40,7 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
   const handleDeleteClick = async () => {
     if (window.confirm(`Are you sure you want to delete the task "${task.name}"? This action cannot be undone.`)) {
       try {
-        await deleteTask({ variables: { taskId: task._id } });
+        await deleteTask({ variables: { taskId: task._id }, refetchQueries: [QUERY_SINGLE_USER, 'user']} );
       
       } catch (err) {
         console.error('Error deleting task:', err);

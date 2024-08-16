@@ -10,7 +10,7 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
 
         const handleRedeemClick = async () => {
           try{
-            await buyReward({ variables: { rewardId: reward._id }, refetchQueries: [GET_REWARDS, ME, QUERY_SINGLE_USER]  });
+            await buyReward({ variables: { rewardId: reward._id }, refetchQueries: [QUERY_SINGLE_USER, 'user']  });
               
             } catch (err) {
               console.error('Error redeeming reward:', err);
@@ -24,7 +24,7 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
               variables:{
                 rewardId: reward._id
               },
-              refetchQueries: [GET_REWARDS, QUERY_SINGLE_USER]} )
+              refetchQueries: [QUERY_SINGLE_USER, 'user']} )
           }catch(err){
 
           }
@@ -32,7 +32,7 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
       
         const handleDeleteClick = async () => {
             try {
-              await deleteReward({ variables: { rewardId: reward._id }, refetchQueries: [GET_REWARDS, ME, QUERY_SINGLE_USER] },              );
+              await deleteReward({ variables: { rewardId: reward._id }, refetchQueries: [QUERY_SINGLE_USER, 'user'] },              );
 
             } catch (err) {
               console.error('Error deleting reward:', err);
@@ -69,7 +69,7 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
                 </button>
               ): <></>}
                 {showDeleteButton && (
-                  <button className="btn btn-error  mt-5" onClick={handleDeleteClick}>
+                  <button className="btn btn-error" onClick={handleDeleteClick}>
                     Delete!
                   </button>
                 )}
