@@ -43,6 +43,12 @@ input ChildUpdateInput{
   email: String
 }
 
+input ParentUpdateInput{
+  username: String
+  password: String
+  email: String
+}
+
 type Parent {
     _id: ID!
     username: String!
