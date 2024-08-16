@@ -33,7 +33,10 @@ const ParentAccount = () => {
     navigate("/tasks");
   }
   if (error)
-    return <p className="text-center text-red-500">Error: {error.message}</p>;
+    if (error.message === 'Could not authenticate user.'){
+      navigate("/login");
+      return <p className="text-center text-red-500">Error: {error.message}</p>;
+    }
 
   return (
     <AuthCheck>
