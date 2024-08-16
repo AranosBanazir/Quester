@@ -56,6 +56,18 @@ export const UPDATE_CHILD = gql`
   }
 `;
 
+export const UPDATE_PARENT = gql`
+  mutation UpdateParent($updatedParentInfo: ParentUpdateInput) {
+    updateParent(updatedParentInfo: $updatedParentInfo) {
+      ... on Parent {
+        _id
+        username
+        email
+      }
+    }
+  }
+`;
+
 export const UPDATE_TASK = gql`
   mutation UpdateTask($taskId: ID!, $updatedTask: TaskInput!) {
     updateTask(taskId: $taskId, updatedTask: $updatedTask) {

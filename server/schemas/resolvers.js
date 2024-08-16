@@ -184,6 +184,13 @@ const resolvers = {
       }
       throw AuthenticationError
     },
+    updateParent: async (parent, {updatedParentInfo}, context) =>{
+      if (context.user){
+        const user = await Parent.findByIdAndUpdate({_id: context.user._id}, updatedParentInfo)
+        return user
+      }
+      throw AuthenticationError
+    },
   
     addTask: async (parent, {task}, context) =>{
       if (context.user){

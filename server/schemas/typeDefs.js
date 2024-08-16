@@ -94,8 +94,8 @@ type User {
   type Mutation {
     addParent(username: String!, email: String!, password: String!): Auth
     addChild(username: String!, password: String!): UserTypes
-
     updateChild(updatedChildInfo: ChildUpdateInput):UserTypes
+    updateParent(updatedParentInfo: ParentUpdateInput): UserTypes
     removeUser(creds:UserInput!):UserTypes  
 
 
