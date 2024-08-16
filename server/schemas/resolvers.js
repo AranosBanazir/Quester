@@ -251,11 +251,23 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    buyReward: async (parent, {rewardId, userId}, context) =>{
+    cashInReward: async (parent, {rewardId, childId}, context)=>{
+      if (context.user){
+        const child = Child.findByIdAndUpdate(childId, {
+          $pull: {inventory: {_id: rewardId}}
+        })
+
+        return await Reward.findById(rewardId)
+      }
+
+      throw AuthenticationError
+
+    },
+    buyReward: async (parent, {rewardId}, context) =>{
 
       if (context.user){
         const reward = await Reward.findById({_id: rewardId})
-        const user = await Child.findByIdAndUpdate({_id: userId}, {
+        const user = await Child.findByIdAndUpdate({_id: context.user._id}, {
           $push: {inventory: reward._id},
         })
         

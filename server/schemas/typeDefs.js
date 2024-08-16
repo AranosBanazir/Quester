@@ -104,8 +104,9 @@ type User {
     confirmTaskComplete(taskId: ID!, childId: ID!): Task
     delTask(taskId: ID!): Task
 
-    buyReward(rewardId: ID!, userId: ID!): Reward
+    buyReward(rewardId: ID!): Reward
     addReward(reward: RewardInput!): Reward
+    cashInReward(rewardId: ID!, chidId: ID!): Reward
     updateReward(rewardId: ID!, updatedReward: RewardInput!): Reward
     delReward(rewardId: ID!): Reward
     

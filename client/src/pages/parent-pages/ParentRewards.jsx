@@ -4,19 +4,15 @@ import AddChildForm from "./AddChildForm"; // Update the path as necessary
 import { ADD_REWARD, DELETE_REWARD } from "../../utils/mutations"; // Import your reward mutations
 import { GET_REWARDS, ME } from "../../utils/queries"; // Import your reward queries
 import RewardCard from "../../components/RewardCard"; // Make sure to import RewardCard
-
-const ParentRewards = () => {
+import Spinner from "../../components/Spinner";
+const ParentRewards = (data) => {
   const [rewardName, setRewardName] = useState("");
   const [rewardDescription, setRewardDescription] = useState("");
   const [rewardCost, setRewardCost] = useState("");
   const [rewards, setRewards] = useState([]);
 
   // Query to get user data
-  const {
-    data: userData,
-    loading: userLoading,
-    error: userError,
-  } = useQuery(ME);
+
 
   // Query to get rewards
   const {
@@ -100,13 +96,7 @@ const ParentRewards = () => {
     }
   }, [rewardsData]);
 
-  if (userLoading || rewardsLoading) return <Spinner/>
-  if (userError)
-    return (
-      <p className="text-red-500">
-        Error loading user data: {userError.message}
-      </p>
-    );
+  if (rewardsLoading) return <Spinner/>
   if (rewardsError)
     return (
       <p className="text-red-500">
@@ -114,8 +104,8 @@ const ParentRewards = () => {
       </p>
     );
 
-  const isParent = userData?.me?.__typename === "Parent";
-  const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
+  const isParent = data.__typename === "Parent";
+  const children = isParent ? data.kids || [] : []; // Ensure children is an array
 
   return (
     <div className="container mx-auto p-6">
@@ -198,8 +188,7 @@ const ParentRewards = () => {
                 <RewardCard
                   key={reward._id}
                   reward={reward}
-                  onRedeem={() => {}}
-                  onDelete={() => {}}
+                  userType ={data.__typename}
                 />
               ))}
           </div>

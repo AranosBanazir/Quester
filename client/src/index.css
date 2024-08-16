@@ -229,35 +229,38 @@ main {
   width: 100px; 
   height: 100px; 
   animation-name: task-complete;
-  animation-duration: 3s;
-  animation-timing-function: linear;
+  animation-duration: 4s;
+  animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: 1;
   animation-direction: normal;
   animation-fill-mode: none;
- 
     
 
 }
 @keyframes task-complete {
     
   0% {
-    transform:translateY(0);
+    transform:translateY(0) rotate(360deg);
     opacity:1;
   }
   15% {
-    transform: rotate(6deg);
+    transform:translateX(-30px) rotate(6deg) translateY(300px);
   }
   30% {
-    transform: rotate(-6deg);
+    transform:translateX(15px) rotate(-6deg);
   }
   45% {
-    transform: rotate(3.6deg);
-    transform:translateY(2000px);
-
+    transform:translateX(-15px) rotate(-6deg);
   }
+
+  50%{
+    transform: translateX(30px)
+  }
+
   60%{
-    opacity:0;
+    transform:translateY(1000px);
+  
   }
   100% {
     opacity:0;
@@ -300,5 +303,37 @@ main {
   100% {
     transform:translateX(0%);
     transform-origin:50% 50%;
+  }
+}
+
+.blown-away{
+  
+  
+  animation-name: blown-away;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+    
+  /* shorthand
+  animation: flip-out-diagonal-br 1s linear 0s 1 normal none;*/
+}
+@keyframes blown-away {
+    
+  0% {
+    transform: rotate3d(2,1,0, -1440deg) translateX(1000px);
+    opacity:1;
+  }
+
+  80%{
+    opacity: 0;
+  }
+
+  100% {
+    
+    
+    opacity:0;
   }
 }

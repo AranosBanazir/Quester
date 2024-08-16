@@ -4,7 +4,7 @@ import { ME, QUERY_SINGLE_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 import { useState} from "react";
 import AuthCheck from "../../components/AuthCheck";
-
+import RewardCard from "../../components/RewardCard";
 
 const KidsPage = () =>{
     const [activeChildState, setActiveChildState] = useState('')
@@ -30,19 +30,23 @@ const KidsPage = () =>{
       return tasks
         .filter(task=> task.childConfirmed === true)
         .map(task=>{
-          return <TaskCard task={task} userType={userType} showDeleteButton={true}/>
+          return <TaskCard task={task} userType={userType} showDeleteButton={true} key={task._id}/>
         })
       
     }
 
 
     const getActiveChildInventory = () =>{
-      const tasks = activeChildState?.tasks || []
-      return (
-        <>
-
-        </>
-      )
+      const inventory = activeChildState?.inventory || []
+      return inventory
+            .map(reward=>{
+              return <RewardCard
+              key={reward._id}
+              reward={reward}
+              userType ={userType}
+              showDeleteButton = {true}
+            />
+            })
     }
 
 

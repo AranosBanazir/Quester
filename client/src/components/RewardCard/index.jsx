@@ -1,32 +1,29 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
-
-    const RewardCard = ({ reward, onDelete, showDeleteButton = true }) => {
-        const [confirmRewardComplete] = useMutation(CONFIRM_REWARD);
+import { BUY_REWARD, DELETE_REWARD } from '../../utils/mutations';
+import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
+    const RewardCard = ({ reward, showDeleteButton = true, userType}) => {
+        const [buyReward] = useMutation(BUY_REWARD);
         const [deleteReward] = useMutation(DELETE_REWARD);
       
         const handleRedeemClick = async () => {
-          if (window.confirm(`Are you sure you want to redeem the reward "${reward.name}"?`)) {
-            try {
-              await confirmRewardComplete({ variables: { rewardId: reward._id } });
+          try{
+            await buyReward({ variables: { rewardId: reward._id }, refetchQueries: [GET_REWARDS, ME, QUERY_SINGLE_USER]  });
               
             } catch (err) {
               console.error('Error redeeming reward:', err);
             }
-          }
+          
         };
       
         const handleDeleteClick = async () => {
-          if (window.confirm(`Are you sure you want to delete the reward "${reward.name}"? This action cannot be undone.`)) {
             try {
-              await deleteReward({ variables: { rewardId: reward._id } });
-              onDelete(reward);
-              window.location.reload();
+              await deleteReward({ variables: { rewardId: reward._id }, refetchQueries: [GET_REWARDS, ME, QUERY_SINGLE_USER] },              );
+
             } catch (err) {
               console.error('Error deleting reward:', err);
             }
-          }
+          
         };
 
  
@@ -41,13 +38,16 @@ import { CONFIRM_REWARD, DELETE_REWARD } from '../../utils/mutations';
                 </div>
               </div>
 
+
               <div className="self-center ">
+              {userType === 'Child' ? (
                 <button className="" onClick={handleRedeemClick}>
                   <p className='pb-10 reward-cost flex flex-row items-center justify-center'>
                     Cost: {reward.cost}
                     <img src='/assets/coin.gif' className='w-[40px]'/>
                   </p>
                 </button>
+              ): <></>}
                 {showDeleteButton && (
                   <button className="btn btn-error  mt-5" onClick={handleDeleteClick}>
                     Delete!

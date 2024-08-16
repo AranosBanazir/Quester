@@ -42,7 +42,10 @@ function App() {
   useEffect(()=>{
     const backgrounds = [
       "tropical",
-      "treehouse"
+      "treehouse",
+      "path",
+      "nighttime",
+      "mountains"
     ]
     const rndBackgroundIndex = Math.floor(Math.random() * backgrounds.length)
     const background = backgrounds[rndBackgroundIndex]
