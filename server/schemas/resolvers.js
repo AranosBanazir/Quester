@@ -159,60 +159,22 @@ const resolvers = {
           throw AuthenticationError;
         }
 
-        //if we have gotten this far then ther user is:
-        //1.) logged in
-        //2.) has the correct username and password
-        //3.) either is the account or owns the account
-        if (user.__t === 'Parent'){
-          const parent = await BaseUser.findById({_id: context.user._id}).populate('kids')
-          if (parent.username == user.username){
-            for (const kid of parent.kids){
-              await Child.deleteOne({_id: kid._id})
-            }
-            console.log(parent)
-            await BaseUser.findByIdAndDelete({_id: parent._id})
-            return user
-          }
-
-          //Loops through the kids to see if the requested user to delete is in the array
-          for (const kid of parent.kids){
-            if (kid.username === user.username){
-              await BaseUser.deleteOne({_id: user._id})
-            } 
-          }
-          return null
-        }else if (user.__t === 'Child'){
-          throw AuthenticationError
-        }
+      await BaseUser.deleteOne({ username: creds.username})
+      return user
       }
-
-    },
-    updateUser: async (parent, {updatedUserInfo}, context) =>{
+      throw AuthenticationError
+    
+    
+  },
+    updateChild: async (parent, {updatedChildInfo}, context) =>{
       if (context.user){
-        const user = await BaseUser.findById(context.user._id);
-
-
-        //if we have gotten this far then ther user is:
-        //1.) logged in
-        //2.) has the correct username and password
-        //3.) either is the account or owns the account
-        if (user.__t === 'Parent'){
-          const parent = await BaseUser.findById({_id: context.user._id}).populate('kids')
-
-          if (parent.username == user.username){
-            await BaseUser.findByIdAndUpdate({_id: parent._id}, updatedUserInfo)
-            return user
-          }
-
-
-        
+        const currentUser = await BaseUser.findById(context.user._id).populate('kids');
           
-        }else if (user.__t === 'Child'){ 
-          const parent = await BaseUser.findById({_id: context.user._id}, 'kids').populate('kids')
+        if (currentUser.__t === 'Parent'){ 
           //Loops through the kids to see if the requested user to delete is in the array
-          for (const kid of parent.kids){
-            if (kid.username === user.username){
-              const targetKid = await BaseUser.findByIdAndUpdate({_id: user._id}, updatedUserInfo, {
+          for (const kid of currentUser.kids){
+            if (kid.username === updatedChildInfo.oldUsername){
+              const targetKid = await BaseUser.findByIdAndUpdate({_id: kid._id}, updatedChildInfo, {
                 new: true
               })
               return targetKid
@@ -220,7 +182,7 @@ const resolvers = {
           }
         }
       }
-
+      throw AuthenticationError
     },
   
     addTask: async (parent, {task}, context) =>{

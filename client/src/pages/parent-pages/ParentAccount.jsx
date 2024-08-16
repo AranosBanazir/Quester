@@ -1,12 +1,12 @@
-import React from "react";
-import { useQuery } from "@apollo/client";
+import React, { useState } from "react";
+import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_SINGLE_USER, ME } from "../../utils/queries";
+// import { UPDATE_USER } from "../../utils/mutations"; // Adjust the path if necessary
 import AddChildForm from "./AddChildForm";
 import AuthCheck from "../../components/AuthCheck";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import KidCard from "../../components/KidCard";
-
 
 const ParentAccount = () => {
   const navigate = useNavigate();
@@ -23,6 +23,9 @@ const ParentAccount = () => {
   });
   console.log(singleUserData);
   const kids = singleUserData?.user?.kids || [];
+
+  
+
 
   if (loading) return <Spinner />;
 

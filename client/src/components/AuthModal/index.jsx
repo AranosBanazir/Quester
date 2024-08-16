@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { useMutation } from "@apollo/client";
-import { UPDATE_USER } from "../../utils/mutations"; // Import the mutation
+// import { UPDATE_USER } from "../../utils/mutations"; // Import the mutation
 import { QUERY_SINGLE_USER, ME } from "../../utils/queries";
 
 const AuthModal = ({ isOpen, onClose, userData }) => {
@@ -16,7 +16,7 @@ const AuthModal = ({ isOpen, onClose, userData }) => {
   const [email, setEmail] = useState(userData.email || "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [updateUser] = useMutation(UPDATE_USER);
+  // const [updateUser] = useMutation(UPDATE_USER);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,9 +27,9 @@ const AuthModal = ({ isOpen, onClose, userData }) => {
 
       console.log("Sending variables:", { creds, updatedUserInfo });
 
-      const { data } = await updateUser({
-        variables: { creds, updatedUserInfo },
-      });
+      // const { data } = await updateUser({
+      //   variables: { creds, updatedUserInfo },
+      // });
 
       console.log("User updated:", data.updateUser);
       onClose(); // Close the modal on success
