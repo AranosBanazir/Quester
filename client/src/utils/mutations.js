@@ -124,6 +124,7 @@ export const DELETE_REWARD = gql`
     name  
     }
   }` 
+  
 export const UPDATE_REWARD = gql`
   mutation UpdateReward($rewardId: ID!, $updatedReward: RewardInput!) {
   updateReward(rewardId: $rewardId, updatedReward: $updatedReward) {
