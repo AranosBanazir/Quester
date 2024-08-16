@@ -41,17 +41,22 @@ const client = new ApolloClient({
 function App() {
   useEffect(()=>{
     const backgrounds = [
-      "tropical",
-      "treehouse",
-      "path",
-      "nighttime",
-      "mountains"
+      // "tropical.jpg",
+      // "treehouse.jpg",
+      // "path.jpg",
+      // "nighttime.jpg",
+      // "mountains.jpg",
+      // "forest.jpg",
+      // "brook.gif",
+      // "waterfall.gif"
+      "campfire.gif"
+      
     ]
     const rndBackgroundIndex = Math.floor(Math.random() * backgrounds.length)
     const background = backgrounds[rndBackgroundIndex]
 
     document.querySelector('body')
-            .setAttribute('style', `background-image: url("/assets/backgrounds/${background}.jpg");`)
+            .setAttribute('style', `background-image: url("/assets/backgrounds/${background}");`)
 
   }, [])
 

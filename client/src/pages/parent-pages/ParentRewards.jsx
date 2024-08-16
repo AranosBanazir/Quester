@@ -109,8 +109,11 @@ const ParentRewards = (data) => {
 
   return (
     <div className="container mx-auto p-6">
-      <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2>
+      <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6 corkboard">
+        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2> */}
+        <div className='max-w-[400px]'>
+          <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward" />
+        </div>
         <form onSubmit={handleRewardSubmit}>
           <div className="mb-4">
             <label
@@ -179,7 +182,10 @@ const ParentRewards = (data) => {
       </section>
 
       <section className="mt-6 p-4 bg-gray-800 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-blue-500">Rewards</h2>
+        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Rewards</h2> */}
+        <div className='max-w-[400px] '>
+          <img src="/assets/rewards-banner.png" alt="" />
+        </div>
         {rewards.filter((reward) => reward !== null).length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {rewards
