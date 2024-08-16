@@ -3,6 +3,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { ADD_TASK } from '../../utils/mutations'; // Import your mutations
 import { GET_TASKS, ME } from '../../utils/queries'; // Import your queries
 import SecretTaskCard from '../../components/SecretTaskCard'
+import Spinner from '../../components/Spinner';
 
 
 //TODO Need a new task card for parents that isn't cartoony
@@ -58,7 +59,7 @@ const ParentTasks = ({}) => {
       }
     }, [tasksData]);
   
-    if (userLoading || tasksLoading) return <p className="text-center text-gray-500">Loading...</p>;
+    if (userLoading || tasksLoading) return <Spinner/>
     if (userError) return <p className="text-center text-red-500">Error loading user data: {userError.message}</p>;
     if (tasksError) return <p className="text-center text-red-500">Error loading tasks: {tasksError.message}</p>;
   

@@ -100,7 +100,7 @@ const ParentRewards = () => {
     }
   }, [rewardsData]);
 
-  if (userLoading || rewardsLoading) return <p>Loading...</p>;
+  if (userLoading || rewardsLoading) return <Spinner/>
   if (userError)
     return (
       <p className="text-red-500">

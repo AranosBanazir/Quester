@@ -58,7 +58,10 @@ html, body{
 
 
 
-
+.reward-text{
+  text-shadow: -2px 2px rgb(17, 14, 14);
+  color: #eeedec
+}
 
 
 .task-text{
@@ -75,11 +78,16 @@ html, body{
   font-style: normal;
 }
 
+.reward-description-div{
+  overflow-y: auto;
+  height: 140px;
+}
 
 
-.task-sign{
+.reward-sign{
   background-image: url('/assets/task-sign.png'); 
-  background-size:cover; 
+  background-size: stretch; 
+  background-color: transparent;
   background-position: center center;
   background-repeat: no-repeat;
   min-height: 200px;
@@ -88,6 +96,7 @@ html, body{
   flex-direction: column;
   gap: 0.5rem;
   justify-content: center;
+  /* text-shadow: -2px 2px black; */
   /* margin: 0px 20px 0px 20px; */
 }
 
@@ -112,7 +121,6 @@ html, body{
   background-repeat: no-repeat;
   width: 250px;
   height: 150px;
-
 }
 
 .nav-sign{
@@ -203,6 +211,44 @@ main {
     opacity: 0;
   }
 
+}
+
+.item-bought:active{
+  width: 100px; 
+  height: 100px; 
+  animation-name: bought-item;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+    
+
+}
+@keyframes bought-item {
+    
+  0% {
+    transform:translateY(0);
+    opacity:1;
+  }
+  15% {
+    transform:translateX(-30px) rotate(6deg);
+  }
+  30% {
+    transform:translateX(15px) rotate(-6deg);
+  }
+  45% {
+    transform:translateX(-15px) rotate(3.6deg);
+    transform:translateY(2000px);
+
+  }
+  60%{
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+  }
 }
 
 .wobble:focus{

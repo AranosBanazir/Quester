@@ -72,12 +72,7 @@ function Navbar() {
               >
                 <p className="mb-7">Logout</p>
               </button>
-              <button
-                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
-                onClick={openModal}
-              >
-                <p className="mb-7">Change User Info</p>
-              </button>
+              {/* TODO Figuure out what is going on with this modal */}
               <AuthModal
                 isOpen={isModalOpen}
                 onClose={closeModal}

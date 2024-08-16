@@ -66,7 +66,7 @@ const KidsPage = () =>{
                   <button onClick={()=>{
                     handleActiveChild(kid.username)
                   }} className="bg-transparent text-center text-black font-bold text-xl sign btn-sign permanent-marker-regular wobble" key={kid._id}>
-                    <p className="mt-8 mr-16">
+                    <p className="mt-8 mr-16 text-3xl">
                     {kid.username}
                     </p>
                   </button>
@@ -79,16 +79,16 @@ const KidsPage = () =>{
             <div id="section-container" className="mt-10">
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
 
-                  <img src="/assets/task-banner-brown.png" alt="Task banner"  />
+                  <img src="/assets/completed-tasks-banner.png" alt="Task banner"  />
                   
                 </div>
-              <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+              <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container ">
                 <section id="task-section" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
                     {getActiveChildTasks()}
                 </section>
               </div>
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
-                  <img src="/assets/inv-banner-brown.png" alt="Inventory banner" />
+                  <img src="/assets/inventory-banner.png" alt="Inventory banner" />
                 </div>
                 <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
                 <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
