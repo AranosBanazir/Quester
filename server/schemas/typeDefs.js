@@ -36,7 +36,8 @@ input UserInput{
     password: String!
 }
   
-input UserUpdateInput{
+input ChildUpdateInput{
+  oldUsername: String
   username: String
   password: String
   email: String
@@ -94,7 +95,7 @@ type User {
     addParent(username: String!, email: String!, password: String!): Auth
     addChild(username: String!, password: String!): UserTypes
 
-    updateUser(updatedUserInfo: UserUpdateInput):UserTypes
+    updateChild(updatedChildInfo: ChildUpdateInput):UserTypes
     removeUser(creds:UserInput!):UserTypes  
 
 

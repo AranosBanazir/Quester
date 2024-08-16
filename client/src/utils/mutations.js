@@ -38,6 +38,24 @@ export const ADD_TASK = gql`
   }
 `
 
+export const UPDATE_CHILD = gql`
+  mutation UpdateChild($updatedChildInfo: ChildUpdateInput) {
+    updateChild(updatedChildInfo: $updatedChildInfo) {
+      ... on Parent {
+        _id
+        username
+        email
+        kids {
+          username
+        }
+      }
+      ... on Child {
+        username
+      }
+    }
+  }
+`;
+
 export const UPDATE_TASK = gql`
   mutation UpdateTask($taskId: ID!, $updatedTask: TaskInput!) {
     updateTask(taskId: $taskId, updatedTask: $updatedTask) {
@@ -127,7 +145,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
-export const DELTE_USER = gql`
+export const DELETE_USER = gql`
 mutation RemoveUser($creds: UserInput!) {
   removeUser(creds: $creds) {
     ...on Parent{
