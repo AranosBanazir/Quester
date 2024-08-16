@@ -106,8 +106,8 @@ export const BUY_REWARD = gql`
 `
 
 export const CASH_IN_REWARD = gql`
-  mutation CashInReward($rewardId: ID!, $childId: ID!){
-    cashInChild(rewardId: $rewardId, childId: $childId){
+  mutation CashInReward($rewardId: ID!){
+    cashInReward(rewardId: $rewardId){
       _id
     }
   }

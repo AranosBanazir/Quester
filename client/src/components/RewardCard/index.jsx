@@ -1,11 +1,13 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { BUY_REWARD, DELETE_REWARD } from '../../utils/mutations';
+import { BUY_REWARD, DELETE_REWARD, CASH_IN_REWARD} from '../../utils/mutations';
 import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
-    const RewardCard = ({ reward, showDeleteButton = true, userType}) => {
+    const RewardCard = ({ reward, showDeleteButton = true, userType, showCashInButton = false}) => {
         const [buyReward] = useMutation(BUY_REWARD);
         const [deleteReward] = useMutation(DELETE_REWARD);
-      
+        const [cashInReward] = useMutation(CASH_IN_REWARD)
+
+
         const handleRedeemClick = async () => {
           try{
             await buyReward({ variables: { rewardId: reward._id }, refetchQueries: [GET_REWARDS, ME, QUERY_SINGLE_USER]  });
@@ -15,6 +17,18 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
             }
           
         };
+
+        const handleCashIn = async () =>{
+          try{
+            await cashInReward({
+              variables:{
+                rewardId: reward._id
+              },
+              refetchQueries: [GET_REWARDS, QUERY_SINGLE_USER]} )
+          }catch(err){
+
+          }
+        }
       
         const handleDeleteClick = async () => {
             try {
@@ -27,7 +41,7 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
         };
 
  
-
+       console.log(userType)
         return (
           <div className="item-bought card min-h-[325px] max-h-[325px]">
             <div className="card-body reward-sign items-center justify-center permanent-marker-regular reward-text">
@@ -40,7 +54,14 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
 
 
               <div className="self-center ">
-              {userType === 'Child' ? (
+              {showCashInButton && userType === 'Child' ? (
+                      <button className="" onClick={handleRedeemClick}>
+                      <p className='pb-10 reward-cost flex flex-row items-center justify-center'>
+                        Cost: {reward.cost}
+                        <img src='/assets/coin.gif' className='w-[40px]'/>
+                      </p>
+                    </button>
+              ): userType === 'Child' ? (
                 <button className="" onClick={handleRedeemClick}>
                   <p className='pb-10 reward-cost flex flex-row items-center justify-center'>
                     Cost: {reward.cost}

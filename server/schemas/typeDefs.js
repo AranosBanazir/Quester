@@ -106,7 +106,7 @@ type User {
 
     buyReward(rewardId: ID!): Reward
     addReward(reward: RewardInput!): Reward
-    cashInReward(rewardId: ID!, chidId: ID!): Reward
+    cashInReward(rewardId: ID!): Reward
     updateReward(rewardId: ID!, updatedReward: RewardInput!): Reward
     delReward(rewardId: ID!): Reward
     

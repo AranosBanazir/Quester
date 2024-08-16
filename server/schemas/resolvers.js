@@ -251,9 +251,11 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    cashInReward: async (parent, {rewardId, childId}, context)=>{
+    cashInReward: async (parent, {rewardId}, context)=>{
+
       if (context.user){
-        const child = Child.findByIdAndUpdate(childId, {
+        //getting the child from the DB by context
+        const child = Child.findByIdAndUpdate(context.user_id, {
           $pull: {inventory: {_id: rewardId}}
         })
 
@@ -266,14 +268,28 @@ const resolvers = {
     buyReward: async (parent, {rewardId}, context) =>{
 
       if (context.user){
+        
+        //finding the reward to clone
         const reward = await Reward.findById({_id: rewardId})
-        const user = await Child.findByIdAndUpdate({_id: context.user._id}, {
-          $push: {inventory: reward._id},
-        })
+        const {name, description, cost} = reward
+
+        //cloning reward for inventory
+        const newReward = await Reward.create({name, description, cost})
+
+        //checking if the user is broke
+        const user = await Child.findById(context.user._id)
+        const hadEnoughMoney = await user.buyReward(reward.cost)
+
+        console.log(hadEnoughMoney)
+
+        if (hadEnoughMoney){
+          //Hey they weren't broke! lets push in the cloned reward so we can stop deleting the original!
+          const user = await Child.findByIdAndUpdate({_id: context.user._id}, {
+            $push: {inventory: newReward._id},
+          })
+        }
         
-        await user.buyReward(reward.cost)
-        
-        return reward
+        return newReward
       }
       return AuthenticationError
     },

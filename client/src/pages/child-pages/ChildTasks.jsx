@@ -4,10 +4,10 @@ const ChildTasks = ({ data }) => {
   console.log(data)
   return (
     <>
-      <div id="section-container" className="mt-10">
-        <div className="font-extrabold text-6xl mx-10 permanent-marker-regular task-header-text">
+        <div >
           <img src="/assets/my-tasks-banner.png" alt="" />
         </div>
+      <div id="section-container" className="mt-10">
         <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
           <section
             id="task-section"
