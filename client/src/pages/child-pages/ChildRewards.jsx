@@ -4,12 +4,13 @@ import RewardCard from "../../components/RewardCard";
 import { GET_REWARDS } from "../../utils/queries";
 import Spinner from "../../components/Spinner";
 
-const ChildRewards = () => {
+const ChildRewards = ({data}) => {
   const [rewards, setRewards] = useState([]);
 
   // Query to get rewards
   const { data: rewardsData, loading: rewardsLoading, error: rewardsError } = useQuery(GET_REWARDS);
 
+  
   // Load rewards from the GET_REWARDS query
   useEffect(() => {
     if (rewardsData && rewardsData.getRewards) {
@@ -22,8 +23,14 @@ const ChildRewards = () => {
 
   return (
     <>
-    <div>
-    <img src="/assets/rewards-shop-banner.png" alt="" />
+    <div className="flex flex-col">
+      <div>
+      <img src="/assets/rewards-shop-banner.png" alt="" />
+      <strong className="flex flex-row text-4xl coin-text permanent-marker-regular font-bold">
+        Your Coins: {data.wallet.toLocaleString()}
+        <img src="/assets/coin.gif" alt="" className="max-w-[50px]"/>  
+      </strong> 
+      </div>
     </div>
     <div className="container mx-auto p-6 ">
       {rewards.length > 0 ? (

@@ -30,7 +30,7 @@ const KidsPage = () =>{
       return tasks
         .filter(task=> task.childConfirmed === true)
         .map(task=>{
-          return <TaskCard task={{name: task.name, description: task.description, points: task.points}}/>
+          return <TaskCard task={task} userType={userType} showDeleteButton={true}/>
         })
       
     }

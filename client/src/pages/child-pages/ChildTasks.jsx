@@ -1,6 +1,7 @@
 import TaskCard from "../../components/TaskCard";
 
 const ChildTasks = ({ data }) => {
+  console.log(data)
   return (
     <>
       <div id="section-container" className="mt-10">
@@ -18,6 +19,7 @@ const ChildTasks = ({ data }) => {
                 <TaskCard
                   task={task}
                   showDeleteButton={false}
+                  userType={data.__typename}
                 />
               );
             })}
