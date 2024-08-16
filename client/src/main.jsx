@@ -14,6 +14,8 @@ import RewardsStore from './pages/base-pages/RewardsStore';
 import Rewards from './pages/base-pages/Rewards.jsx';
 import ParentAccount from './pages/parent-pages/ParentAccount.jsx';
 import KidsPage from './pages/parent-pages/KidsPage.jsx';
+import Inventory from './pages/child-pages/ChildInventory.jsx';
+
 //TODO: need to expand the router to work with new pages
 const router = createBrowserRouter([
   {
@@ -40,8 +42,8 @@ const router = createBrowserRouter([
         element: <MyTasks/>
       },
       {
-        path: '/rewards',
-        element: <Rewards/>
+        path: '/inventory',
+        element: <Inventory/>
       },
       {
         path: '/account',
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
       },{
         path: '/kids',
         element: <KidsPage/>
+      },
+      {
+        path: '/shop',
+        element: <Rewards/>
+      },
+      {
+        path: '/rewards',
+        element: <Rewards/>
       }
       
     ]

@@ -13,7 +13,7 @@ function Navbar() {
   if (userType === "Parent") {
     navItems = ["Rewards", "Tasks", "Kids"];
   } else if (userType === "Child") {
-    navItems = ["Rewards", "Tasks"];
+    navItems = ["Shop", "Tasks", "Inventory"];
   }
 
   const logout = (event) => {
