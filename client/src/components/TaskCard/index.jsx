@@ -29,7 +29,7 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
             }
          })
          
-      // console.log(response)
+      
 
       } catch (err) {
         console.error('Error redeeming task:', err);

@@ -21,7 +21,7 @@ const ParentAccount = () => {
       userId,
     },
   });
-  console.log(singleUserData);
+
   const kids = singleUserData?.user?.kids || [];
 
   
@@ -30,7 +30,6 @@ const ParentAccount = () => {
   if (loading) return <Spinner />;
 
   if (data?.me?.__typename === "Child") {
-    console.log("here");
     navigate("/tasks");
   }
   if (error)

@@ -14,7 +14,6 @@ const Inventory = () => {
     },
   });
   const userData = userInfo?.data?.user;
-  console.log(userData?.inventory)
     return (
         <>
         <div>

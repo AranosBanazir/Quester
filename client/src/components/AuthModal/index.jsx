@@ -25,13 +25,11 @@ const AuthModal = ({ isOpen, onClose, userData }) => {
       const creds = { username: userData.username, password: password };
       const updatedUserInfo = { username, email, password: password || null };
 
-      console.log("Sending variables:", { creds, updatedUserInfo });
 
       // const { data } = await updateUser({
       //   variables: { creds, updatedUserInfo },
       // });
 
-      console.log("User updated:", data.updateUser);
       onClose(); // Close the modal on success
     } catch (err) {
       console.error("Error updating user:", err);

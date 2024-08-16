@@ -57,7 +57,7 @@ const ParentRewards = (data) => {
   const handleRewardSubmit = (e) => {
     e.preventDefault();
 
-    console.log(rewardDescription, rewardCost, rewardName);
+    
 
     if (!rewardName || !rewardDescription || !rewardCost) {
       console.error("Reward details are missing");

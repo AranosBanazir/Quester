@@ -255,10 +255,7 @@ const resolvers = {
 
       if (context.user){
         //getting the child from the DB by context
-        const child = Child.findByIdAndUpdate(context.user_id, {
-          $pull: {inventory: {_id: rewardId}}
-        })
-
+        const test = await Reward.deleteOne({_id: rewardId})
         return await Reward.findById(rewardId)
       }
 
@@ -280,7 +277,6 @@ const resolvers = {
         const user = await Child.findById(context.user._id)
         const hadEnoughMoney = await user.buyReward(reward.cost)
 
-        console.log(hadEnoughMoney)
 
         if (hadEnoughMoney){
           //Hey they weren't broke! lets push in the cloned reward so we can stop deleting the original!

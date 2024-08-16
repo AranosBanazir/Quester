@@ -37,14 +37,12 @@ const KidCard = ({ _id, username }) => {
 
   const handleUpdateUser = async () => {
     const updatedChildInfo = { oldUsername: username };
-    console.log(newUserName, newPassword);
     if (newUserName) {
       updatedChildInfo.username = newUserName;
     }
     if (newPassword) {
       updatedChildInfo.password = newPassword;
     }
-    console.log(updatedChildInfo);
     await updateChild({
       variables: { updatedChildInfo },
     });

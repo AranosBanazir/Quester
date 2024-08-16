@@ -28,8 +28,7 @@ function Navbar() {
   const closeModal = () => setIsModalOpen(false);
 
   const handleModalSubmit = (formData) => {
-    console.log('Submitted data:', formData);
-    console.log('Current User Info:', userData); // Log current user info
+
   };
 
   return (

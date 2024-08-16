@@ -26,7 +26,7 @@ const RewardsStore = () => {
       const stripe = await loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx')
       stripe.redirectToCheckout({ sessionId: response.data.checkout.session })
     } catch(err) {
-      console.log(err)
+      console.error(err)
       alert('Error checking out!')
     }
   }

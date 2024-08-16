@@ -41,7 +41,7 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
         };
 
  
-       console.log(userType)
+      
         return (
           <div className="item-bought card min-h-[325px] max-h-[325px]">
             <div className="card-body reward-sign items-center justify-center permanent-marker-regular reward-text">
@@ -55,10 +55,9 @@ import { GET_REWARDS, ME, QUERY_SINGLE_USER } from '../../utils/queries';
 
               <div className="self-center ">
               {showCashInButton && userType === 'Child' ? (
-                      <button className="" onClick={handleRedeemClick}>
-                      <p className='pb-10 reward-cost flex flex-row items-center justify-center'>
-                        Cost: {reward.cost}
-                        <img src='/assets/coin.gif' className='w-[40px]'/>
+                      <button className="" onClick={handleCashIn}>
+                      <p className=' btn  text-center reward-text'>
+                        Cash in reward
                       </p>
                     </button>
               ): userType === 'Child' ? (
