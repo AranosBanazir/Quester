@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import React from "react";
+import { useQuery } from "@apollo/client";
 import { QUERY_SINGLE_USER, ME } from "../../utils/queries";
-// import { UPDATE_USER } from "../../utils/mutations"; // Adjust the path if necessary
 import AddChildForm from "./AddChildForm";
 import AuthCheck from "../../components/AuthCheck";
 import { useNavigate } from "react-router-dom";
@@ -24,19 +23,18 @@ const ParentAccount = () => {
 
   const kids = singleUserData?.user?.kids || [];
 
-  
-
-
   if (loading) return <Spinner />;
 
   if (data?.me?.__typename === "Child") {
     navigate("/tasks");
   }
-  if (error)
-    if (error.message === 'Could not authenticate user.'){
+
+  if (error) {
+    if (error.message === 'Could not authenticate user.') {
       navigate("/login");
       return <p className="text-center text-red-500">Error: {error.message}</p>;
     }
+  }
 
   return (
     <AuthCheck>
@@ -47,12 +45,11 @@ const ParentAccount = () => {
           <p className="text-center text-gray-500">No user ID found.</p>
         )}
         <div className="mt-8">
-        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {kids.map((kid) => {
-            return <KidCard {...kid}/>
-            
-          })}
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {kids.map((kid) => (
+              <KidCard key={kid._id} {...kid} />
+            ))}
+          </div>
         </div>
       </div>
     </AuthCheck>

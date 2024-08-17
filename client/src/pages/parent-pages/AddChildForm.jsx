@@ -70,8 +70,8 @@ const AddChildForm = ({ userId }) => {
             >
                 {loading ? 'Adding...' : 'Add Child'}
             </button>
-            {error && <p className="mt-4 text-red-500">Error: {error.message || 'An unknown error occurred'}</p>}
-            {data && <p className="mt-4 text-green-500">Child added: {data.addChild.username}</p>}
+            {error && <p className="mt-4 text-red-500 permanent-marker-regular">Error: {error.message || 'An unknown error occurred'}</p>}
+            {data && <p className="mt-4 permanent-marker-regular text-green-500">Child added: {data.addChild.username}</p>}
         </form>
     );
 };
