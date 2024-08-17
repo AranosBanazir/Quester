@@ -72,12 +72,12 @@ function Navbar() {
                 <p className="mb-7">Logout</p>
               </button>
               {/* TODO Figuure out what is going on with this modal */}
-              <AuthModal
+              {/* <AuthModal
                 isOpen={isModalOpen}
                 onClose={closeModal}
                 onSubmit={handleModalSubmit}
                 userData={userData} // Pass user data to the modal
-              />
+              /> */}
             </>
           ) : Auth.loggedIn() && userType === 'Child' ? (
             <>
