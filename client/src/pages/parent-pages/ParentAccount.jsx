@@ -46,11 +46,13 @@ const ParentAccount = () => {
         ) : (
           <p className="text-center text-gray-500">No user ID found.</p>
         )}
-        <div className="flex wrap mt-5 gap-5">
+        <div className="mt-8">
+        <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {kids.map((kid) => {
             return <KidCard {...kid}/>
             
           })}
+        </div>
         </div>
       </div>
     </AuthCheck>

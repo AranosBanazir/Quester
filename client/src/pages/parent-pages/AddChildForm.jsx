@@ -40,7 +40,7 @@ const AddChildForm = ({ userId }) => {
         <form onSubmit={handleSubmit} className="bg-gray-800 text-white p-6 rounded-md shadow-lg mx-auto max-w-[75%] mt-10">
             <h2 className="text-3xl font-bold mb-4 text-white permanent-marker-regular">Add Child</h2>
             <div className="mb-4">
-                <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2">Username:</label>
+                <label htmlFor="username" className="block text-sm font-medium text-gray-300 mb-2 permanent-marker-regular">Username:</label>
                 <input
                     id="username"
                     type="text"
@@ -52,7 +52,7 @@ const AddChildForm = ({ userId }) => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">Password:</label>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2 permanent-marker-regular">Password:</label>
                 <input
                     id="password"
                     type="password"
@@ -66,7 +66,7 @@ const AddChildForm = ({ userId }) => {
             <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+                className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 permanent-marker-regular"
             >
                 {loading ? 'Adding...' : 'Add Child'}
             </button>

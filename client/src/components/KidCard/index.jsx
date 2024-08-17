@@ -50,34 +50,32 @@ const KidCard = ({ _id, username }) => {
   };
 
   return (
-    <div className="card bg-neutral text-neutral-content w-96" key={_id}>
+    <div className="card bg-neutral text-neutral-content w-full sm:w-auto" key={_id}>
       <div className="card-body items-center text-center">
-        <h2 className="card-title">{newUserName}</h2>
-
+        <h2 className="card-title text-white permanent-marker-regular">{newUserName}</h2>
+  
         {isEditMode && (
-          <>
-            <label className="input input-bordered flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                className="h-4 w-4 opacity-70"
-              >
-                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-              </svg>
-              <input
-                value={newUserName}
-                onChange={(e) => setNewUserName(e.target.value)}
-                type="text"
-                className="grow"
-                placeholder="Username"
-              />
-            </label>
-          </>
+          <label className="input input-bordered flex flex-col sm:flex-row items-center gap-2 mt-4 w-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+            </svg>
+            <input
+              value={newUserName}
+              onChange={(e) => setNewUserName(e.target.value)}
+              type="text"
+              className="grow"
+              placeholder="Username"
+            />
+          </label>
         )}
-
+  
         {(isEditMode || isDeletingMode) && (
-          <label className="input input-bordered flex items-center gap-2">
+          <label className="input input-bordered flex flex-col sm:flex-row items-center gap-2 mt-4 w-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 16 16"
@@ -95,40 +93,37 @@ const KidCard = ({ _id, username }) => {
               className="grow"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="New Password"
             />
           </label>
         )}
-
-        <div className="card-actions justify-end">
-
+  
+        <div className="card-actions justify-center flex flex-wrap gap-2 mt-4 w-full">
           {isEditMode && (
             <button className="btn btn-primary" onClick={handleUpdateUser}>
-                {updateLoading ? "saving..." : "save"}
-              </button>
+              {updateLoading ? "Saving..." : "Save"}
+            </button>
           )}
           {(isEditMode || isDeletingMode) && (
-            <>
-             
-              <button
-                className="btn btn-ghost"
-                onClick={(e) => {
-                  setIsEditMode(false);
-                  setDeletingMode(false)
-                }}
-              >
-                Cancel
-              </button>
-            </>
-          )}
-          {(!isEditMode && !isDeletingMode) && (
             <button
-                className="btn btn-info"
-                onClick={() => setIsEditMode(true)}
-              >
-                Edit
-              </button>
+              className="btn btn-ghost border border-white"
+              onClick={() => {
+                setIsEditMode(false);
+                setDeletingMode(false);
+              }}
+            >
+              Cancel
+            </button>
           )}
-          {(!isDeletingMode && !isEditMode) && (
+          {!isEditMode && !isDeletingMode && (
+            <button
+              className="btn btn-info"
+              onClick={() => setIsEditMode(true)}
+            >
+              Edit
+            </button>
+          )}
+          {!isDeletingMode && !isEditMode && (
             <button
               className="btn btn-error"
               onClick={() => setDeletingMode(true)}
@@ -141,13 +136,14 @@ const KidCard = ({ _id, username }) => {
               className="btn btn-error"
               onClick={handleDeleteChild}
             >
-              Are you fo real?...
+              Confirm Delete?
             </button>
           )}
         </div>
       </div>
     </div>
   );
+  
 };
 
 export default KidCard;
