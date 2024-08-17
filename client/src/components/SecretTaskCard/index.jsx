@@ -40,12 +40,13 @@ const SecretTaskCard = ({ task,  }) => {
           <FaCoins className="inline mx-1" /> Points: {task.points} <FaCoins className="inline mx-1" />
         </p>
         <div className="card-actions flex justify-center">
-          <button
+          {/* TODO replace this with edit button eventually */}
+          {/* <button
             className="btn btn-success mx-2 permanent-marker-regular"
             onClick={handleRedeemClick}
           >
             Redeem
-          </button>
+          </button> */}
           <button
             className="btn btn-error permanent-marker-regular"
             onClick={handleDeleteClick}
