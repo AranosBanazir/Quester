@@ -5,6 +5,7 @@ import { ADD_REWARD, DELETE_REWARD } from "../../utils/mutations"; // Import you
 import { GET_REWARDS, ME } from "../../utils/queries"; // Import your reward queries
 import RewardCard from "../../components/RewardCard"; // Make sure to import RewardCard
 import Spinner from "../../components/Spinner";
+import errorHandler from "../../utils/errorHandler";
 const ParentRewards = (data) => {
   const [rewardName, setRewardName] = useState("");
   const [rewardDescription, setRewardDescription] = useState("");
@@ -100,7 +101,7 @@ const ParentRewards = (data) => {
   if (rewardsError)
     return (
       <p className="text-red-500">
-        Error loading rewards: {rewardsError.message}
+        Error loading rewards: {errorHandler(rewardsError.message)}
       </p>
     );
 
@@ -175,7 +176,7 @@ const ParentRewards = (data) => {
           </button>
           {rewardError && (
             <p className="mt-4 text-red-500">
-              Error: {rewardError.message || "An unknown error occurred"}
+              Error: {errorHandler(rewardError.message) || "An unknown error occurred"}
             </p>
           )}
         </form>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_CHILD} from '../../utils/mutations';
 import { QUERY_SINGLE_USER } from '../../utils/queries';
+import errorHandler from '../../utils/errorHandler';
 const AddChildForm = ({ userId }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -12,6 +13,7 @@ const AddChildForm = ({ userId }) => {
             setPassword(''); 
         },
         onError: (err) => {
+            console.log('user already exists')
             console.error('Error adding child:', err.message);
         },
     });
@@ -72,6 +74,8 @@ const AddChildForm = ({ userId }) => {
             </button>
             {error && <p className="mt-4 text-red-500 permanent-marker-regular">Error: {error.message || 'An unknown error occurred'}</p>}
             {data && <p className="mt-4 permanent-marker-regular text-green-500">Child added: {data.addChild.username}</p>}
+            {error && <p className="mt-4 text-red-500">Error: {errorHandler(error.message) || 'An unknown error occurred'}</p>}
+            {data && <p className="mt-4 text-green-500">Child added: {data.addChild.username}</p>}
         </form>
     );
 };

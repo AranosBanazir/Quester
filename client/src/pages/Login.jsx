@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import errorHandler from '../utils/errorHandler';
 
 const Login = () => {
   const [formState, setFormState] = useState({ username: '', password: '' });
@@ -92,7 +93,7 @@ const Login = () => {
   
           {error && (
             <div className="mt-4 p-3 bg-red-600 text-white rounded-md">
-              {error.message}
+              {errorHandler(error.message)}
             </div>
           )}
         </div>

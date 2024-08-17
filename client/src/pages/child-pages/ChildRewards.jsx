@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import RewardCard from "../../components/RewardCard";
 import { GET_REWARDS } from "../../utils/queries";
 import Spinner from "../../components/Spinner";
+import errorHandler from "../../utils/errorHandler";
 
 const ChildRewards = ({data}) => {
   const [rewards, setRewards] = useState([]);
@@ -19,7 +20,7 @@ const ChildRewards = ({data}) => {
   }, [rewardsData]);
 
   if (rewardsLoading) return <Spinner/>;
-  if (rewardsError) return <p className="text-red-500">Error loading rewards: {rewardsError.message}</p>;
+  if (rewardsError) return <p className="text-red-500">Error loading rewards: {errorHandler(rewardsError.message)}</p>;
 
   return (
     <>

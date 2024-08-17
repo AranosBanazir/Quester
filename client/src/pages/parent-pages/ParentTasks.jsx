@@ -4,6 +4,7 @@ import { ADD_TASK } from '../../utils/mutations'; // Import your mutations
 import { GET_TASKS, ME } from '../../utils/queries'; // Import your queries
 import SecretTaskCard from '../../components/SecretTaskCard';
 import Spinner from '../../components/Spinner';
+import errorHandler from '../../utils/errorHandler';
 
 const ParentTasks = () => {
     const [taskName, setTaskName] = useState('');
@@ -56,9 +57,9 @@ const ParentTasks = () => {
       }
     }, [tasksData]);
   
-    if (userLoading || tasksLoading) return <Spinner />;
-    if (userError) return <p className="text-center text-red-500">Error loading user data: {userError.message}</p>;
-    if (tasksError) return <p className="text-center text-red-500">Error loading tasks: {tasksError.message}</p>;
+    if (userLoading || tasksLoading) return <Spinner/>
+    if (userError) return <p className="text-center text-red-500">Error loading user data: {errorHandler(userError.message)}</p>;
+    if (tasksError) return <p className="text-center text-red-500">Error loading tasks: {errorHandler(tasksError.message)}</p>;
   
     const isParent = userData?.me?.__typename === 'Parent';
     const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
@@ -142,7 +143,7 @@ const ParentTasks = () => {
             >
               {taskLoading ? 'Adding...' : 'Add Task'}
             </button>
-            {taskError && <p className="mt-2 text-red-500 text-sm">Error: {taskError.message || 'An unknown error occurred'}</p>}
+            {taskError && <p className="mt-2 text-red-500 text-sm">Error: {errorHandler(taskError.message) || 'An unknown error occurred'}</p>}
           </form>
         </section>
     

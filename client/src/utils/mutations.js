@@ -68,6 +68,15 @@ export const UPDATE_PARENT = gql`
   }
 `;
 
+export const DENY_TASK = gql`
+  mutation DenyTask($taskId: ID!){
+    denyTask(taskId: $taskId){
+      childConfirmed
+      parentConfirmed
+    }
+  }
+`
+
 export const UPDATE_TASK = gql`
   mutation UpdateTask($taskId: ID!, $updatedTask: TaskInput!) {
     updateTask(taskId: $taskId, updatedTask: $updatedTask) {
