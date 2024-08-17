@@ -18,7 +18,7 @@ const Inventory = () => {
     return (
         <>
         <AuthCheck>
-        <div>
+        <div className="flex justify-center">
         <img src="/assets/inventory-banner.png" alt="Inventory banner" />
         </div>
 

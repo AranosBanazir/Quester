@@ -111,14 +111,14 @@ const ParentRewards = (data) => {
     <div className="container mx-auto p-6">
       <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6 corkboard">
         {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2> */}
-        <div className='max-w-[400px]'>
+        <div className="flex justify-center w-full mb-4">
           <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward" />
         </div>
         <form onSubmit={handleRewardSubmit}>
           <div className="mb-4">
             <label
               htmlFor="rewardName"
-              className="block text-sm font-medium text-gray-300 mb-2"
+              className="block text-sm font-medium text-gray-300 mb-2 permanent-marker-regular"
             >
               Reward Name:
             </label>
@@ -135,7 +135,7 @@ const ParentRewards = (data) => {
           <div className="mb-4">
             <label
               htmlFor="rewardDescription"
-              className="block text-sm font-medium text-gray-300 mb-2"
+              className="block text-sm font-medium text-gray-300 mb-2 permanent-marker-regular"
             >
               Description:
             </label>
@@ -152,7 +152,7 @@ const ParentRewards = (data) => {
           <div className="mb-4">
             <label
               htmlFor="rewardCost"
-              className="block text-sm font-medium text-gray-300 mb-2"
+              className="block text-sm font-medium text-gray-300 mb-2 permanent-marker-regular"
             >
               Cost:
             </label>
@@ -169,7 +169,7 @@ const ParentRewards = (data) => {
           <button
             type="submit"
             disabled={rewardLoading}
-            className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200"
+            className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors duration-200 permanent-marker-regular"
           >
             {rewardLoading ? "Adding Reward..." : "Add Reward"}
           </button>

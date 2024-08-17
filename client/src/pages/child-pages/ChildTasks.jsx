@@ -4,8 +4,8 @@ const ChildTasks = ({ data }) => {
   console.log(data)
   return (
     <>
-        <div >
-          <img src="/assets/my-tasks-banner.png" alt="" />
+        <div className="flex justify-center">
+          <img src="/assets/my-tasks-banner.png" alt="child-my-tasks" />
         </div>
       <div id="section-container" className="mt-10">
         <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
