@@ -25,7 +25,7 @@ const ChildRewards = ({data}) => {
   return (
     <>
     <div className="flex flex-col">
-      <div>
+      <div >
       <img src="/assets/rewards-shop-banner.png" alt="" />
       <strong className="flex flex-row text-4xl coin-text permanent-marker-regular font-bold">
         Your Coins: {data?.wallet?.toLocaleString()}
