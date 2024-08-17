@@ -184,6 +184,13 @@ const resolvers = {
       }
       throw AuthenticationError
     },
+    updateParent: async (parent, {updatedParentInfo}, context) =>{
+      if (context.user){
+        const user = await Parent.findByIdAndUpdate({_id: context.user._id}, updatedParentInfo)
+        return user
+      }
+      throw AuthenticationError
+    },
   
     addTask: async (parent, {task}, context) =>{
       if (context.user){
@@ -251,17 +258,41 @@ const resolvers = {
       }
       throw AuthenticationError
     },
-    buyReward: async (parent, {rewardId, userId}, context) =>{
+    cashInReward: async (parent, {rewardId}, context)=>{
 
       if (context.user){
+        //getting the child from the DB by context
+        const test = await Reward.deleteOne({_id: rewardId})
+        return await Reward.findById(rewardId)
+      }
+
+      throw AuthenticationError
+
+    },
+    buyReward: async (parent, {rewardId}, context) =>{
+
+      if (context.user){
+        
+        //finding the reward to clone
         const reward = await Reward.findById({_id: rewardId})
-        const user = await Child.findByIdAndUpdate({_id: userId}, {
-          $push: {inventory: reward._id},
-        })
+        const {name, description, cost} = reward
+
+        //cloning reward for inventory
+        const newReward = await Reward.create({name, description, cost})
+
+        //checking if the user is broke
+        const user = await Child.findById(context.user._id)
+        const hadEnoughMoney = await user.buyReward(reward.cost)
+
+
+        if (hadEnoughMoney){
+          //Hey they weren't broke! lets push in the cloned reward so we can stop deleting the original!
+          const user = await Child.findByIdAndUpdate({_id: context.user._id}, {
+            $push: {inventory: newReward._id},
+          })
+        }
         
-        await user.buyReward(reward.cost)
-        
-        return reward
+        return newReward
       }
       return AuthenticationError
     },

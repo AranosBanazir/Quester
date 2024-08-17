@@ -1,5 +1,7 @@
 import { useQuery } from "@apollo/client";
 import {ME, QUERY_SINGLE_USER}from '../../utils/queries'
+import RewardCard from "../../components/RewardCard";
+import AuthCheck from "../../components/AuthCheck";
 
 
 
@@ -13,10 +15,21 @@ const Inventory = () => {
     },
   });
   const userData = userInfo?.data?.user;
-  console.log(userData)
     return (
         <>
-        hello
+        <AuthCheck>
+        <div>
+        <img src="/assets/inventory-banner.png" alt="Inventory banner" />
+        </div>
+
+        <div className=" mx-auto p-6">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols3">
+          {userData?.inventory?.map(item=>{
+            return <RewardCard key={item._id} showDeleteButton={false} showCashInButton={true} userType={userType} reward={item}/>
+          })}
+          </div>
+        </div>
+        </AuthCheck>
         </>
     )
 }

@@ -42,7 +42,7 @@ db.once('open', async () => {
 
     
 
-    // console.log(children)
+   
     for (const parent of parents){
       rndChild = Math.floor(Math.random() * children.length)
 

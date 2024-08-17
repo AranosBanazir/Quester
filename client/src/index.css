@@ -59,6 +59,10 @@ html, body{
 
 
 
+.reward-text{
+  text-shadow: -2px 2px rgb(17, 14, 14);
+  color: #eeedec
+}
 
 
 .task-text{
@@ -75,11 +79,22 @@ html, body{
   font-style: normal;
 }
 
+.reward-description-div{
+  overflow-y: auto;
+  height: 140px;
+}
 
+.task-description-div{
+  overflow-y: auto;
+  height: 250px;
+  margin-left: 60px;
+  width: 270px;
+}
 
-.task-sign{
+.reward-sign{
   background-image: url('/assets/task-sign.png'); 
-  background-size:cover; 
+  background-size: stretch; 
+  background-color: transparent;
   background-position: center center;
   background-repeat: no-repeat;
   min-height: 200px;
@@ -88,6 +103,7 @@ html, body{
   flex-direction: column;
   gap: 0.5rem;
   justify-content: center;
+  /* text-shadow: -2px 2px black; */
   /* margin: 0px 20px 0px 20px; */
 }
 
@@ -112,7 +128,6 @@ html, body{
   background-repeat: no-repeat;
   width: 250px;
   height: 150px;
-
 }
 
 .nav-sign{
@@ -205,6 +220,54 @@ main {
 
 }
 
+.coin-text{
+  color: goldenrod;
+  text-shadow: -2px 2px black;
+  margin-left: 20px;
+}
+
+.task-complete{
+  width: 100px; 
+  height: 100px; 
+  animation-name: task-complete;
+  animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+    
+
+}
+@keyframes task-complete {
+    
+  0% {
+    transform:translateY(0) rotate(360deg);
+    opacity:1;
+  }
+  15% {
+    transform:translateX(-30px) rotate(6deg) translateY(300px);
+  }
+  30% {
+    transform:translateX(15px) rotate(-6deg);
+  }
+  45% {
+    transform:translateX(-15px) rotate(-6deg);
+  }
+
+  50%{
+    transform: translateX(30px)
+  }
+
+  60%{
+    transform:translateY(1000px);
+  
+  }
+  100% {
+    opacity:0;
+  }
+}
+
 .wobble:focus{
   animation-name: wobble-hor-top;
   animation-duration: 7s;
@@ -241,5 +304,37 @@ main {
   100% {
     transform:translateX(0%);
     transform-origin:50% 50%;
+  }
+}
+
+.blown-away{
+  
+  
+  animation-name: blown-away;
+  animation-duration: 6s;
+  animation-timing-function: linear;
+  animation-delay: 0s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: none;
+    
+  /* shorthand
+  animation: flip-out-diagonal-br 1s linear 0s 1 normal none;*/
+}
+@keyframes blown-away {
+    
+  0% {
+    transform: rotate3d(2,1,0, -1440deg) translateX(1000px);
+    opacity:1;
+  }
+
+  80%{
+    opacity: 0;
+  }
+
+  100% {
+    
+    
+    opacity:0;
   }
 }

@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 
 const Login = () => {
   const [formState, setFormState] = useState({ username: '', password: '' });
-  const [login, { error, data }] = useMutation(LOGIN_USER);
+  const [login, { error, data, loading}] = useMutation(LOGIN_USER);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -39,6 +39,7 @@ const Login = () => {
 
   return (
     <main className="flex items-center justify-center min-h-screen">
+
       <div className="w-full max-w-sm p-6 bg-gray-800  rounded-lg shadow-lg">
         <h4 className="text-3xl font-bold mb-4 permanent-marker-regular text-white">Login</h4>
         <div>
@@ -79,13 +80,16 @@ const Login = () => {
                 type="submit"
                 className="w-full py-2 btn-sign wood-sign"
               >
-                <p className="mb-7">
+                {(loading || Auth.loggedIn()) ? (<p className="mb-7">
+                  Loading in!
+                </p>): <p className="mb-7">
                   Login
-                </p>
+                </p> }
+                
               </button>
             </form>
           )}
-
+  
           {error && (
             <div className="mt-4 p-3 bg-red-600 text-white rounded-md">
               {error.message}

@@ -8,7 +8,6 @@ const AddChildForm = ({ userId }) => {
 
     const [addChild, { data, loading, error }] = useMutation(ADD_CHILD, {
         onCompleted: (data) => {
-            console.log('Mutation successful:', data);
             setUsername(''); 
             setPassword(''); 
         },
@@ -25,7 +24,6 @@ const AddChildForm = ({ userId }) => {
             return;
         }
 
-        console.log('Submitting form with values:', { username, password });
 
         addChild({
             variables: {

@@ -26,6 +26,7 @@ query User($userId: ID!) {
           points
           childConfirmed
           parentConfirmed
+          owner
         }
       inventory{
         _id

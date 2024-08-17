@@ -43,6 +43,12 @@ input ChildUpdateInput{
   email: String
 }
 
+input ParentUpdateInput{
+  username: String
+  password: String
+  email: String
+}
+
 type Parent {
     _id: ID!
     username: String!
@@ -94,8 +100,8 @@ type User {
   type Mutation {
     addParent(username: String!, email: String!, password: String!): Auth
     addChild(username: String!, password: String!): UserTypes
-
     updateChild(updatedChildInfo: ChildUpdateInput):UserTypes
+    updateParent(updatedParentInfo: ParentUpdateInput): UserTypes
     removeUser(creds:UserInput!):UserTypes  
 
 
@@ -104,8 +110,9 @@ type User {
     confirmTaskComplete(taskId: ID!, childId: ID!): Task
     delTask(taskId: ID!): Task
 
-    buyReward(rewardId: ID!, userId: ID!): Reward
+    buyReward(rewardId: ID!): Reward
     addReward(reward: RewardInput!): Reward
+    cashInReward(rewardId: ID!): Reward
     updateReward(rewardId: ID!, updatedReward: RewardInput!): Reward
     delReward(rewardId: ID!): Reward
     

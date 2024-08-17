@@ -28,14 +28,13 @@ function Navbar() {
   const closeModal = () => setIsModalOpen(false);
 
   const handleModalSubmit = (formData) => {
-    console.log('Submitted data:', formData);
-    console.log('Current User Info:', userData); // Log current user info
+
   };
 
   return (
     <nav className="bg-gray-900 text-white shadow-md rounded-b-xl">
       <div className="container mx-auto flex flex-wrap justify-between items-center py-4 px-6">
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-4 flex-wrap">
           {navItems.map((item) => (
             <li key={item}>
               {item === "Logout" ? (
@@ -72,12 +71,7 @@ function Navbar() {
               >
                 <p className="mb-7">Logout</p>
               </button>
-              <button
-                className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
-                onClick={openModal}
-              >
-                <p className="mb-7">Change User Info</p>
-              </button>
+              {/* TODO Figuure out what is going on with this modal */}
               <AuthModal
                 isOpen={isModalOpen}
                 onClose={closeModal}

@@ -25,13 +25,11 @@ const AuthModal = ({ isOpen, onClose, userData }) => {
       const creds = { username: userData.username, password: password };
       const updatedUserInfo = { username, email, password: password || null };
 
-      console.log("Sending variables:", { creds, updatedUserInfo });
 
       // const { data } = await updateUser({
       //   variables: { creds, updatedUserInfo },
       // });
 
-      console.log("User updated:", data.updateUser);
       onClose(); // Close the modal on success
     } catch (err) {
       console.error("Error updating user:", err);
@@ -50,7 +48,6 @@ const AuthModal = ({ isOpen, onClose, userData }) => {
         className="relative bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className="text-2xl font-bold mb-6 text-white">Change User Info</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>

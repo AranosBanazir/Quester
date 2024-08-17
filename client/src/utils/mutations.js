@@ -56,6 +56,18 @@ export const UPDATE_CHILD = gql`
   }
 `;
 
+export const UPDATE_PARENT = gql`
+  mutation UpdateParent($updatedParentInfo: ParentUpdateInput) {
+    updateParent(updatedParentInfo: $updatedParentInfo) {
+      ... on Parent {
+        _id
+        username
+        email
+      }
+    }
+  }
+`;
+
 export const UPDATE_TASK = gql`
   mutation UpdateTask($taskId: ID!, $updatedTask: TaskInput!) {
     updateTask(taskId: $taskId, updatedTask: $updatedTask) {
@@ -97,10 +109,18 @@ export const ADD_REWARD = gql`
 `
 
 export const BUY_REWARD = gql`
-  mutation BuyReward($rewardId: ID!, $userId: ID!) {
-    buyReward(rewardId: $rewardId, userId: $userId) {
+  mutation BuyReward($rewardId: ID!) {
+    buyReward(rewardId: $rewardId) {
       _id
       name
+    }
+  }
+`
+
+export const CASH_IN_REWARD = gql`
+  mutation CashInReward($rewardId: ID!){
+    cashInReward(rewardId: $rewardId){
+      _id
     }
   }
 `

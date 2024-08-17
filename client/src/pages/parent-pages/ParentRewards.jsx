@@ -4,19 +4,15 @@ import AddChildForm from "./AddChildForm"; // Update the path as necessary
 import { ADD_REWARD, DELETE_REWARD } from "../../utils/mutations"; // Import your reward mutations
 import { GET_REWARDS, ME } from "../../utils/queries"; // Import your reward queries
 import RewardCard from "../../components/RewardCard"; // Make sure to import RewardCard
-
-const ParentRewards = () => {
+import Spinner from "../../components/Spinner";
+const ParentRewards = (data) => {
   const [rewardName, setRewardName] = useState("");
   const [rewardDescription, setRewardDescription] = useState("");
   const [rewardCost, setRewardCost] = useState("");
   const [rewards, setRewards] = useState([]);
 
   // Query to get user data
-  const {
-    data: userData,
-    loading: userLoading,
-    error: userError,
-  } = useQuery(ME);
+
 
   // Query to get rewards
   const {
@@ -61,7 +57,7 @@ const ParentRewards = () => {
   const handleRewardSubmit = (e) => {
     e.preventDefault();
 
-    console.log(rewardDescription, rewardCost, rewardName);
+    
 
     if (!rewardName || !rewardDescription || !rewardCost) {
       console.error("Reward details are missing");
@@ -100,13 +96,7 @@ const ParentRewards = () => {
     }
   }, [rewardsData]);
 
-  if (userLoading || rewardsLoading) return <p>Loading...</p>;
-  if (userError)
-    return (
-      <p className="text-red-500">
-        Error loading user data: {userError.message}
-      </p>
-    );
+  if (rewardsLoading) return <Spinner/>
   if (rewardsError)
     return (
       <p className="text-red-500">
@@ -114,13 +104,16 @@ const ParentRewards = () => {
       </p>
     );
 
-  const isParent = userData?.me?.__typename === "Parent";
-  const children = isParent ? userData.me.kids || [] : []; // Ensure children is an array
+  const isParent = data.__typename === "Parent";
+  const children = isParent ? data.kids || [] : []; // Ensure children is an array
 
   return (
     <div className="container mx-auto p-6">
-      <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2>
+      <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6 corkboard">
+        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2> */}
+        <div className='max-w-[400px]'>
+          <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward" />
+        </div>
         <form onSubmit={handleRewardSubmit}>
           <div className="mb-4">
             <label
@@ -189,7 +182,10 @@ const ParentRewards = () => {
       </section>
 
       <section className="mt-6 p-4 bg-gray-800 rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-4 text-blue-500">Rewards</h2>
+        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Rewards</h2> */}
+        <div className='max-w-[400px] '>
+          <img src="/assets/rewards-banner.png" alt="" />
+        </div>
         {rewards.filter((reward) => reward !== null).length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {rewards
@@ -198,8 +194,7 @@ const ParentRewards = () => {
                 <RewardCard
                   key={reward._id}
                   reward={reward}
-                  onRedeem={() => {}}
-                  onDelete={() => {}}
+                  userType ={data.__typename}
                 />
               ))}
           </div>

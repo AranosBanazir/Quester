@@ -21,7 +21,7 @@ const ParentAccount = () => {
       userId,
     },
   });
-  console.log(singleUserData);
+
   const kids = singleUserData?.user?.kids || [];
 
   
@@ -30,11 +30,13 @@ const ParentAccount = () => {
   if (loading) return <Spinner />;
 
   if (data?.me?.__typename === "Child") {
-    console.log("here");
     navigate("/tasks");
   }
   if (error)
-    return <p className="text-center text-red-500">Error: {error.message}</p>;
+    if (error.message === 'Could not authenticate user.'){
+      navigate("/login");
+      return <p className="text-center text-red-500">Error: {error.message}</p>;
+    }
 
   return (
     <AuthCheck>
