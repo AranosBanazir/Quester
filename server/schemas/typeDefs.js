@@ -109,6 +109,7 @@ type User {
     updateTask(taskId: ID!, updatedTask: TaskInput!): Task
     confirmTaskComplete(taskId: ID!, childId: ID!): Task
     delTask(taskId: ID!): Task
+    denyTask(taskId: ID!): Task
 
     buyReward(rewardId: ID!): Reward
     addReward(reward: RewardInput!): Reward

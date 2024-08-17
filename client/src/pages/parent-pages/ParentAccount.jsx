@@ -48,7 +48,7 @@ const ParentAccount = () => {
         )}
         <div className="flex wrap mt-5 gap-5">
           {kids.map((kid) => {
-            return <KidCard {...kid}/>
+            return <KidCard {...kid} key={kid._id}/>
             
           })}
         </div>

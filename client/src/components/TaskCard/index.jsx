@@ -1,16 +1,19 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import { CONFIRM_TASK, DELETE_TASK } from '../../utils/mutations';
+import { CONFIRM_TASK, DENY_TASK } from '../../utils/mutations';
 import { FaStar, FaCoins } from 'react-icons/fa';
 import { QUERY_SINGLE_USER } from '../../utils/queries';
 
 
 const TaskCard = ({ task, userType, showDeleteButton }) => {
   const [confirmTaskComplete] = useMutation(CONFIRM_TASK);
-  const [deleteTask] = useMutation(DELETE_TASK);
+  const [denyTask] = useMutation(DENY_TASK)
+
+
   const handleRedeemClick = async (e) => {
      
-     if ( task.childConfirmed && userType === 'Child') return
+    //  if ( task.childConfirmed && userType === 'Child') return
+
       try {
         const response = await confirmTaskComplete({ 
           variables: { 
@@ -26,7 +29,6 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
               setTimeout(() => {
                   taskCard.setAttribute('style', 'display: none;')
               }, 4000);
-
             }
          })
          
@@ -37,15 +39,26 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
       }
   };
 
-  const handleDeleteClick = async () => {
-    if (window.confirm(`Are you sure you want to delete the task "${task.name}"? This action cannot be undone.`)) {
+  const handleDenyClick = async () => {
       try {
-        await deleteTask({ variables: { taskId: task._id }, refetchQueries: [QUERY_SINGLE_USER, 'user']} );
-      
-      } catch (err) {
+        const response = await denyTask({ 
+          variables: { 
+            taskId: task._id, 
+           },
+           refetchQueries:[QUERY_SINGLE_USER, 'user']
+         }).then(({data})=>{
+            if ((!data.denyTask.childConfirmed && !data.denyTask.parentConfirmed)
+               || data.denyTask.childConfirmed && !data.denyTask.parentConfirmed){
+              const taskCard = document.getElementById(`${task._id}`)
+              taskCard.classList.add('task-complete')
+              setTimeout(() => {
+                  taskCard.setAttribute('style', 'display: none;')
+              }, 4000);
+
+            }
+         })      } catch (err) {
         console.error('Error deleting task:', err);
       }
-    }
   };
 
 
@@ -64,12 +77,12 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
         
         
         >
-          {task.childConfirmed && userType === 'Child'? <p>Good Job!</p> : <p>Complete</p>}
+          {(task.childConfirmed && userType === 'Child') ? <p>Good Job!</p> : (task.childConfirmed && userType === 'Parent') ? <p>Confirm</p> : <p>Complete</p>}
 
         </button>
         {showDeleteButton && (
-        <button className="btn btn-danger" onClick={handleDeleteClick}>
-          Delete
+        <button className="btn btn-danger" onClick={handleDenyClick}>
+          Deny
         </button>
         )}
       </div>

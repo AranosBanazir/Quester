@@ -235,8 +235,19 @@ const resolvers = {
     },
     delTask: async (parent, {taskId}, context)=>{
       if (context.user){
-        const user = BaseUser.find({})
-        return await Task.findByIdAndDelete({_id: taskId})
+        return await Task.findByIdAndDelete(taskId)
+      }
+      throw AuthenticationError
+    },
+    denyTask: async (parent, {taskId}, context)=>{
+      if (context.user){
+        const task = await Task.findByIdAndUpdate(taskId, {
+          childConfirmed: false,
+          parentConfirmed: false
+        })
+
+        return task
+        
       }
       throw AuthenticationError
     },
