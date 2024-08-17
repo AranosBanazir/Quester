@@ -2,32 +2,28 @@ import React from 'react';
 import { useMutation } from '@apollo/client';
 import { CONFIRM_TASK, DELETE_TASK } from '../../utils/mutations';
 import { FaStar, FaCoins } from 'react-icons/fa';
+import { QUERY_SINGLE_USER } from '../../utils/queries';
 
-
-const SecretTaskCard = ({ task, onRedeem, onDelete }) => {
+const SecretTaskCard = ({ task,  }) => {
   const [confirmTaskComplete] = useMutation(CONFIRM_TASK);
   const [deleteTask] = useMutation(DELETE_TASK);
 
+  //TODO Change this to an update button
   const handleRedeemClick = async () => {
-    if (window.confirm(`Are you sure you want to redeem the task "${task.name}"?`)) {
       try {
-        await confirmTaskComplete({ variables: { taskId: task._id } });
-        onRedeem(task);
+        await confirmTaskComplete({ variables: { taskId: task._id }, refetchQueries: [QUERY_SINGLE_USER, 'user'] });
       } catch (err) {
         console.error('Error redeeming task:', err);
       }
-    }
+    
   };
 
   const handleDeleteClick = async () => {
-    if (window.confirm(`Are you sure you want to delete the task "${task.name}"? This action cannot be undone.`)) {
       try {
-        await deleteTask({ variables: { taskId: task._id } });
-        onDelete(task);
+        await deleteTask({ variables: { taskId: task._id }, refetchQueries: [QUERY_SINGLE_USER, 'user'] });
       } catch (err) {
         console.error('Error deleting task:', err);
       }
-    }
   };
 
 

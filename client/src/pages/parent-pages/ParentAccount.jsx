@@ -7,6 +7,7 @@ import AuthCheck from "../../components/AuthCheck";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/Spinner";
 import KidCard from "../../components/KidCard";
+import errorHandler from "../../utils/errorHandler";
 
 const ParentAccount = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const ParentAccount = () => {
   if (error)
     if (error.message === 'Could not authenticate user.'){
       navigate("/login");
-      return <p className="text-center text-red-500">Error: {error.message}</p>;
+      return <p className="text-center text-red-500">Error: {errorHandler(error.message)}</p>;
     }
 
   return (
@@ -48,7 +49,7 @@ const ParentAccount = () => {
         )}
         <div className="flex wrap mt-5 gap-5">
           {kids.map((kid) => {
-            return <KidCard {...kid}/>
+            return <KidCard {...kid} key={kid._id}/>
             
           })}
         </div>

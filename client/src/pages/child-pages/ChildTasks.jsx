@@ -17,13 +17,12 @@ const ChildTasks = ({ data }) => {
             {data?.tasks
               .filter(task=> !task.childConfirmed)
               .map((task) => {
-                return (
-                  <TaskCard
+                return <TaskCard
                     task={task}
                     showDeleteButton={false}
                     userType={data.__typename}
+                    key={task._id}
                   />
-                );
             })}
           </section>
         </div>
