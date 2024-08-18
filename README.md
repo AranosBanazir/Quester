@@ -1,5 +1,5 @@
 # Quester
-  ![Quester-Screenshot](./client/public/assets/better-logo.png)
+  ![Quester-Screenshot](./client/public/assets/new-logo.png)
 
 ## Description
   *  Use React to build a fun kid friendly app to complete tasks and buy rewards with points.
