@@ -60,8 +60,7 @@ const router = createBrowserRouter([
       {
         path: '/rewards',
         element: <Rewards/>
-      }
-      
+      },
     ]
   }
 ])
