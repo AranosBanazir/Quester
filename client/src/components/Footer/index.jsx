@@ -11,7 +11,7 @@ const Footer = () => {
           &copy; {new Date().getFullYear()} Made with contributions from: 
         </h4>
     
-          <div className='flex flex-row flex-wrap'>
+          <div className='flex flex-row flex-wrap items-center justify-center'>
 
           <a href='https://github.com/LerieLogin' className="btn-github">
           
