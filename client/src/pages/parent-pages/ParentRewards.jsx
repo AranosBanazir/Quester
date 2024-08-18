@@ -113,7 +113,8 @@ const ParentRewards = (data) => {
       <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6 corkboard">
         {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2> */}
         <div className="flex justify-center w-full mb-4">
-          <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward" />
+          <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward"
+          className="w-full md:w-3/4 lg:w-2/3" />
         </div>
         <form onSubmit={handleRewardSubmit}>
           <div className="mb-4">

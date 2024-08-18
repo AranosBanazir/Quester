@@ -1,67 +1,85 @@
 # Quester
+Rewards for Tasks!
 
 ## Description
+  *  Use React to build a fun kid friendly app to complete tasks and buy rewards with points.
+  *  Parents control the flow of the whole app!
+  *  Kids reap the rewards by doing everyday tasks!
+  *  Authentication every step of the way so cheating isn't happening.
+
+![Quester-Screenshot](./client/public/assets/quester-screenshot.png)
+  
+  ## Table of Contents
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Contributing](#contribution)
+  * [Questions](#questions)
+  * [Obstacles](#obstacles-and-successes)
+  
+  ## Installation
 
 
+  * The app is up and running on Render at 
 
-- The motivation behind Quester was to make 
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
+  https://quester-407s.onrender.com
+  
+  * If you are granted access to clone or fork the repo navigate to your desktop in your terminal to clone it down. 
 
-## Table of Contents (Optional)
+  * Make sure to run npm install in all directories with packages.
+  
+  ## Usage
+  * Internet required. 
+  * If opening from a terminal and using a localhost host type npm run dev in your terminal at the root of the directory. 
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
+  Flow of the app is as follows:
+  * Create an account from View My Profile
+  ![Quester-Screenshot](./client/public/assets/quester-signup.png)
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Credits](#credits)
-- [License](#license)
+  * Add kids to your account
+  ![Quester-Screenshot](./client/public/assets/quester-add-child-screenshot.png)
+  * Add a task for your kids
+  ![Quester-Screenshot](./client/public/assets/quester-add-task.png)
+  * Add a reward for your kids
+  ![Quester-Screenshot](./client/public/assets/quester-add-reward.png)
 
-## Installation
+  * Now the kids will be able to login under their account to view tasks, rewards and after redeeming tasks, spend points in the shop!
+  
+  
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+  ## Contributing
+  No contributions please. 
 
-## Usage
+  ## License
+   
 
-Provide instructions and examples for use. Include screenshots as needed.
+This project is unlicensed. 
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+  
+  ## Questions
+  * Here is a link to Nick's [GitHub](https://github.com/soko77788) profile.
+   * Here is a link to Caleb's [GitHub](https://github.com/AranosBanazir) profile.
+   * Here is a link to Larry's [GitHub](https://github.com/LerieLogin) profile.
+  * For further questions email me at nicksokolowskidev7@gmail.com.
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+  ## Tools and 3rd party assistance
+  * Built with React, MongoDb, Express, Node, Apollo, Graphql, Tailwind, DaisyUi
+  * Images generated from canva.com 
 
-## Credits
+  ## Obstacles and Successes
+  * Creating a React app using technologies a couple of us weren't versed in.
+  * Creating a seemless Authentication app that checks if the parent or child is logged in and displays a page based on the user.
+  * Getting tasks and rewards to display on both pages and updating the database when one side of the equation was redeemed. 
 
-List your collaborators, if any, with links to their GitHub profiles.
+ 
+  * Successes were that we thought of the app quickly even if we didn't know how to do it and created wireframes to get a visual of what to build
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+  * Nifty navigation setup to again check who is viewing and routing to the correct page. 
 
-If you followed tutorials, include links to those here as well.
+  * Caleb provided all of the backend data handling Schema, Seeds, TypeDefs, Resolvers, Mutations etc and excelled at it. 
 
-## License
+  * Creating components went smooth throughout the process and adding polish and animations made the app come to life. 
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+  ## Deployed App
 
----
-
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
-
-## Badges
-
-![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
-
-Badges aren't necessary, per se, but they demonstrate street cred. Badges let other developers know that you know what you're doing. Check out the badges hosted by [shields.io](https://shields.io/). You may not understand what they all represent now, but you will in time.
-
-## Features
-
-If your project has a lot of features, list them here.
-
-## How to Contribute
-
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
-
-## Tests
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+https://quester-407s.onrender.com
+  

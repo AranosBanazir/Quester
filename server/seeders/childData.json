@@ -1,17 +1,17 @@
 [
     {
-        "username": "Favorite Son",
-        "password": "1234asdf",
+        "username": "John",
+        "password": "John1234",
         "wallet": 100000
     },
     {
-        "username": "Middle Child",
-        "password": "1234asdf",
+        "username": "Sally",
+        "password": "Sally1234",
         "wallet": 100000
     },
     {
-        "username": "Youngest Child",
-        "password": "1234asdf",
+        "username": "Billy",
+        "password": "Billy1234",
         "wallet": 100000
     }
 ]
