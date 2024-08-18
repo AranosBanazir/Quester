@@ -50,8 +50,8 @@ const KidCard = ({ _id, username }) => {
   };
 
   return (
-    <div className="card bg-neutral text-neutral-content w-full sm:w-auto" key={_id}>
-      <div className="card-body items-center text-center">
+    <div className="card bg-neutral text-neutral-content w-full sm:w-auto " key={_id}>
+      <div className="card-body items-center text-center relative z-10">
         <h2 className="card-title text-white permanent-marker-regular">{newUserName}</h2>
   
         {isEditMode && (
