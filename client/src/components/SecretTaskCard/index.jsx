@@ -24,8 +24,9 @@ const SecretTaskCard = ({ task }) => {
     try {
       await deleteTask({
         variables: { taskId: task._id },
-        refetchQueries: [QUERY_SINGLE_USER, "user"],
+        refetchQueries: [QUERY_SINGLE_USER, "user"]
       });
+      window.location.reload();
     } catch (err) {
       console.error("Error deleting task:", err);
     }

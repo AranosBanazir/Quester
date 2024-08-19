@@ -44,6 +44,7 @@ const RewardCard = ({
         variables: { rewardId: reward._id },
         refetchQueries: [QUERY_SINGLE_USER, "user"],
       });
+      window.location.reload();
     } catch (err) {
       console.error("Error deleting reward:", err);
     }
