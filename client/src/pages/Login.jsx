@@ -38,7 +38,7 @@ const Login = () => {
     }
   }
 
-  // update state based on form input changes
+  // Update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -48,7 +48,7 @@ const Login = () => {
     });
   };
 
-  // submit form
+  // Submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -60,7 +60,7 @@ const Login = () => {
       console.error(e);
     }
 
-    // clear form values
+    // Clear form values
     setFormState({
       username: '',
       password: '',
@@ -69,8 +69,7 @@ const Login = () => {
 
   return (
     <main className="flex items-center justify-center min-h-screen">
-
-      <div className="w-full max-w-sm p-6 bg-gray-800  rounded-lg shadow-lg">
+      <div className="w-full max-w-sm p-6 bg-gray-800 rounded-lg shadow-lg">
         <h4 className="text-3xl font-bold mb-4 permanent-marker-regular text-white">Login</h4>
         <div>
           {data ? (
@@ -109,12 +108,11 @@ const Login = () => {
                 type="submit"
                 className="w-full py-2 btn-sign wood-sign"
               >
-                {(loading || Auth.loggedIn()) ? (<p className="mb-7">
-                  Loading in!
-                </p>): <p className="mb-7">
-                  Login
-                </p> }
-                
+                {(loading || Auth.loggedIn()) ? (
+                  <p className="mb-7">Loading in!</p>
+                ) : (
+                  <p className="mb-7">Login</p>
+                )}
               </button>
               <button className='w-[100px] flex flex-row justify-center' onClick={togglePasswordImageState}>
                 <img src="/assets/key.png" alt="picture password" className=''/>
@@ -136,12 +134,17 @@ const Login = () => {
 
             </form>
           )}
-     
           {error && (
             <div className="mt-4 p-3 bg-red-600 text-white rounded-md">
               {errorHandler(error.message)}
             </div>
           )}
+        </div>
+        <div className="mt-4 text-center">
+          <p className="text-gray-300 permanent-marker-regular">Don't have an account?</p>
+          <Link to="/signup" className="permanent-marker-regular btn-sign text-white rounded-md px-4 py-2">
+            Sign Up
+          </Link>
         </div>
       </div>
     </main>

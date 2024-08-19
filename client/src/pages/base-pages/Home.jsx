@@ -19,22 +19,18 @@ const Home = () => {
   });
   const userData = userInfo?.data?.user;
 
-  let relaventPage = <Login/>;
+  let relaventPage = <Login />;
 
   if (data) {
-    if (userType === 'Parent' && userData?.kids?.length === 0) {
-      relaventPage = <ParentAccount data={userData} />
-    }else if (userType === "Parent") {
+    if (userType === "Parent" && userData?.kids?.length === 0) {
+      relaventPage = <ParentAccount data={userData} />;
+    } else if (userType === "Parent") {
       relaventPage = <KidsPage data={userData} />;
     } else if (userType === "Child") {
       relaventPage = <ChildTasks data={userData} />;
     }
   }
 
-  return (
-    <AuthCheck>
-      {relaventPage}
-    </AuthCheck>
-  )
+  return <AuthCheck>{relaventPage}</AuthCheck>;
 };
 export default Home;

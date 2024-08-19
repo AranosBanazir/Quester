@@ -14,7 +14,6 @@ const ParentRewards = (data) => {
 
   // Query to get user data
 
-
   // Query to get rewards
   const {
     data: rewardsData,
@@ -46,19 +45,19 @@ const ParentRewards = (data) => {
       cache.writeQuery({
         query: GET_REWARDS,
         data: {
-          getRewards: getRewards.filter((reward) => reward._id !== delReward._id),
+          getRewards: getRewards.filter(
+            (reward) => reward._id !== delReward._id
+          ),
         },
       });
     },
     onError: (err) => {
       console.error("Error deleting reward:", err.message);
-    }
+    },
   });
 
   const handleRewardSubmit = (e) => {
     e.preventDefault();
-
-    
 
     if (!rewardName || !rewardDescription || !rewardCost) {
       console.error("Reward details are missing");
@@ -97,7 +96,7 @@ const ParentRewards = (data) => {
     }
   }, [rewardsData]);
 
-  if (rewardsLoading) return <Spinner/>
+  if (rewardsLoading) return <Spinner />;
   if (rewardsError)
     return (
       <p className="text-red-500">
@@ -111,10 +110,12 @@ const ParentRewards = (data) => {
   return (
     <div className="container mx-auto p-6">
       <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6 corkboard">
-        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2> */}
         <div className="flex justify-center w-full mb-4">
-          <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward"
-          className="w-full md:w-3/4 lg:w-2/3" />
+          <img
+            src="/assets/add-a-reward-banner.png"
+            alt="banner for adding a reward"
+            className="w-full md:w-3/4 lg:w-2/3"
+          />
         </div>
         <form onSubmit={handleRewardSubmit}>
           <div className="mb-4">
@@ -177,33 +178,38 @@ const ParentRewards = (data) => {
           </button>
           {rewardError && (
             <p className="mt-4 text-red-500">
-              Error: {errorHandler(rewardError.message) || "An unknown error occurred"}
+              Error:{" "}
+              {errorHandler(rewardError.message) || "An unknown error occurred"}
             </p>
           )}
         </form>
       </section>
 
-      <section className="mt-6 p-4 bg-gray-800 rounded-lg shadow-md">
-        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Rewards</h2> */}
-        <div className='max-w-[400px] '>
-          <img src="/assets/rewards-banner.png" alt="" />
-        </div>
-        {rewards.filter((reward) => reward !== null).length > 0 ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {rewards
-              .filter((reward) => reward !== null)
-              .map((reward) => (
-                <RewardCard
-                  key={reward._id}
-                  reward={reward}
-                  userType ={data.__typename}
-                />
-              ))}
-          </div>
-        ) : (
-          <p className="text-gray-500 text-center">No rewards available.</p>
-        )}
-      </section>
+      <div className="container mx-auto p-4">
+        <img
+          src="/assets/rewards-banner.png"
+          alt="Reward Banner"
+          className="w-full md:w-3/4 lg:w-2/3 mx-auto"
+        />
+
+        <section className="mt-4 p-8 rounded-lg shadow-md">
+          {rewards.filter((reward) => reward !== null).length > 0 ? (
+            <div className="grid gap-4 md:gap-20 md:grid-cols-2 lg:grid-cols-3">
+              {rewards
+                .filter((reward) => reward !== null)
+                .map((reward) => (
+                  <RewardCard
+                    key={reward._id}
+                    reward={reward}
+                    userType={data.__typename}
+                  />
+                ))}
+            </div>
+          ) : (
+            <p className="text-gray-500 text-center">No rewards available.</p>
+          )}
+        </section>
+      </div>
     </div>
   );
 };

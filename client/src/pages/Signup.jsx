@@ -13,7 +13,7 @@ const Signup = () => {
   });
   const [addParent, { error, data }] = useMutation(ADD_PARENT);
 
-  // update state based on form input changes
+  // Update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -23,7 +23,7 @@ const Signup = () => {
     });
   };
 
-  // submit form
+  // Submit form
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -37,7 +37,7 @@ const Signup = () => {
   };
 
   return (
-    <main className="flex items-center justify-center min-h-screen  py-6 px-4">
+    <main className="flex items-center justify-center min-h-screen py-6 px-4">
       <div className="w-full max-w-sm p-6 bg-gray-800 rounded-lg shadow-lg">
         <h4 className="text-3xl font-bold permanent-marker-regular text-white mb-4">Sign Up</h4>
         <div>
@@ -91,9 +91,7 @@ const Signup = () => {
                 type="submit"
                 className="w-full py-2 wood-sign btn-sign"
               >
-                <p className='mb-7'>
-                  Sign Up
-                </p>
+                <p className='mb-7'>Sign Up</p>
               </button>
             </form>
           )}
@@ -103,6 +101,12 @@ const Signup = () => {
               {errorHandler(error.message)}
             </div>
           )}
+        </div>
+        <div className="mt-4 text-center">
+          <p className="permanent-marker-regular text-gray-300">Already have an account?</p>
+          <Link to="/login" className="btn-sign text-white rounded-md px-4 py-2 permanent-marker-regular">
+            Login
+          </Link>
         </div>
       </div>
     </main>

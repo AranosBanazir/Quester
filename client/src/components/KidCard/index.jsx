@@ -20,20 +20,18 @@ const KidCard = ({ _id, username }) => {
 
   const handleDeleteChild = async () => {
     if (!newPassword) {
-        return
+      return;
     }
     await deleteUser({
-        variables: {creds: {
-            username,
-            password: newPassword
-        }},
-        refetchQueries: [
-            QUERY_SINGLE_USER,
-            'user'
-        ]
-    }) 
-  }
-
+      variables: {
+        creds: {
+          username,
+          password: newPassword,
+        },
+      },
+      refetchQueries: [QUERY_SINGLE_USER, "user"],
+    });
+  };
 
   const handleUpdateUser = async () => {
     const updatedChildInfo = { oldUsername: username };
@@ -50,10 +48,15 @@ const KidCard = ({ _id, username }) => {
   };
 
   return (
-    <div className="card bg-neutral text-neutral-content w-full sm:w-auto " key={_id}>
+    <div
+      className="card bg-neutral text-neutral-content w-full sm:w-auto "
+      key={_id}
+    >
       <div className="card-body items-center text-center relative z-10">
-        <h2 className="card-title text-white permanent-marker-regular">{newUserName}</h2>
-  
+        <h2 className="card-title text-white permanent-marker-regular">
+          {newUserName}
+        </h2>
+
         {isEditMode && (
           <label className="input input-bordered flex flex-col sm:flex-row items-center gap-2 mt-4 w-full">
             <svg
@@ -73,7 +76,7 @@ const KidCard = ({ _id, username }) => {
             />
           </label>
         )}
-  
+
         {(isEditMode || isDeletingMode) && (
           <label className="input input-bordered flex flex-col sm:flex-row items-center gap-2 mt-4 w-full">
             <svg
@@ -97,7 +100,7 @@ const KidCard = ({ _id, username }) => {
             />
           </label>
         )}
-  
+
         <div className="card-actions justify-center flex flex-wrap gap-2 mt-4 w-full">
           {isEditMode && (
             <button className="btn btn-primary" onClick={handleUpdateUser}>
@@ -132,10 +135,7 @@ const KidCard = ({ _id, username }) => {
             </button>
           )}
           {isDeletingMode && (
-            <button
-              className="btn btn-error"
-              onClick={handleDeleteChild}
-            >
+            <button className="btn btn-error" onClick={handleDeleteChild}>
               Confirm Delete?
             </button>
           )}
@@ -143,7 +143,6 @@ const KidCard = ({ _id, username }) => {
       </div>
     </div>
   );
-  
 };
 
 export default KidCard;
