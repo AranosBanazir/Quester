@@ -23,12 +23,6 @@ const TaskCard = ({ task, userType, showDeleteButton }) => {
             childId : task.owner
            },
            refetchQueries:[QUERY_SINGLE_USER, 'User']
-         }).then(({data})=>{
-            if ((!data.confirmTaskComplete.childConfirmed && !data.confirmTaskComplete.parentConfirmed)
-               || data.confirmTaskComplete.childConfirmed && !data.confirmTaskComplete.parentConfirmed){
-
-   
-            }
          })
          
       
