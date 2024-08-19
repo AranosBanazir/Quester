@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
-import { ME } from '../../utils/queries';
-import Auth from '../../utils/auth';
-import AuthModal from '../AuthModal/index'; // Import AuthModal
+import React, { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { ME } from "../../utils/queries";
+import Auth from "../../utils/auth";
+import AuthModal from "../AuthModal/index"; // Import AuthModal
 
 function Navbar() {
   const { loading, error, data } = useQuery(ME);
@@ -37,8 +37,8 @@ function Navbar() {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const openModal = () => setIsModalOpen(true);
@@ -73,9 +73,18 @@ function Navbar() {
           >
             ☰
           </button>
-          <div id="zindex" className={`absolute top-0 left-0 w-full bg-gray-900 text-white p-4 ${isMenuOpen ? 'block' : 'hidden'}`} ref={menuRef}
-          style={{ zIndex: 9999}}>
-            <button onClick={toggleMenu} className="text-white text-2xl absolute top-2 right-2">
+          <div
+            id="zindex"
+            className={`absolute top-0 left-0 w-full bg-gray-900 text-white p-4 ${
+              isMenuOpen ? "block" : "hidden"
+            }`}
+            ref={menuRef}
+            style={{ zIndex: 9999 }}
+          >
+            <button
+              onClick={toggleMenu}
+              className="text-white text-2xl absolute top-2 right-2"
+            >
               ✕
             </button>
             <ul className="flex flex-col items-center space-y-4 mt-8">
@@ -84,7 +93,10 @@ function Navbar() {
                   {item === "Logout" ? (
                     <button
                       className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
-                      onClick={(e) => { logout(e); handleMenuItemClick(); }}
+                      onClick={(e) => {
+                        logout(e);
+                        handleMenuItemClick();
+                      }}
                     >
                       <p className="mb-7">{item}</p>
                     </button>
@@ -98,7 +110,7 @@ function Navbar() {
                     </Link>
                   ) : (
                     <Link
-                      to={`/${item.toLowerCase().replace(' ', '-')}`}
+                      to={`/${item.toLowerCase().replace(" ", "-")}`}
                       className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
                       onClick={handleMenuItemClick}
                     >
@@ -115,16 +127,20 @@ function Navbar() {
         <div className="hidden lg:flex lg:justify-between lg:items-center lg:w-full">
           <div className="flex-grow flex justify-start">
             <ul className="flex flex-row space-x-4">
-              {navItems.filter(item => item !== "View My Profile" && item !== "Logout").map((item) => (
-                <li key={item}>
-                  <Link
-                    to={`/${item.toLowerCase().replace(' ', '-')}`}
-                    className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
-                  >
-                    <p className="mb-7">{item}</p>
-                  </Link>
-                </li>
-              ))}
+              {navItems
+                .filter(
+                  (item) => item !== "View My Profile" && item !== "Logout"
+                )
+                .map((item) => (
+                  <li key={item}>
+                    <Link
+                      to={`/${item.toLowerCase().replace(" ", "-")}`}
+                      className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
+                    >
+                      <p className="mb-7">{item}</p>
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
 

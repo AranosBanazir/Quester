@@ -7,31 +7,25 @@ import AuthCheck from "../../components/AuthCheck";
 import Spinner from "../../components/Spinner";
 
 const Tasks = () => {
-  const {loading, error, data} = useQuery(ME)
-  const userType = data?.me?.__typename || 'user'
+  const { loading, error, data } = useQuery(ME);
+  const userType = data?.me?.__typename || "user";
   const userInfo = useQuery(QUERY_SINGLE_USER, {
-      variables: {
-          userId: data?.me?._id
-      }
-  })
-  
-  const userData = userInfo?.data?.user || {}   
-  let relaventPage;
- 
+    variables: {
+      userId: data?.me?._id,
+    },
+  });
 
-    if (data){
-      if (userType === 'Parent'){
-        relaventPage = <ParentTasks  data={userData}/>
-      }else if (userType === 'Child'){
-        relaventPage = <ChildTasks  data={userData}/>
-      }
+  const userData = userInfo?.data?.user || {};
+  let relaventPage;
+
+  if (data) {
+    if (userType === "Parent") {
+      relaventPage = <ParentTasks data={userData} />;
+    } else if (userType === "Child") {
+      relaventPage = <ChildTasks data={userData} />;
     }
-  
-    return (
-      <AuthCheck>
-        {userInfo.loading ? <Spinner/>: relaventPage}
-      </AuthCheck>
-    );
-  };
-  export default Tasks;
-  
+  }
+
+  return <AuthCheck>{userInfo.loading ? <Spinner /> : relaventPage}</AuthCheck>;
+};
+export default Tasks;

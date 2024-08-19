@@ -1,12 +1,12 @@
 import TaskCard from "../../components/TaskCard";
 
 const ChildTasks = ({ data }) => {
-  console.log(data)
+  console.log(data);
   return (
     <>
-        <div className="flex justify-center">
-          <img src="/assets/my-tasks-banner.png" alt="child-my-tasks" />
-        </div>
+      <div className="flex justify-center">
+        <img src="/assets/my-tasks-banner.png" alt="child-my-tasks" />
+      </div>
       <div id="section-container" className="mt-10">
         <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
           <section
@@ -15,15 +15,17 @@ const ChildTasks = ({ data }) => {
             style={{ margin: "20px" }}
           >
             {data?.tasks
-              .filter(task=> !task.childConfirmed)
+              .filter((task) => !task.childConfirmed)
               .map((task) => {
-                return <TaskCard
+                return (
+                  <TaskCard
                     task={task}
                     showDeleteButton={false}
                     userType={data.__typename}
                     key={task._id}
                   />
-            })}
+                );
+              })}
           </section>
         </div>
       </div>

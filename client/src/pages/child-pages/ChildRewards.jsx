@@ -5,13 +5,16 @@ import { GET_REWARDS } from "../../utils/queries";
 import Spinner from "../../components/Spinner";
 import errorHandler from "../../utils/errorHandler";
 
-const ChildRewards = ({data}) => {
+const ChildRewards = ({ data }) => {
   const [rewards, setRewards] = useState([]);
-  
-  // Query to get rewards
-  const { data: rewardsData, loading: rewardsLoading, error: rewardsError } = useQuery(GET_REWARDS);
 
-  
+  // Query to get rewards
+  const {
+    data: rewardsData,
+    loading: rewardsLoading,
+    error: rewardsError,
+  } = useQuery(GET_REWARDS);
+
   // Load rewards from the GET_REWARDS query
   useEffect(() => {
     if (rewardsData && rewardsData.getRewards) {
@@ -19,31 +22,41 @@ const ChildRewards = ({data}) => {
     }
   }, [rewardsData]);
 
-  if (rewardsLoading) return <Spinner/>;
-  if (rewardsError) return <p className="text-red-500">Error loading rewards: {errorHandler(rewardsError.message)}</p>;
+  if (rewardsLoading) return <Spinner />;
+  if (rewardsError)
+    return (
+      <p className="text-red-500">
+        Error loading rewards: {errorHandler(rewardsError.message)}
+      </p>
+    );
 
   return (
     <>
-    <div className="flex flex-col">
-      <div >
-      <img src="/assets/rewards-shop-banner.png" alt="" />
-      <strong className="flex flex-row text-4xl coin-text permanent-marker-regular font-bold">
-        Your Coins: {data?.wallet?.toLocaleString()}
-        <img src="/assets/coin.gif" alt="" className="max-w-[50px]"/>  
-      </strong> 
-      </div>
-    </div>
-    <div className="container mx-auto p-6 ">
-      {rewards.length > 0 ? (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {rewards.map((reward) => (
-            <RewardCard key={reward._id} reward={reward} showDeleteButton={false} userType={data.__typename} />
-          ))}
+      <div className="flex flex-col">
+        <div>
+          <img src="/assets/rewards-shop-banner.png" alt="" />
+          <strong className="flex flex-row text-4xl coin-text permanent-marker-regular font-bold">
+            Your Coins: {data?.wallet?.toLocaleString()}
+            <img src="/assets/coin.gif" alt="" className="max-w-[50px]" />
+          </strong>
         </div>
-      ) : (
-        <p className="text-gray-500 text-center">No rewards available.</p>
-      )}
-    </div>
+      </div>
+      <div className="container mx-auto p-6 ">
+        {rewards.length > 0 ? (
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {rewards.map((reward) => (
+              <RewardCard
+                key={reward._id}
+                reward={reward}
+                showDeleteButton={false}
+                userType={data.__typename}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-500 text-center">No rewards available.</p>
+        )}
+      </div>
     </>
   );
 };
