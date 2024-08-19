@@ -20,6 +20,7 @@ const baseUserSchema = new Schema({
 
 baseUserSchema.pre('save', async function (next) {
   const saltRounds = 10;
+  this.wasNew = this.isNew
   if (this.isNew || this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
@@ -29,9 +30,9 @@ baseUserSchema.pre('save', async function (next) {
 baseUserSchema.pre('findOneAndUpdate', async function (next){
   const saltRounds = 10;
   const incomingPass = this._update.password
-  const hashedPass = await bcrypt.hash(incomingPass, saltRounds)
-  console.log(this)
+  console.log(this._update)
   if (incomingPass){
+    const hashedPass = await bcrypt.hash(incomingPass, saltRounds)
     this.set({
       password: hashedPass
     })
