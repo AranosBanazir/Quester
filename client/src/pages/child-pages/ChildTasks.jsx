@@ -8,7 +8,7 @@ const ChildTasks = ({ data }) => {
           <img src="/assets/my-tasks-banner.png" alt="child-my-tasks" />
         </div>
       <div id="section-container" className="mt-10">
-        <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+        <div className="flex flex-wrap flex-row mx-auto items-center justify-center">
           <section
             id="task-section"
             className="w-auto flex flex-wrap flex-row justify-evenly"
