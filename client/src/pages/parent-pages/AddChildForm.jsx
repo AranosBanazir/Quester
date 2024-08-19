@@ -3,10 +3,11 @@ import { useMutation } from '@apollo/client';
 import { ADD_CHILD} from '../../utils/mutations';
 import { QUERY_SINGLE_USER } from '../../utils/queries';
 import errorHandler from '../../utils/errorHandler';
+import { HiOutlineInformationCircle } from "react-icons/hi";
 const AddChildForm = ({ userId }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    const [infoHoverState, setInfoHoverState] = useState('closed')
     const [addChild, { data, loading, error }] = useMutation(ADD_CHILD, {
         onCompleted: (data) => {
             setUsername(''); 
@@ -17,6 +18,16 @@ const AddChildForm = ({ userId }) => {
             console.error('Error adding child:', err.message);
         },
     });
+
+    const infoHover = (e) =>{
+        e.preventDefault()
+        console.log(infoHoverState)
+        if (infoHoverState === 'closed'){
+            setInfoHoverState('open')
+        }else{
+            setInfoHoverState('closed')
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -54,7 +65,12 @@ const AddChildForm = ({ userId }) => {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2 permanent-marker-regular">Password:</label>
+                <label htmlFor="password" className="text-sm font-medium text-gray-300 mb-2 permanent-marker-regular flex flex-row items-center gap-2">Password: 
+                    <button onClick={infoHover} className='max-w-[25px]'>
+                        <HiOutlineInformationCircle />
+                     </button>
+                     </label>
+                    
                 <input
                     id="password"
                     type="password"
@@ -75,6 +91,20 @@ const AddChildForm = ({ userId }) => {
             {error && <p className="mt-4 text-red-500 permanent-marker-regular">Error: {errorHandler(error.message) || 'An unknown error occurred'}</p>}
             {data && <p className="mt-4 permanent-marker-regular text-green-500">Child added: {data.addChild.username}</p>}
 
+        {infoHoverState === 'closed' ? <></>:  <section id='info-div' className='mt-5'>
+                <div>
+                    <p>
+                        You can use a picture password by setting the password to a list of these images:
+                    </p>
+                    <p>
+                        cow, pig, chicken, sheep, firetruck
+                    </p>
+                    <p>
+                        e.g; cowpigchicken would make it so they could click those images on login instead of having to type.
+                    </p>
+                </div>
+            </section> }
+           
         </form>
     );
 };

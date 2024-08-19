@@ -175,7 +175,7 @@ const resolvers = {
           for (const kid of currentUser.kids){
             if (kid.username === updatedChildInfo.oldUsername){
               const targetKid = await BaseUser.findByIdAndUpdate({_id: kid._id}, updatedChildInfo, {
-                new: true
+                new: true,
               })
               return targetKid
             } 

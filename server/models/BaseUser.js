@@ -17,13 +17,27 @@ const baseUserSchema = new Schema({
 });
 
 // set up pre-save middleware to create password
+
 baseUserSchema.pre('save', async function (next) {
+  const saltRounds = 10;
   if (this.isNew || this.isModified('password')) {
-    const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
   next();
 });
+
+baseUserSchema.pre('findOneAndUpdate', async function (next){
+  const saltRounds = 10;
+  const incomingPass = this._update.password
+  const hashedPass = await bcrypt.hash(incomingPass, saltRounds)
+  console.log(this)
+  if (incomingPass){
+    this.set({
+      password: hashedPass
+    })
+  }
+  next()
+})
 
 // compare the incoming password with the hashed password
 baseUserSchema.methods.isCorrectPassword = async function (password) {
