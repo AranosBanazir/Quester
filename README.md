@@ -63,7 +63,10 @@ This project is unlicensed.
 
   ## Tools and 3rd party assistance
   * Built with React, MongoDb, Express, Node, Apollo, Graphql, Tailwind, DaisyUi
-  * Images generated from canva.com 
+  * Images generated from canva.com
+
+  ## Attributions
+  Images aquired through attribution liscences from: [Freepik](https://www.freepik.com/) and [Vecteezy](https://www.vecteezy.com/)
 
   ## Obstacles and Successes
   * Creating a React app using technologies a couple of us weren't versed in.
