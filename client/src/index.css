@@ -101,7 +101,7 @@ html, body{
   min-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: .5rem;
   justify-content: center;
   /* text-shadow: -2px 2px black; */
   /* margin: 0px 20px 0px 20px; */
@@ -136,6 +136,22 @@ html, body{
   background-position:left left;
   background-repeat: no-repeat;
   width: 150px;
+  height: 100px;
+}
+
+#zindex {
+  z-index: 9999;
+}
+
+#quester-logo-big {
+  height: 110px;
+  padding: none;
+  margin: none;
+  width: 600px
+}
+
+#quester-logo-small {
+  width: 600px;
   height: 100px;
 }
 
@@ -332,5 +348,48 @@ main {
     
     
     opacity:0;
+  }
+}
+/* Quester Logo Big */
+@media (min-width: 1024px) and (max-width: 1278px) {
+  #quester-logo-big {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 1535px) {
+  #quester-logo-big {
+    width: 600px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 1279px) and (max-width: 1534px) {
+  #quester-logo-big {
+    width: 400px;
+    height: 100px;
+  }
+}
+
+/* Quester Logo Small */
+@media (max-width: 500px) {
+  #quester-logo-small {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 501px) and (max-width: 800px) {
+  #quester-logo-small {
+    width: 400px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 801px) and (max-width: 1023px) {
+  #quester-logo-small {
+    width: 600px;
+    height: 100px;
   }
 }

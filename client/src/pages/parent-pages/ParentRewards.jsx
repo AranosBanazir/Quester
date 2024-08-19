@@ -111,7 +111,6 @@ const ParentRewards = (data) => {
   return (
     <div className="container mx-auto p-6">
       <section className="bg-gray-800 text-white p-6 rounded-md shadow-lg mb-6 corkboard">
-        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Add a Reward</h2> */}
         <div className="flex justify-center w-full mb-4">
           <img src="/assets/add-a-reward-banner.png" alt="banner for adding a reward"
           className="w-full md:w-3/4 lg:w-2/3" />
@@ -183,13 +182,13 @@ const ParentRewards = (data) => {
         </form>
       </section>
 
-      <section className="mt-6 p-4 bg-gray-800 rounded-lg shadow-md">
-        {/* <h2 className="text-2xl font-bold mb-4 text-blue-500">Rewards</h2> */}
-        <div className='max-w-[400px] '>
-          <img src="/assets/rewards-banner.png" alt="" />
-        </div>
+      <div className="container mx-auto p-4">
+          <img src="/assets/rewards-banner.png" alt="Reward Banner"  className="w-full md:w-3/4 lg:w-2/3 mx-auto"
+          />
+
+          <section className="mt-4 p-8 rounded-lg shadow-md">
         {rewards.filter((reward) => reward !== null).length > 0 ? (
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:gap-20 md:grid-cols-2 lg:grid-cols-3">
             {rewards
               .filter((reward) => reward !== null)
               .map((reward) => (
@@ -200,10 +199,12 @@ const ParentRewards = (data) => {
                 />
               ))}
           </div>
+          
         ) : (
           <p className="text-gray-500 text-center">No rewards available.</p>
         )}
       </section>
+    </div>
     </div>
   );
 };
