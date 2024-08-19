@@ -91,7 +91,7 @@ const KidsPage = () =>{
                   <img src="/assets/completed-tasks-banner.png" alt="Task banner"  />
                   
                 </div>
-              <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container ">
+              <div className="flex flex-wrap flex-row mx-auto items-center justify-center">
                 <section id="task-section" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
                     {getActiveChildTasks()}
                 </section>
@@ -99,7 +99,7 @@ const KidsPage = () =>{
               <div className="text-white font-extrabold text-6xl mx-10 permanent-marker-regular">
                   <img src="/assets/inventory-banner.png" alt="Inventory banner" />
                 </div>
-                <div className="flex flex-wrap flex-row mx-auto items-center justify-center kid-item-container">
+                <div className="flex flex-wrap flex-row mx-auto items-center justify-center">
                 <section id="inventory-div" className="w-auto flex flex-wrap flex-row justify-evenly" style={{margin: '20px'}}>
                   {getActiveChildInventory()}
                 </section>

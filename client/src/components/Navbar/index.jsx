@@ -3,12 +3,11 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { ME } from "../../utils/queries";
 import Auth from "../../utils/auth";
-import AuthModal from "../AuthModal/index"; // Import AuthModal
+
 
 function Navbar() {
   const { loading, error, data } = useQuery(ME);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // For AuthModal
   const menuRef = useRef(null);
 
   const userType = data?.me?.__typename || "user";
@@ -18,8 +17,10 @@ function Navbar() {
   if (userType === "Parent") {
     navItems = ["Rewards", "Tasks", "Kids", "View My Profile", "Logout"];
   } else if (userType === "Child") {
-    navItems = ["Shop", "Tasks", "Inventory", "Logout"];
-  }
+    navItems = ["Shop", "Tasks", "Inventory"];
+  } else (
+    navItems = ["Login", "Signup"]
+  )
 
   const logout = (event) => {
     event.preventDefault();
@@ -30,23 +31,7 @@ function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        setIsMenuOpen(false);
-      }
-    };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  const handleModalSubmit = (formData) => {
-    // Handle form submission for AuthModal here
-  };
 
   const handleMenuItemClick = () => {
     setIsMenuOpen(false);
@@ -88,37 +73,42 @@ function Navbar() {
               ✕
             </button>
             <ul className="flex flex-col items-center space-y-4 mt-8">
-              {navItems.map((item) => (
-                <li key={item} className="w-full text-center">
-                  {item === "Logout" ? (
-                    <button
-                      className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
-                      onClick={(e) => {
-                        logout(e);
-                        handleMenuItemClick();
-                      }}
-                    >
-                      <p className="mb-7">{item}</p>
-                    </button>
-                  ) : item === "View My Profile" ? (
-                    <Link
-                      to="/account"
-                      className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
-                      onClick={handleMenuItemClick}
-                    >
-                      <p className="mb-7">{item}</p>
-                    </Link>
-                  ) : (
-                    <Link
-                      to={`/${item.toLowerCase().replace(" ", "-")}`}
-                      className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
-                      onClick={handleMenuItemClick}
-                    >
-                      <p className="mb-7">{item}</p>
-                    </Link>
-                  )}
-                </li>
-              ))}
+              {navItems.map((item) =>{
+
+
+console.log(item)
+                return (
+                  <li key={item} className="w-full text-center">
+                    {item === "Logout" ? (
+                      <button
+                        className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
+                        onClick={(e) => {
+                          logout(e);
+                          handleMenuItemClick();
+                        }}
+                      >
+                        <p className="mb-7">{item}</p>
+                      </button>
+                    ) : item === "View My Profile" ? (
+                      <Link
+                        to="/account"
+                        className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
+                        onClick={handleMenuItemClick}
+                      >
+                        <p className="mb-7">{item}</p>
+                      </Link>
+                    ) : (
+                      <Link
+                        to={`/${item.toLowerCase().replace(" ", "-")}`}
+                        className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble w-full"
+                        onClick={handleMenuItemClick}
+                      >
+                        <p className="mb-7">{item}</p>
+                      </Link>
+                    )}
+                  </li>
+                )
+              } )}
             </ul>
           </div>
         </div>
@@ -126,10 +116,10 @@ function Navbar() {
         {/* Navigation Links for Larger Screens */}
         <div className="hidden lg:flex lg:justify-between lg:items-center lg:w-full">
           <div className="flex-grow flex justify-start">
-            <ul className="flex flex-row space-x-4">
+            <ul className="flex flex-row space-x-4 outside">
               {navItems
                 .filter(
-                  (item) => item !== "View My Profile" && item !== "Logout"
+                  (item) => item !== "View My Profile" && item !== "Logout" && item !== "Login" && item !== "Signup"
                 )
                 .map((item) => (
                   <li key={item}>
@@ -158,7 +148,7 @@ function Navbar() {
             {Auth.loggedIn() && userType === "Parent" ? (
               <>
                 <Link
-                  to="/account"
+                  to={`/account`}
                   className="btn-sign text-white rounded-md px-4 py-2 nav-sign wobble"
                 >
                   <p className="mb-7">View My Profile</p>
@@ -169,12 +159,7 @@ function Navbar() {
                 >
                   <p className="mb-7">Logout</p>
                 </button>
-                <AuthModal
-                  isOpen={isModalOpen}
-                  onClose={closeModal}
-                  onSubmit={handleModalSubmit}
-                  userData={userData} // Pass user data to the modal
-                />
+                
               </>
             ) : Auth.loggedIn() && userType === "Child" ? (
               <button

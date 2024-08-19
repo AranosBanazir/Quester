@@ -6,35 +6,32 @@ import { QUERY_SINGLE_USER } from "../../utils/queries";
 
 const TaskCard = ({ task, userType, showDeleteButton }) => {
   const [confirmTaskComplete] = useMutation(CONFIRM_TASK);
-  const [denyTask] = useMutation(DENY_TASK);
+  const [denyTask] = useMutation(DENY_TASK)
 
+  console.log(task)
   const handleRedeemClick = async (e) => {
-    //  if ( task.childConfirmed && userType === 'Child') return
+    
+    const taskCard = document.getElementById(`${task._id}`)
+    taskCard.classList.add('task-complete')
+    setTimeout(async () => {
+      taskCard.setAttribute('style', 'display: none;')
+      try {
+        const response = await confirmTaskComplete({ 
+          variables: { 
+            taskId: task._id, 
+            childId : task.owner
+           },
+           refetchQueries:[QUERY_SINGLE_USER, 'User']
+         })
+         
+      
 
-    try {
-      const response = await confirmTaskComplete({
-        variables: {
-          taskId: task._id,
-          childId: task.owner,
-        },
-        refetchQueries: [QUERY_SINGLE_USER, "user"],
-      }).then(({ data }) => {
-        if (
-          (!data.confirmTaskComplete.childConfirmed &&
-            !data.confirmTaskComplete.parentConfirmed) ||
-          (data.confirmTaskComplete.childConfirmed &&
-            !data.confirmTaskComplete.parentConfirmed)
-        ) {
-          const taskCard = document.getElementById(`${task._id}`);
-          taskCard.classList.add("task-complete");
-          setTimeout(() => {
-            taskCard.setAttribute("style", "display: none;");
-          }, 4000);
-        }
-      });
-    } catch (err) {
-      console.error("Error redeeming task:", err);
-    }
+      } catch (err) {
+        console.error('Error redeeming task:', err);
+      }
+    }, 3000);
+
+      
   };
 
   const handleDenyClick = async () => {
